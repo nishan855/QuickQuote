@@ -3,11 +3,15 @@ package com.springPrac;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 
 
 import com.Shapes.*;
+import com.priceQuote.Job;
+import com.priceQuote.ParamDXF;	// Eric Keng
+import com.priceQuote.PriceQuote;
 import org.kabeja.dxf.*;
 import org.kabeja.dxf.helpers.DXFSplineConverter;
 import org.kabeja.dxf.helpers.DXFUtils;
@@ -21,7 +25,6 @@ import org.kabeja.parser.*;
 @CrossOrigin
 @RestController
 public class FileController {
-
 
 	//mapping for request sending dxf files
 	@PostMapping(value = "/")
@@ -53,11 +56,26 @@ public class FileController {
 			//get pierce distance
 			double length = op.getCuttingDistance(entities);
 
+/*          **********	 	BEGIN changes by Eric Keng	 	**********          */
+			double area = 37.00; // Need to learn to get this value!
+
+			ParamDXF currDXF = new ParamDXF(area, length, peirce_points);
+			for( int metalIndex = 0; metalIndex < 8; metalIndex++ ){
+				Job currJob = new Job( currDXF, metalIndex );
+				double totalPrice = PriceQuote.priceQuote( currJob );
+
+				String currency = NumberFormat.getCurrencyInstance().format( totalPrice );
+				System.out.print("Cost to cut \"" + currJob.getMetalType().getMaterialType() + "\": ");
+				System.out.println( currency );
+			}
+			System.out.println( "\n" );
+/*          **********	 	END changes by Eric Keng	 	**********          */
+
+
 			parsedData.add(new FileData(uploadedFile[i].getName(),peirce_points,length));
 
 		}
 
 	return (parsedData);
 	}
-
-	}
+}
