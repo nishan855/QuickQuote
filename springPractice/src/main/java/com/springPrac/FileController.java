@@ -30,7 +30,7 @@ public class FileController {
 	@PostMapping(value = "/")
 	public ArrayList<FileData> testUpload1(@RequestParam("file") MultipartFile uploadedFile[]) throws Exception {
 
-		ArrayList<FileData> parsedData = new ArrayList<FileData>();
+		ArrayList<FileData> parsedData = new ArrayList<>();
 		for (int i=0;i<uploadedFile.length;i++) {
 			//parse shapes out of the file
 			ObjectParser op = new ObjectParser(uploadedFile[i]);
@@ -56,23 +56,31 @@ public class FileController {
 			//get pierce distance
 			double length = op.getCuttingDistance(entities);
 
-/*          **********	 	BEGIN changes by Eric Keng	 	**********          */
+
+			/*          **********	 	BEGIN changes by Eric Keng	 	**********          */
 			double area = 37.00; // Need to learn to get this value!
 
+			// Holds the parameters for the current DXF file
 			ParamDXF currDXF = new ParamDXF(area, length, peirce_points);
-			for( int metalIndex = 0; metalIndex < 8; metalIndex++ ){
-				Job currJob = new Job( currDXF, metalIndex );
-				double totalPrice = PriceQuote.priceQuote( currJob );
+			double totalPrice = 0.00;	// total price for metalType[7] will be stored in the File
 
+			// For now, showing the price calculation for all 8 metal types
+			for( int metalIndex = 0; metalIndex < 8; metalIndex++ ){
+				// Initializing a Job object that will store all the information for the current job
+				Job currJob = new Job( currDXF, metalIndex );
+
+				// Getting a price quote based off the current job
+				totalPrice = PriceQuote.priceQuote( currJob );
+
+				// Print totalPrice and the name of the metal type
 				String currency = NumberFormat.getCurrencyInstance().format( totalPrice );
 				System.out.print("Cost to cut \"" + currJob.getMetalType().getMaterialType() + "\": ");
 				System.out.println( currency );
 			}
-			System.out.println( "\n" );
-/*          **********	 	END changes by Eric Keng	 	**********          */
+			System.out.println( );
+			/*          **********	 	END changes by Eric Keng	 	**********          */
 
-
-			parsedData.add(new FileData(uploadedFile[i].getName(),peirce_points,length));
+			parsedData.add(new FileData(uploadedFile[i].getName(),peirce_points,length,area,totalPrice));
 
 		}
 
