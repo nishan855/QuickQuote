@@ -54,8 +54,6 @@ public class ObjectParser {
         return entityList;
     }
 
-
-
     //get total distance travelled
     public double getCuttingDistance(ArrayList<DXFEntity> entt)  {
 
@@ -68,8 +66,7 @@ public class ObjectParser {
 
     return length;
     }
-
-
+    
     //get Loops
     public ArrayList<DXFEntity> getLoops(ArrayList<DXFEntity> entityList) throws Exception {
 
@@ -265,8 +262,5 @@ public class ObjectParser {
         }
         return true;
     }
-
-
-
 }
 
