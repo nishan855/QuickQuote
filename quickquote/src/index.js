@@ -6,7 +6,18 @@ import reportWebVitals from './reportWebVitals';
 import BaseApp from './BaseApp';
 import Amplify from 'aws-amplify';
 import config from './aws-exports';
+import * as AWS from 'aws-sdk'
+import {CofigurationOptions} from 'aws-sdk'
+
+const configuration: CofigurationOptions ={
+    region: 'YOUR_REGION',
+    secretAccessKey: 'YOUR_SECRET_ACCESS_KEY',
+    accessKeyId: 'YOUR_ACCESS_KEY_ID'
+}
+
+AWS.config.update(configuration);
 Amplify.configure(config);
+
 ReactDOM.render(
   <React.StrictMode>
     <BaseApp />

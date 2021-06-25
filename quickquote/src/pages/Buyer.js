@@ -1,11 +1,12 @@
-import '../../App.css'
+import '../App.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Card, Button} from 'react-bootstrap'
 import Dropzone from "react-dropzone";
 import React, {useEffect, useState} from "react";
 import {CardHeader, CardTitle} from "reactstrap";
 import axios from "axios";
-import Server  from "../Server";
+import Server  from "../compo/Server";
+import Navbar from "../compo/Navbar";
 
 export default function Buyer () {
 
@@ -100,6 +101,7 @@ export default function Buyer () {
     return (
         <div className = 'seller' >
             <div>
+                <Navbar/>
                 <Card style={DropzoneCardStyle}>
                     <CardHeader style={DropzoneCardHeaderStyle}>Upload Your DXF Files</CardHeader>
                     <Dropzone  accept={'.dxf'} onDrop={acceptedFiles =>{

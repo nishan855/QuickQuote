@@ -2,22 +2,24 @@ import React from 'react'
 import Navbar from './compo/Navbar'
 import { BrowserRouter as Router, Switch, Route} from 'react-router-dom'    // 'npm install react-router-dom'
 import './BaseApp.css'
-import Home from './compo/pages/Home';
-import Sellers from './compo/pages/Sellers';
-import Buyer from './compo/pages/Buyer';
-import SignUp from './compo/pages/SignUp';
-import {withAuthenticator} from "@aws-amplify/ui-react";
+import Home from './pages/Home';
+import Buyer from './pages/Buyer';
+import SellerDB from "./Seller/SellerDashBoard";
+import Parameters from "./Seller/Parameters";
 
 function BaseApp() {
   return (
       <>
         <Router>
-          <Navbar />
           <Switch>
             <Route path = '/' exact component = {Home} />
             <Route path = '/buyer' exact component = {Buyer} />
-            <Route path = '/seller' exact component = {Sellers} />
-            <Route path = '/signup' exact component = {SignUp} />
+            <Route path = '/seller' component = {SellerDB} />
+            <Route path = '/sellerDashboard' component = {SellerDB}/>
+              <Route path = '/sellerProfile' component = {SellerDB} />
+              <Route path = '/sellerOrders' component = {SellerDB} />
+              <Route path = '/changeParameter' component = {Parameters} />
+
           </Switch>
         </Router>
       </>
