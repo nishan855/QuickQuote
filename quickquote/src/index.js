@@ -5,13 +5,6 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import BaseApp from './BaseApp';
 
-var AWS = require("aws-sdk");
-let awsConfig = {
-    "region": "us-east-2",
-    "endpoint": "http://dynamodb.us-east-2.amazonaws.com",
-    "accessKeyId": "AKIARZGXFZKPTIKMFHW5", "secretAccessKey": "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"
-};
-AWS.config.update(awsConfig);
 
 ReactDOM.render(
   <React.StrictMode>
