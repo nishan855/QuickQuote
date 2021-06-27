@@ -64,6 +64,9 @@ function SellerDashBoard () {
             if (err) {
                 console.log("users::fetchOneByKey::error - " + JSON.stringify(err, null, 2));
             }
+            else if (data.Item==null){
+                setInfo(info);
+           }
             else {
                 setInfo(data.Item);
             }
