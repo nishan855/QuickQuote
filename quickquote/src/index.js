@@ -4,19 +4,14 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import BaseApp from './BaseApp';
-import Amplify from 'aws-amplify';
-import config from './aws-exports';
-import * as AWS from 'aws-sdk'
-import {CofigurationOptions} from 'aws-sdk'
 
-const configuration: CofigurationOptions ={
-    region: 'YOUR_REGION',
-    secretAccessKey: 'YOUR_SECRET_ACCESS_KEY',
-    accessKeyId: 'YOUR_ACCESS_KEY_ID'
-}
-
-AWS.config.update(configuration);
-Amplify.configure(config);
+var AWS = require("aws-sdk");
+let awsConfig = {
+    "region": "us-east-2",
+    "endpoint": "http://dynamodb.us-east-2.amazonaws.com",
+    "accessKeyId": "AKIARZGXFZKPTIKMFHW5", "secretAccessKey": "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"
+};
+AWS.config.update(awsConfig);
 
 ReactDOM.render(
   <React.StrictMode>
