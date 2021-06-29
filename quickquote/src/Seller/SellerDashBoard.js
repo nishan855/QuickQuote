@@ -11,8 +11,6 @@ let AWS = require("aws-sdk");
 
 
 
-
-
 function SellerDashBoard () {
 
     const [primeKey,setPrimeKey]=useState("");
