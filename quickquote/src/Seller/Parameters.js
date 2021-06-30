@@ -220,7 +220,7 @@ const Parameters = () => {
     const [selected, setSelected] = useState([]);
 
     const [inputList, setInputList] = useState([]);
-    const [processList, setProcessList] = useState([]);
+    //const [processList, setProcessList] = useState([]);
 
 
 
@@ -234,9 +234,11 @@ const Parameters = () => {
                 <Card>
                     <CardHeader style={{background:"#71bbd4"}}> Process {processList.length+1} Available </CardHeader>
                     <Form>
+
+
                         <FormGroup>
                             <Label for="exampleEmail">Process Name</Label>
-                            <input placeholder="input Process Name" required value={process}
+                            <input placeholder="input Process Name" defaultValue={process}
                                    onChange={(e) => setprocess(e.target.value)}/>
                         </FormGroup>
 
@@ -244,19 +246,19 @@ const Parameters = () => {
 
                         <FormGroup>
                             <Label for="exampleEmail">Price per Inch</Label>
-                            <input type={"number"} placeholder="input price $/inch" required value={perinch}
+                            <input type={"number"} placeholder="input price $/inch" defaultValue={perinch}
                                    onChange={(e) => setperinch(e.target.value)} />
                         </FormGroup>
 
                         <FormGroup>
                             <Label for="exampleEmail">Price per Pierce</Label>
-                            <input  type={"number"} placeholder="input price $/ Pierce" required value={perpierce}
+                            <input  type={"number"} placeholder="input price $/ Pierce" defaultValue={perpierce}
                                     onChange={(e) => setperpierce(e.target.value)}/>
                         </FormGroup>
 
                         <FormGroup>
                             <Label for="exampleEmail">Set up Cost</Label>
-                            <input type={"number"} placeholder="input Set up Cost" required value={setcost}
+                            <input type={"number"} placeholder="input Set up Cost" defaultValue={setcost}
                                    onChange={(e) => setupcost(e.target.value)}/>
                         </FormGroup>
 
@@ -265,7 +267,7 @@ const Parameters = () => {
 
                         <FormGroup>
                             <Label for="exampleEmail">Process Kurf</Label>
-                            <input placeholder="input Process Kurf" required value={processkurf}
+                            <input placeholder="input Process Kurf" defaultValue={processkurf}
                                    onChange={(e) => setprocesskurf(e.target.value)}/>
                         </FormGroup>
 
@@ -278,7 +280,9 @@ const Parameters = () => {
 
 
         function onProcessClick() {
+            console.log(process);
             setProcessList(processList.concat(<Process key={processList.length} />));
+
         }
 
         return(
@@ -287,42 +291,46 @@ const Parameters = () => {
 
                <FormGroup>
                  <Label for="exampleEmail">Material Name</Label>
-                <input placeholder="input Material Name" onchange={onProcessClick} />
+                <input placeholder="input Material Name" defaultValue={input}
+                 onChange={(e) => setInput(e.target.value)}/>
                 </FormGroup>
 
                 <FormGroup>
                     <Label for="exampleEmail">Material Density</Label>
-                    <input type={"number"} placeholder="input Material Density " required value={materialdensity}
+                    <input type={"number"} placeholder="input Material Density " defaultValue={materialdensity}
+
                            onChange={(e) => setmaterialdensity(e.target.value)}/>
                 </FormGroup>
 
                 <FormGroup>
                     <Label for="exampleEmail">Material Thickness</Label>
-                    <input type={"number"} placeholder="input Material Thickness" required value={materialthickness}
+                    <input type={"number"} placeholder="input Material Thickness" defaultValue={materialthickness}
                            onChange={(e) => setmaterialthickness(e.target.value)}/>
                 </FormGroup>
 
                 <FormGroup>
                     <Label for="exampleEmail">Max Sizes</Label>
-                    <input type={"number"} placeholder="input Max sizes" required value={maxsize}
-                           onChange={(e) => setmaxsize(e.target.value)} />
+                    <input type={"number"} placeholder="input Max sizes" defaultValue={maxsize}
+                           onChange={(e) => console.log("test")} />
                 </FormGroup>
 
                 <FormGroup>
                     <Label for="exampleEmail">Cut speeds</Label>
-                    <input type={"number"} placeholder="Input cut speed" required value={cutspeeds}
-                           onChange={(e) => setcutspeeds(e.target.value)}/>
+                    <input type={"number"} placeholder="Input cut speed" defaultValue={cutspeeds}
+                           onChange={(e) => setcutspeeds(e.target.value)}
+
+                           />
                 </FormGroup>
 
             <FormGroup>
                 <Label for="exampleEmail">Material cost </Label>
-                <input type={"number"} placeholder="Input material cost" required value={materialcost}
+                <input type={"number"} placeholder="Input material cost" defaultValue={materialcost}
                        onChange={(e) => materialsetcost(e.target.value)} />
             </FormGroup>
 
                 <FormGroup>
                     <Label for="exampleEmail">Lead In/ Lead Out distances</Label>
-                    <input type={"number"} placeholder="input Lead in/out distances" required value={leadin}
+                    <input type={"number"} placeholder="input Lead in/out distances" defaultValue={leadin}
                            onChange={(e) => setleadin(e.target.value)}/>
                 </FormGroup>
 
@@ -337,6 +345,7 @@ const Parameters = () => {
 
     const onAddBtnClick = event => {
         console.log(inputList)
+        console.log(input)
         console.log(inputList.concat(<Input/>));
         setInputList(inputList.concat(<Input key={inputList.length} />));
     };
@@ -350,8 +359,9 @@ const Parameters = () => {
     return (
         <div>
             <button class = "button" title="click to add more materials" onClick={onAddBtnClick}>Add Material (+) </button>
-            <Input/>
-            {/*inputList*/}
+
+            {inputList}
+
 
             <button class = "savebutton" onClick={onsaveClick}> Save material </button>
         </div>
