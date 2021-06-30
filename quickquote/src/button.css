@@ -1,0 +1,67 @@
+.button {
+    background-color: #008CBA; /* Green */
+    border-color: rgb(216, 216, 216) rgb(209, 209, 209) rgb(186, 186, 186);
+    color: black;
+    padding: 15px 10px;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 5px;
+    text-align: center;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-shadow: 0px 2px 2px lightgray;
+    transition: ease background-color 250ms;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    position: center;
+    margin-top: 0px;
+    margin-left: 700px;
+}
+
+.addprocessbutton {
+    background-color: #008CBA; /* Green */
+    border-color: rgb(216, 216, 216) rgb(209, 209, 209) rgb(186, 186, 186);
+    color: black;
+    padding: 15px 10px;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 5px;
+    text-align: center;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-shadow: 0px 2px 2px lightgray;
+    transition: ease background-color 250ms;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    position: center;
+    margin-top: 10px;
+    margin-left: 700px;
+    margin-right: 750px;
+}
+
+
+
+
+
+.savebutton {
+    background-color: #4CAF50; /* Green */
+    border-color: rgb(216, 216, 216) rgb(209, 209, 209) rgb(186, 186, 186);
+    color: black;
+    padding: 15px 10px;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 5px;
+    text-align: center;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-shadow: 0px 2px 2px lightgray;
+    transition: ease background-color 250ms;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    position: center;
+    margin-top: 3px;
+    margin-left: 708px;
+}

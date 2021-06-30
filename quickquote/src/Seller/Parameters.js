@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import '../App.css'
+import '../button.css'
 import {Card,CardBody,CardHeader} from "reactstrap";
 import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import { Auth } from '@aws-amplify/auth';
@@ -11,15 +12,11 @@ import DynamoConfig from "../DynamoConfig";
 
 
 //
-// function Parameters(){
-//     const[areaC,setareaC]=useState(0);
-//     const[cutC,setCutc]=useState(0);
-//     const[setUpC,setSetUpc]=useState(0);
-//     const[piercePC,setPiercePc]=useState(0);
-//
-//     const[sub, setSub]=useState("");
-//     const[proc,setProc]= useState([]);
-//     const [selected, setSelected] = useState([]);
+ //function Parametes() {
+
+
+ //}
+
 //
 //
 //
@@ -204,84 +201,132 @@ import DynamoConfig from "../DynamoConfig";
 
 const Parameters = () => {
 
+
+    const [input, setInput] = useState("");
+    const [materialdensity, setmaterialdensity] = useState(0);
+    const [materialthickness, setmaterialthickness] = useState(0);
+    const [maxsize, setmaxsize] = useState(0);
+    const [cutspeeds, setcutspeeds] = useState(0);
+    const [leadin, setleadin] = useState(0);
+    const [materialcost, materialsetcost] = useState(0);
+
+    const [process, setprocess] = useState("");
+    const [perinch, setperinch] = useState(0);
+    const [perpierce, setperpierce] = useState(0);
+    const [setcost, setupcost] = useState(0);
+    const [processkurf, setprocesskurf] = useState("");
+
+    const [proc, setProc] = useState([]);
+    const [selected, setSelected] = useState([]);
+
     const [inputList, setInputList] = useState([]);
+    const [processList, setProcessList] = useState([]);
+
+
+
     const Input = () => {
         const [processList, setProcessList] = useState([]);
+        //console.log(processList);
+
 
         const Process =()=>{
             return(
                 <Card>
-                <CardHeader style={{background:"#97CAEF"}}> Process {processList.length+1} Available </CardHeader>
-                <Form>
-                    <FormGroup>
-                        <Label for="exampleEmail">Process Name</Label>
-                        <input placeholder="input Process Name" />
-                    </FormGroup>
+                    <CardHeader style={{background:"#71bbd4"}}> Process {processList.length+1} Available </CardHeader>
+                    <Form>
+                        <FormGroup>
+                            <Label for="exampleEmail">Process Name</Label>
+                            <input placeholder="input Process Name" required value={process}
+                                   onChange={(e) => setprocess(e.target.value)}/>
+                        </FormGroup>
 
-                    <FormGroup>
-                        <Label for="exampleEmail">Price per Inch</Label>
-                        <input type={"number"} placeholder="input price $/inch" />
-                    </FormGroup>
 
-                    <FormGroup>
-                        <Label for="exampleEmail">Price per Pierce</Label>
-                        <input  type={"number"} placeholder="input price $/ Pierce" />
-                    </FormGroup>
 
-                    <FormGroup>
-                        <Label for="exampleEmail">Set up Cost</Label>
-                        <input type={"number"} placeholder="input Set up Cost" />
-                    </FormGroup>
+                        <FormGroup>
+                            <Label for="exampleEmail">Price per Inch</Label>
+                            <input type={"number"} placeholder="input price $/inch" required value={perinch}
+                                   onChange={(e) => setperinch(e.target.value)} />
+                        </FormGroup>
 
-                    <FormGroup>
-                        <Label for="exampleEmail">Process Kurf</Label>
-                        <input placeholder="input Process Kurf" />
-                    </FormGroup>
+                        <FormGroup>
+                            <Label for="exampleEmail">Price per Pierce</Label>
+                            <input  type={"number"} placeholder="input price $/ Pierce" required value={perpierce}
+                                    onChange={(e) => setperpierce(e.target.value)}/>
+                        </FormGroup>
+
+                        <FormGroup>
+                            <Label for="exampleEmail">Set up Cost</Label>
+                            <input type={"number"} placeholder="input Set up Cost" required value={setcost}
+                                   onChange={(e) => setupcost(e.target.value)}/>
+                        </FormGroup>
+
+
+
+
+                        <FormGroup>
+                            <Label for="exampleEmail">Process Kurf</Label>
+                            <input placeholder="input Process Kurf" required value={processkurf}
+                                   onChange={(e) => setprocesskurf(e.target.value)}/>
+                        </FormGroup>
 
                     </Form>
                 </Card>
             )
         }
 
+
+
+
         function onProcessClick() {
             setProcessList(processList.concat(<Process key={processList.length} />));
         }
 
         return(
-            <Card>
+        <Card>
             <CardHeader  style={{background:"#71bbd4"}}>Material {inputList.length+1} Setup </CardHeader>
 
                <FormGroup>
                  <Label for="exampleEmail">Material Name</Label>
-                <input placeholder="input Material Name" />
+                <input placeholder="input Material Name" onchange={onProcessClick} />
                 </FormGroup>
 
                 <FormGroup>
                     <Label for="exampleEmail">Material Density</Label>
-                    <input type={"number"} placeholder="input Material Density " />
+                    <input type={"number"} placeholder="input Material Density " required value={materialdensity}
+                           onChange={(e) => setmaterialdensity(e.target.value)}/>
                 </FormGroup>
 
                 <FormGroup>
                     <Label for="exampleEmail">Material Thickness</Label>
-                    <input type={"number"} placeholder="input Material Thickness" />
+                    <input type={"number"} placeholder="input Material Thickness" required value={materialthickness}
+                           onChange={(e) => setmaterialthickness(e.target.value)}/>
                 </FormGroup>
 
                 <FormGroup>
                     <Label for="exampleEmail">Max Sizes</Label>
-                    <input type={"number"} placeholder="input Max sizes" />
+                    <input type={"number"} placeholder="input Max sizes" required value={maxsize}
+                           onChange={(e) => setmaxsize(e.target.value)} />
                 </FormGroup>
 
                 <FormGroup>
-                    <Label for="exampleEmail">Material Cost</Label>
-                    <input type={"number"} placeholder="Input Material Cost" />
+                    <Label for="exampleEmail">Cut speeds</Label>
+                    <input type={"number"} placeholder="Input cut speed" required value={cutspeeds}
+                           onChange={(e) => setcutspeeds(e.target.value)}/>
                 </FormGroup>
+
+            <FormGroup>
+                <Label for="exampleEmail">Material cost </Label>
+                <input type={"number"} placeholder="Input material cost" required value={materialcost}
+                       onChange={(e) => materialsetcost(e.target.value)} />
+            </FormGroup>
 
                 <FormGroup>
                     <Label for="exampleEmail">Lead In/ Lead Out distances</Label>
-                    <input type={"number"} placeholder="input Lead in/out distances" />
+                    <input type={"number"} placeholder="input Lead in/out distances" required value={leadin}
+                           onChange={(e) => setleadin(e.target.value)}/>
                 </FormGroup>
 
-                <button onClick={onProcessClick}>Add Process</button>
+                <button class = "addprocessbutton" title="click to add process for above material" onClick={onProcessClick}>Add Process</button>
                 {processList}
                 </Card>
         )
@@ -289,14 +334,26 @@ const Parameters = () => {
 
 
 
+
     const onAddBtnClick = event => {
+        console.log(inputList)
+        console.log(inputList.concat(<Input/>));
         setInputList(inputList.concat(<Input key={inputList.length} />));
     };
 
+    const onsaveClick = event => {
+        alert("material has been added successfully");
+
+    };
+
+
     return (
         <div>
-            <button onClick={onAddBtnClick}>Add Material</button>
-            {inputList}
+            <button class = "button" title="click to add more materials" onClick={onAddBtnClick}>Add Material (+) </button>
+            <Input/>
+            {/*inputList*/}
+
+            <button class = "savebutton" onClick={onsaveClick}> Save material </button>
         </div>
     );
 };
