@@ -1,12 +1,12 @@
-import '../App.css'
+import '../../App.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Card, Button} from 'react-bootstrap'
 import Dropzone from "react-dropzone";
 import React, {useEffect, useState} from "react";
 import {CardHeader, CardTitle} from "reactstrap";
 import axios from "axios";
-import Server  from "../compo/Server";
-import Navbar from "../compo/Navbar";
+import Server  from "../Server";
+import Navbar from "../Navbar";
 
 
 function DragDropCard () {
@@ -66,17 +66,23 @@ function DragDropCard () {
         borderColor: '#000000',
         background: '#6d6e6e',
         alignItems: 'center',
-        width: '100%',
+        display: 'flex',
+        width: '90vmin',
+        height: 'auto',
         marginTop: '100px',
+        marginBottom:'100px',
     }
     const DropzoneCardHeaderStyle = {
         width: '100%',
+        display: 'flex',
+        justifyContent: 'center',
+        fontSize: '5vmin',
         fontWeight:'bold',
         background:'#232323',
         color: '#fff',
     }
     const DropzoneStyle = {
-        lineHeight: "500%",
+        lineHeight: "100%",
         // marginBottom:'0%',
         // marginRight:'0%',
         // marginLeft:'0%',
@@ -86,17 +92,69 @@ function DragDropCard () {
     }
     const DropzonePStyle = {
         color: '#fff',
+        // height: '100pt',
+        width: '60vmin',
+        fontSize: '4vmin',
         fontWeight: "bold",
         textAlign: 'center',
+        textJustify: 'center',
+        borderStyle:'dashed',
     }
 
     const ButtonCardStyle = {
         marginTop:'2%',
-        marginBottom: '100px',
+        display: 'flex',
+        flexDirection: 'row',
+        marginTop: 'auto',
+        float: 'bottom',
+        width: '100%',
+        // marginBottom: '100px',
         fontWeight:'bold',
-        background:'#6d6e6e',
+        background:'#232323',
         borderColor: '#000000',
         color: '#ffffff',   // Text color
+    }
+    const ClearButtonStyle = {
+        borderStyle: 'outset',
+        width:'30vmin',
+        marginLeft: '1%',
+        marginRight: '1%',
+        marginTop: '2%',
+        marginBottom: '2%',
+        fontSize:'3vmin',
+        float: 'right',
+    }
+    function ClearButton () {
+        return (
+            <Button className={"clear-button"}
+                    style={ClearButtonStyle}
+                    variant="danger"
+                    size="lg"
+                    onClick={reset}
+            >Clear</Button>
+        )
+    }
+
+    const UploadButtonStyle = {
+        borderStyle: 'outset',
+        width:'30vmin',
+        marginLeft: 'auto',
+        marginRight: '1%',
+        marginTop: '2%',
+        marginBottom: '2%',
+        fontSize:'3vmin',
+        float: 'right',
+    }
+    function UploadButton () {
+        return(
+            <Button className={"upload-button"}
+                    type={"upload"}
+                    style={UploadButtonStyle}
+                    variant="dark"
+                    size="lg"
+                    onClick={submit}
+            >Upload</Button>
+        )
     }
 
     return(
@@ -109,12 +167,11 @@ function DragDropCard () {
                     }>
                         {({getRootProps, getInputProps}) => (
                             <section style = {{
-                                width: '90%',
-                                height: '500%',
+                                // width: '90%',
+                                // height: '500%',
                                 alignItems: 'center',
                                 marginTop: '5%',
                                 marginBottom: '5%',
-                                borderStyle:'dashed',
                             }}>
                                 <div  style={DropzoneStyle}{...getRootProps()}>
                                     <input {...getInputProps()} />
@@ -123,15 +180,14 @@ function DragDropCard () {
                             </section>
                         )}
                     </Dropzone>
-                </Card>
-                <Card style={ButtonCardStyle} >
-                    <CardHeader style={{fontWeight:'bold'}}>Total Files: {files.length}
-                        <Button className={"float-right"} style={{ borderStyle: 'outset', width:'12vw',fontSize:'2vw'}} variant="danger" size="sm" onClick={reset} >Clear</Button>
-                        <Button className={"float-right"} type={"submit"} style={{marginLeft: '100px', marginRight: '1rem',width:'13vw',fontSize:'2vw',borderStyle: 'outset'}} variant="primary" size="sm"
-                                onClick={submit}>Submit</Button>
-                    </CardHeader>
-
-                    {display}
+                    <Card style={ButtonCardStyle} >
+                        {/*<CardHeader style={{fontWeight:'bold'}}>Total Files: {files.length}*/}
+                            <h1 style={{ fontSize: '4vmin', float: "left", marginRight: '2%', marginTop: "2%", marginLeft: '2%'}}>Total Files: {files.length}</h1>
+                            <UploadButton/>
+                            <ClearButton/>
+                        {/*</CardHeader>*/}
+                        {display}
+                    </Card>
                 </Card>
             </div>
         </div>
