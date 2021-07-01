@@ -210,14 +210,32 @@ const Parameters = () => {
     const [leadin, setleadin] = useState(0);
     const [materialcost, materialsetcost] = useState(0);
 
-    const [process, setprocess] = useState("");
-    const [perinch, setperinch] = useState(0);
-    const [perpierce, setperpierce] = useState(0);
-    const [setcost, setupcost] = useState(0);
-    const [processkurf, setprocesskurf] = useState("");
+    const obj=[];
+
+    const [mat,setMat]= useState({
+          "matname":"",
+          "mdensity":0,
+          "mthickness":0,
+           "msize":0,
+           "cutspd":0,
+           "lead":0,
+            "matCost":0,
+
+          //  "process":[ ]
+    });
+
+    const [processObj,setProcObj]=useState({
+        "procname":"",
+         "inch":0,
+         "pierce":0,
+          "setup":0,
+          "kurf":0
+    })
 
     const [proc, setProc] = useState([]);
     const [selected, setSelected] = useState([]);
+
+    const proclst=[];
 
     const [inputList, setInputList] = useState([]);
     //const [processList, setProcessList] = useState([]);
@@ -226,10 +244,27 @@ const Parameters = () => {
 
     const Input = () => {
         const [processList, setProcessList] = useState([]);
-        //console.log(processList);
+
 
 
         const Process =()=>{
+
+            const [process, setprocess] = useState("");
+            const [perinch, setperinch] = useState(0);
+            const [perpierce, setperpierce] = useState(0);
+            const [setcost, setupcost] = useState(0);
+            const [processkurf, setprocesskurf] = useState("");
+
+            const saveProcess=()=>{
+                setProcObj({
+                    "procname":process,
+                    "inch":perinch,
+                    "pierce":perpierce,
+                    "setup":setcost,
+                    "kurf":processkurf
+                })
+                proclst.push(processObj);
+            }
             return(
                 <Card>
                     <CardHeader style={{background:"#71bbd4"}}> Process {processList.length+1} Available </CardHeader>
@@ -238,28 +273,48 @@ const Parameters = () => {
 
                         <FormGroup>
                             <Label for="exampleEmail">Process Name</Label>
-                            <input placeholder="input Process Name" defaultValue={process}
-                                   onChange={(e) => setprocess(e.target.value)}/>
+                            <input placeholder="input Process Name" defaultValue={processObj.procname}
+                                   onChange={(e) => {
+                                       {
+                                           let proctemp =processObj;
+                                           proctemp.procname= e.target.value;
+                                           setProcObj({proctemp})}}
+                                   }/>
                         </FormGroup>
 
 
 
                         <FormGroup>
                             <Label for="exampleEmail">Price per Inch</Label>
-                            <input type={"number"} placeholder="input price $/inch" defaultValue={perinch}
-                                   onChange={(e) => setperinch(e.target.value)} />
+                            <input type={"number"} placeholder="input price $/inch" defaultValue={processObj.inch}
+                                   onChange={(e) => {
+                                       {
+                                           let proctemp =processObj;
+                                           proctemp.inch= e.target.value;
+                                           setProcObj({proctemp})}}
+                                   } />
                         </FormGroup>
 
                         <FormGroup>
                             <Label for="exampleEmail">Price per Pierce</Label>
-                            <input  type={"number"} placeholder="input price $/ Pierce" defaultValue={perpierce}
-                                    onChange={(e) => setperpierce(e.target.value)}/>
+                            <input  type={"number"} placeholder="input price $/ Pierce" defaultValue={processObj.pierce}
+                                    onChange={(e) => {
+                                        {
+                                            let proctemp =processObj;
+                                            proctemp.pierce= e.target.value;
+                                            setProcObj({proctemp})}}
+                                    }/>
                         </FormGroup>
 
                         <FormGroup>
                             <Label for="exampleEmail">Set up Cost</Label>
-                            <input type={"number"} placeholder="input Set up Cost" defaultValue={setcost}
-                                   onChange={(e) => setupcost(e.target.value)}/>
+                            <input type={"number"} placeholder="input Set up Cost" defaultValue={processObj.setup}
+                                   onChange={(e) => {
+                                       {
+                                           let proctemp =processObj;
+                                           proctemp.setup= e.target.value;
+                                           setProcObj({proctemp})}}
+                                   }/>
                         </FormGroup>
 
 
@@ -267,9 +322,16 @@ const Parameters = () => {
 
                         <FormGroup>
                             <Label for="exampleEmail">Process Kurf</Label>
-                            <input placeholder="input Process Kurf" defaultValue={processkurf}
-                                   onChange={(e) => setprocesskurf(e.target.value)}/>
+                            <input placeholder="input Process Kurf" defaultValue={processObj.kurf}
+                                   onChange={(e) => {
+                                       {
+                                           let proctemp =processObj;
+                                           proctemp.kurf= e.target.value;
+                                           setProcObj({proctemp})}}
+                                   }/>
                         </FormGroup>
+
+                        <Button onClick={saveProcess}>Save Process</Button>
 
                     </Form>
                 </Card>
@@ -280,77 +342,105 @@ const Parameters = () => {
 
 
         function onProcessClick() {
-            console.log(process);
             setProcessList(processList.concat(<Process key={processList.length} />));
 
         }
 
         return(
-        <Card>
-            <CardHeader  style={{background:"#71bbd4"}}>Material {inputList.length+1} Setup </CardHeader>
-
-               <FormGroup>
-                 <Label for="exampleEmail">Material Name</Label>
-                <input placeholder="input Material Name" defaultValue={input}
-                 onChange={(e) => setInput(e.target.value)}/>
-                </FormGroup>
-
-                <FormGroup>
-                    <Label for="exampleEmail">Material Density</Label>
-                    <input type={"number"} placeholder="input Material Density " defaultValue={materialdensity}
-
-                           onChange={(e) => setmaterialdensity(e.target.value)}/>
-                </FormGroup>
-
-                <FormGroup>
-                    <Label for="exampleEmail">Material Thickness</Label>
-                    <input type={"number"} placeholder="input Material Thickness" defaultValue={materialthickness}
-                           onChange={(e) => setmaterialthickness(e.target.value)}/>
-                </FormGroup>
-
-                <FormGroup>
-                    <Label for="exampleEmail">Max Sizes</Label>
-                    <input type={"number"} placeholder="input Max sizes" defaultValue={maxsize}
-                           onChange={(e) => console.log("test")} />
-                </FormGroup>
-
-                <FormGroup>
-                    <Label for="exampleEmail">Cut speeds</Label>
-                    <input type={"number"} placeholder="Input cut speed" defaultValue={cutspeeds}
-                           onChange={(e) => setcutspeeds(e.target.value)}
-
-                           />
-                </FormGroup>
-
+            <Card>
             <FormGroup>
-                <Label for="exampleEmail">Material cost </Label>
-                <input type={"number"} placeholder="Input material cost" defaultValue={materialcost}
-                       onChange={(e) => materialsetcost(e.target.value)} />
+                <Label for="exampleEmail">Material Name</Label>
+                <input placeholder="input Material Name" defaultValue={mat.matname}
+                       onChange={(e) =>{
+                           let mattemp =mat;
+                           mattemp.matname= e.target.value;
+                           setMat({ mattemp})}}/>
             </FormGroup>
 
-                <FormGroup>
-                    <Label for="exampleEmail">Lead In/ Lead Out distances</Label>
-                    <input type={"number"} placeholder="input Lead in/out distances" defaultValue={leadin}
-                           onChange={(e) => setleadin(e.target.value)}/>
-                </FormGroup>
+        <FormGroup>
+            <Label for="exampleEmail">Material Density</Label>
+            <input type={"number"} placeholder="input Material Density " defaultValue={mat.mdensity}
 
-                <button class = "addprocessbutton" title="click to add process for above material" onClick={onProcessClick}>Add Process</button>
-                {processList}
-                </Card>
+                   onChange={(e) => {
+                       let mattemp =mat;
+                       mattemp.mdensity= e.target.value;
+                       setMat({mattemp})}}/>
+
+        </FormGroup>
+
+        <FormGroup>
+            <Label for="exampleEmail">Material Thickness</Label>
+            <input type={"number"} placeholder="input Material Thickness" defaultValue={mat.mthickness}
+                   onChange={(e) => {
+                       let mattemp =mat;
+                       mattemp.mthickness= e.target.value;
+                       setMat({ mattemp})}}/>
+        </FormGroup>
+
+        <FormGroup>
+            <Label for="exampleEmail">Max Sizes</Label>
+            <input type={"number"} placeholder="input Max sizes" defaultValue={mat.msize}
+                   onChange={(e) => {
+                       let mattemp =mat;
+                       mattemp.msize= e.target.value;
+                       setMat({ mattemp})}} />
+        </FormGroup>
+
+        <FormGroup>
+            <Label for="exampleEmail">Cut speeds</Label>
+            <input type={"number"} placeholder="Input cut speed" defaultValue={mat.cutspd}
+                   onChange={(e) => {
+                       let mattemp =mat;
+                       mattemp.cutspd= e.target.value;
+                       setMat({mattemp})}}
+
+            />
+        </FormGroup>
+
+        <FormGroup>
+            <Label for="exampleEmail">Material cost </Label>
+            <input type={"number"} placeholder="Input material cost" defaultValue={mat.matCost}
+                   onChange={(e) => {
+                       let mattemp =mat;
+                       mattemp.matCost= e.target.value;
+                       setMat({mattemp})}} />
+        </FormGroup>
+
+        <FormGroup>
+            <Label for="exampleEmail">Lead In/ Lead Out distances</Label>
+            <input type={"number"} placeholder="input Lead in/out distances" defaultValue={mat.lead}
+                   onChange={(e) => {
+                       let mattemp =mat;
+                       mattemp.lead= e.target.value;
+                       setMat({mattemp})}}/>
+        </FormGroup>
+
+        <button class = "addprocessbutton" title="click to add process for above material" onClick={onProcessClick}>Add Process</button>
+        {processList}
+    </Card>
         )
     };
 
-
-
-
     const onAddBtnClick = event => {
-        console.log(inputList)
-        console.log(input)
-        console.log(inputList.concat(<Input/>));
         setInputList(inputList.concat(<Input key={inputList.length} />));
     };
 
+    console.log(mat);
+    console.log(processObj);
+
+
     const onsaveClick = event => {
+        setMat({matname:input,
+            mdensity:materialdensity,
+            mthickness:materialthickness,
+            msize:maxsize,
+            cutspd:cutspeeds,
+            lead:leadin,
+            matCost:materialcost,
+            //process:proclst
+        })
+        console.log(mat)
+
         alert("material has been added successfully");
 
     };
