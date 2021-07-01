@@ -4,7 +4,7 @@ function DXFParametersCard () {
 
         return(
             <>
-                <h1>DXF PARAMETERS CARD</h1>
+                <h1>DXF PARAMETERS CARD!!!! SOMETHING NEW</h1>
             </>
         );
 
