@@ -221,7 +221,7 @@ const Parameters = () => {
            "lead":0,
             "matCost":0,
 
-          //  "process":[ ]
+            "process":[ ]
     });
 
 
@@ -235,7 +235,12 @@ const Parameters = () => {
 
     const saveProcess=(proc)=>{
         proclst.push(proc)
-        console.log(proclst);
+        setMat(prevState => ({
+            ...prevState,
+            process: proclst
+
+        }));
+        console.log(mat)
     }
 
     const Input = () => {
