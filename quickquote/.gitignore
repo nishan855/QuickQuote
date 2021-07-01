@@ -32,6 +32,7 @@ build/
 dist/
 node_modules/
 aws-exports.js
+src/DynamoConfig.js
 awsconfiguration.json
 amplifyconfiguration.json
 amplifyconfiguration.dart
