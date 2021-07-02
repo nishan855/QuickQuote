@@ -8,14 +8,14 @@ import MultiSelect from "react-multi-select-component";
 import DynamoConfig from "../DynamoConfig";
 
 
- let AWS= require("aws-sdk");
+let AWS= require("aws-sdk");
 
 
 //
- //function Parametes() {
+//function Parametes() {
 
 
- //}
+//}
 
 //
 //
@@ -198,35 +198,27 @@ import DynamoConfig from "../DynamoConfig";
 
 
 
+const val=[];
+let count=0;
 
 const Parameters = () => {
 
 
-    const [input, setInput] = useState("");
-    const [materialdensity, setmaterialdensity] = useState(0);
-    const [materialthickness, setmaterialthickness] = useState(0);
-    const [maxsize, setmaxsize] = useState(0);
-    const [cutspeeds, setcutspeeds] = useState(0);
-    const [leadin, setleadin] = useState(0);
-    const [materialcost, materialsetcost] = useState(0);
-
-    const obj=[];
 
     const [mat,setMat]= useState({
-          "matname":"",
-          "mdensity":0,
-          "mthickness":0,
-           "msize":0,
-           "cutspd":0,
-           "lead":0,
-            "matCost":0,
+        "matname":"",
+        "mdensity":0,
+        "mthickness":0,
+        "msize":0,
+        "cutspd":0,
+        "lead":0,
+        "matCost":0,
 
-            "process":[ ]
+        "process":[ ]
     });
 
 
-    const [proc, setProc] = useState([]);
-    const [selected, setSelected] = useState([]);
+    const [obj,setObj]=useState([]);
 
     const proclst=[];
 
@@ -240,7 +232,6 @@ const Parameters = () => {
             process: proclst
 
         }));
-        console.log(mat)
     }
 
     const Input = () => {
@@ -256,12 +247,6 @@ const Parameters = () => {
                 "setup":0,
                 "kurf":0
             })
-
-            const [process, setprocess] = useState("");
-            const [perinch, setperinch] = useState(0);
-            const [perpierce, setperpierce] = useState(0);
-            const [setcost, setupcost] = useState(0);
-            const [processkurf, setprocesskurf] = useState("");
 
 
 
@@ -303,12 +288,12 @@ const Parameters = () => {
                             <input  type={"number"} placeholder="input price $/ Pierce" defaultValue={processObj.pierce}
                                     onChange={(e) => {
 
-                                            setProcObj(prevState => ({
-                                                ...prevState,
-                                                pierce:e.target.value
+                                        setProcObj(prevState => ({
+                                            ...prevState,
+                                            pierce:e.target.value
 
-                                            }));
-                                        }}/>
+                                        }));
+                                    }}/>
 
                         </FormGroup>
 
@@ -356,122 +341,152 @@ const Parameters = () => {
 
         return(
             <Card>
-            <FormGroup>
-                <Label for="exampleEmail">Material Name</Label>
-                <input placeholder="input Material Name" defaultValue={mat.matname}
-                       onChange={(e) =>{
-                           setMat(prevState => ({
-                               ...prevState,
-                               matname:e.target.value
+                <FormGroup>
+                    <Label for="exampleEmail">Material Name</Label>
+                    <input placeholder="input Material Name" defaultValue={mat.matname}
+                           onChange={(e) =>{
+                               setMat(prevState => ({
+                                   ...prevState,
+                                   matname:e.target.value
 
-                           }));
-                       }}/>
-            </FormGroup>
+                               }));
+                           }}/>
+                </FormGroup>
 
-        <FormGroup>
-            <Label for="exampleEmail">Material Density</Label>
-            <input type={"number"} placeholder="input Material Density " defaultValue={mat.mdensity}
+                <FormGroup>
+                    <Label for="exampleEmail">Material Density</Label>
+                    <input type={"number"} placeholder="input Material Density " defaultValue={mat.mdensity}
 
-                   onChange={(e) => {
-                       setMat(prevState => ({
-                           ...prevState,
-                           mdensity:e.target.value
+                           onChange={(e) => {
+                               setMat(prevState => ({
+                                   ...prevState,
+                                   mdensity:e.target.value
 
-                       }));
-                   }}/>
+                               }));
+                           }}/>
 
-        </FormGroup>
+                </FormGroup>
 
-        <FormGroup>
-            <Label for="exampleEmail">Material Thickness</Label>
-            <input type={"number"} placeholder="input Material Thickness" defaultValue={mat.mthickness}
-                   onChange={(e) => {
-                       setMat(prevState => ({
-                           ...prevState,
-                           mthickness:e.target.value
+                <FormGroup>
+                    <Label for="exampleEmail">Material Thickness</Label>
+                    <input type={"number"} placeholder="input Material Thickness" defaultValue={mat.mthickness}
+                           onChange={(e) => {
+                               setMat(prevState => ({
+                                   ...prevState,
+                                   mthickness:e.target.value
 
-                       }));
-                   }}/>
-        </FormGroup>
+                               }));
+                           }}/>
+                </FormGroup>
 
-        <FormGroup>
-            <Label for="exampleEmail">Max Sizes</Label>
-            <input type={"number"} placeholder="input Max sizes" defaultValue={mat.msize}
-                   onChange={(e) => {
-                       setMat(prevState => ({
-                           ...prevState,
-                           msize:e.target.value
+                <FormGroup>
+                    <Label for="exampleEmail">Max Sizes</Label>
+                    <input type={"number"} placeholder="input Max sizes" defaultValue={mat.msize}
+                           onChange={(e) => {
+                               setMat(prevState => ({
+                                   ...prevState,
+                                   msize:e.target.value
 
-                       }));
-                   }}/>
-        </FormGroup>
+                               }));
+                           }}/>
+                </FormGroup>
 
-        <FormGroup>
-            <Label for="exampleEmail">Cut speeds</Label>
-            <input type={"number"} placeholder="Input cut speed" defaultValue={mat.cutspd}
-                   onChange={(e) => {
-                       setMat(prevState => ({
-                           ...prevState,
-                           cutspd:e.target.value
+                <FormGroup>
+                    <Label for="exampleEmail">Cut speeds</Label>
+                    <input type={"number"} placeholder="Input cut speed" defaultValue={mat.cutspd}
+                           onChange={(e) => {
+                               setMat(prevState => ({
+                                   ...prevState,
+                                   cutspd:e.target.value
 
-                       }));
-                   }}/>
-        </FormGroup>
+                               }));
+                           }}/>
+                </FormGroup>
 
-        <FormGroup>
-            <Label for="exampleEmail">Material cost </Label>
-            <input type={"number"} placeholder="Input material cost" defaultValue={mat.matCost}
-                   onChange={(e) => {
+                <FormGroup>
+                    <Label for="exampleEmail">Material cost </Label>
+                    <input type={"number"} placeholder="Input material cost" defaultValue={mat.matCost}
+                           onChange={(e) => {
 
-                       setMat(prevState => ({
-                           ...prevState,
-                           matCost:e.target.value
+                               setMat(prevState => ({
+                                   ...prevState,
+                                   matCost:e.target.value
 
-                       }));
-                   }}/>
+                               }));
+                           }}/>
 
-        </FormGroup>
+                </FormGroup>
 
-        <FormGroup>
-            <Label for="exampleEmail">Lead In/ Lead Out distances</Label>
-            <input type={"number"} placeholder="input Lead in/out distances" defaultValue={mat.lead}
-                   onChange={(e) => {
-                       setMat(prevState => ({
-                           ...prevState,
-                           lead:e.target.value
+                <FormGroup>
+                    <Label for="exampleEmail">Lead In/ Lead Out distances</Label>
+                    <input type={"number"} placeholder="input Lead in/out distances" defaultValue={mat.lead}
+                           onChange={(e) => {
+                               setMat(prevState => ({
+                                   ...prevState,
+                                   lead:e.target.value
 
-                       }));
-                   }}/>
-        </FormGroup>
+                               }));
+                           }}/>
+                </FormGroup>
 
-        <button class = "addprocessbutton" title="click to add process for above material" onClick={onProcessClick}>Add Process</button>
-        {processList}
-    </Card>
+                <button class = "addprocessbutton" title="click to add process for above material" onClick={onProcessClick}>Add Process</button>
+                {processList}
+            </Card>
         )
     };
 
+
+
     const onAddBtnClick = event => {
-        setInputList(inputList.concat(<Input key={inputList.length} />));
+        if(count!=0) {
+            val.push(mat);
+            console.log(val);
+        }
+        count++;
+
+
+        setInputList(<Input key={inputList.length} />);
+
+
     };
 
-    console.log(mat);
+    async function submitChange(){
+
+        AWS.config.update(DynamoConfig);
+         let DynamoDB = new AWS.DynamoDB.DocumentClient();
+
+        //getting sub as user id
+              const user=  await Auth.currentAuthenticatedUser();
+              console.log(user);
+              const id= user.attributes.sub;
+
+        var params = {
+            TableName: "Test",
+            Item: {
+                "t1": id,
+                //array of process
+                "material": val
+            }
+        };
+
+        DynamoDB.put(params, function (err) {
+            if (err) {
+                console.log(err);
+            }
+
+            //this is put
+        });
+
+
+        }
 
 
 
-    const onsaveClick = event => {
-        setMat({matname:input,
-            mdensity:materialdensity,
-            mthickness:materialthickness,
-            msize:maxsize,
-            cutspd:cutspeeds,
-            lead:leadin,
-            matCost:materialcost,
-            //process:proclst
-        })
-        console.log(mat)
 
-        alert("material has been added successfully");
-
+    const onsaveClick =()=> {
+         val.push(mat);
+         console.log(val);
+          submitChange()
     };
 
 
@@ -482,9 +497,8 @@ const Parameters = () => {
             {inputList}
 
 
-            <button class = "savebutton" onClick={onsaveClick}> Save material </button>
+            <button class = "savebutton" onClick={(event)=>onsaveClick(event)}> Submit </button>
         </div>
     );
 };
 export default Parameters;
-
