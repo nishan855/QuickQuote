@@ -1,5 +1,5 @@
 import React from 'react';
-import CustomButton, { Button} from './Button';
+import { Button} from './Button';
 import '../BaseApp.css';
 import './HeroSection.css';
 
