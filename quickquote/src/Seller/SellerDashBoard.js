@@ -12,6 +12,11 @@ let AWS = require("aws-sdk");
 
 
 function SellerDashBoard () {
+    const history = useHistory();
+
+    const handleRoute = () =>{
+        history.push("/changeParameter");
+    }
 
     const [primeKey,setPrimeKey]=useState("");
 
@@ -116,7 +121,7 @@ function SellerDashBoard () {
                 </Card>
 
                 <div style={{float:"right", marginRight: "30%"}}>
-                    <Link to ="/changeParameter"> Set Parameters > </Link>
+                    <Button  onClick={handleRoute}> Set Parameters > </Button>
                 </div>
 
             </div>

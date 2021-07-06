@@ -18,7 +18,7 @@ function BaseApp() {
             <Route path = '/sellerDashboard' component = {SellerDB}/>
               <Route path = '/sellerProfile' component = {SellerDB} />
               <Route path = '/sellerOrders' component = {SellerDB} />
-              <Route path = '/changeParameter' component = {Parameters} />
+              <Route  path = '/changeParameter' component = {Parameters} />
 
           </Switch>
         </Router>
