@@ -2,11 +2,11 @@ import '../../App.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Card, Button} from 'react-bootstrap'
 import Dropzone from "react-dropzone";
-import React, {useEffect, useState} from "react";
-import {CardHeader, CardTitle} from "reactstrap";
+import React, { useState} from "react";
+import {CardHeader } from "reactstrap";
 import axios from "axios";
 import Server  from "../Server";
-import Navbar from "../Navbar";
+// import Navbar from "../Navbar";
 
 
 function DragDropCard () {
@@ -105,7 +105,7 @@ function DragDropCard () {
         marginTop:'2%',
         display: 'flex',
         flexDirection: 'row',
-        marginTop: 'auto',
+        // marginTop: 'auto',
         float: 'bottom',
         width: '100%',
         // marginBottom: '100px',
