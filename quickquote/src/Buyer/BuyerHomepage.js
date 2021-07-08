@@ -3,16 +3,19 @@ import React, {useEffect, useState} from "react";
 import {useHistory,useParams} from "react-router-dom";
 import {Auth} from "@aws-amplify/auth";
 import DynamoConfig from "../DynamoConfig";
+import Navbar from "../compo/Navbar";
 
 let AWS = require("aws-sdk");
 
 function BuyerHomepage(){
-    const params=useParams()
+    const param=useParams()
+
+    const [sellerExists,setSexists]=useState(false)
 
     const history = useHistory();
     const handleRoute = () =>{
         history.push({
-            pathname: '/buyer/placeOrder/'+ params.id,
+            pathname: '/buyer/placeOrder/'+ param.id,
         });
     }
 
@@ -41,15 +44,6 @@ function BuyerHomepage(){
 //fetching from DB
     async function fetch () {
 
-        // await Auth.currentAuthenticatedUser().then((data)=> {
-        //     setPrimeKey(data.attributes.sub)
-        //
-        // });
-
-        //getting userid sub for primary key
-        const user=  await Auth.currentAuthenticatedUser();
-        console.log(user);
-        const id= user.attributes.sub;
 
         //connecting  to db to look for record with primary key
         AWS.config.update(DynamoConfig);
@@ -58,7 +52,7 @@ function BuyerHomepage(){
         var params = {
             TableName: "Seller",
             Key: {
-                "id":id
+                "id": param.id
             }
         };
 
@@ -71,6 +65,7 @@ function BuyerHomepage(){
                 setInfo(info);
             }
             else {
+                setSexists(true);
                 setInfo(data.Item);
             }
         })
@@ -81,6 +76,10 @@ function BuyerHomepage(){
 
 
     return(
+
+        <div>
+            <Navbar/>
+        {sellerExists?
     <div>
 <Card>
     <Card color="danger" style={{width: "50%" ,marginLeft:"5%", marginRight: "5%"}}>
@@ -122,6 +121,12 @@ function BuyerHomepage(){
     <Button  onClick={handleRoute}> Get Quotes > </Button>
 </div>
 
+</div>:
+
+    <div>
+        <h1>OOps!!! seller doesnot exist....</h1>
+
+        </div>}
 </div>
 
 )
