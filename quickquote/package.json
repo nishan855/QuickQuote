@@ -12,6 +12,7 @@
     "bootstrap": "^4.6.0",
     "react": "^17.0.1",
     "react-bootstrap": "^1.5.2",
+    "react-credit-cards": "^0.8.3",
     "react-dom": "^17.0.1",
     "react-dropzone": "^11.2.4",
     "react-multi-select-component": "^4.0.2",
