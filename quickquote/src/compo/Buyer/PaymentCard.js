@@ -58,6 +58,15 @@ export default class PaymentCard extends React.Component {
                         onFocus={this.handleInputFocus}
                     />
                 </form>
+                <form>
+                    <input
+                        type="tel"
+                        name="cvc"
+                        placeholder="CVC"
+                        onChange={this.handleInputChange}
+                        onFocus={this.handleInputFocus}
+                    />
+                </form>
             </div>
         );
     }
