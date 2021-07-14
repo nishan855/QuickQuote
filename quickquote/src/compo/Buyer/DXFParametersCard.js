@@ -1,7 +1,7 @@
 import React from 'react';
 import {Card } from 'react-bootstrap'
 import {CardHeader} from "reactstrap";
-import DXFParametersForm from "./DXFParametersFrom"
+import DXFParametersForm from "./DXFParametersForm"
 
 function DXFParametersCard () {
 
