@@ -22,7 +22,7 @@ function HeroSection () {
                     className='btns'
                     buttonSytle='btn--primary'
                     buttonSize='btn--large'
-                    link='/buyer'
+                    link='/buyers'
                 >
                     Buyer Page <i className = 'far fa-play-cirle'/>
                 </Button>
