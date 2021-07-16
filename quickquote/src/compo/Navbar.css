@@ -16,12 +16,13 @@
     align-items: center;
     height: 80px;
     max-width: 1500px;
+    margin-left: 220px;
 }
 
 .navbar-logo {
     color: #fff;
     justify-self: start;
-    margin-left: 20px;
+    margin-left: 100px;
     cursor: pointer;
     text-decoration: none;
     font-size: 2rem;

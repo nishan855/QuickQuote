@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from 'react'
-import '../App.css'
-import '../button.css'
+import '../../App.css'
+import '../../button.css'
 import  {Card,CardBody,CardHeader} from "reactstrap";
 import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import { Auth } from '@aws-amplify/auth';
 import DynamoConfig from "../DynamoConfig";
-import SellerNavbar from "./SellerCompo/SellerNavbar";
+import SellerNavbar from "./SellerNavbar";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 

@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom'
 import { Auth } from '@aws-amplify/auth';
 import awsconfig from "../../aws-exports";
 import {AmplifySignOut, withAuthenticator} from '@aws-amplify/ui-react'
+import "./SellerDashBoard.css";
 import '../../compo/Navbar.css';
 import Amplify from "aws-amplify";
 
 Amplify.configure(awsconfig);
-
 
 function SellerNavbar() {
     const [click, setClick] = useState(false)
@@ -20,8 +20,8 @@ function SellerNavbar() {
     async function signout(){
         alert("Are you sure you want to sign out?")
         await Auth.signOut();
+
     }
-    // Shrinks button when window reduced
     const showButton = () => {
         if(window.innerWidth <= 960) {
             setButton(false);
@@ -61,30 +61,10 @@ function SellerNavbar() {
                                 className='nav-links'
                                 onClick={closeMobileMenu}
                             >
-                                Home
+                                Dashboard
                             </Link>
                         </li>
 
-
-                        <li className = 'nav-item'>
-                            <Link
-                                to='/sellerProfile'
-                                className='nav-links'
-                                onClick={closeMobileMenu}
-                            >
-                               Profile
-                            </Link>
-                        </li>
-
-                        <li className = 'nav-item'>
-                            <Link
-                                to='/sellerOrders'
-                                className='nav-links'
-                                onClick={closeMobileMenu}
-                            >
-                                Orders
-                            </Link>
-                        </li>
 
                         <li className = 'nav-item'>
                             <Link
@@ -105,3 +85,4 @@ function SellerNavbar() {
 }
 
 export default withAuthenticator(SellerNavbar);
+
