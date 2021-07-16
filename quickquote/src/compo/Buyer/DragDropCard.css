@@ -19,9 +19,9 @@
 }
 
 .drop-zone-container{
-    display: flex;
-    align-items: center;
-    margin: 60pt 60pt 60pt 60pt;
+    /*display: flex;*/
+    /*align-items: center;*/
+    /*!*margin: 60pt 60pt 60pt 60pt;*!*/
 }
 
 .drop-zone-card {
@@ -32,6 +32,7 @@
     align-items: center;
     width: 300pt;
     height: auto;
+    margin: 60pt 60pt 60pt 60pt;
 }
 
 .drop-zone-card-header {
