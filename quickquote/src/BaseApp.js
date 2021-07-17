@@ -7,6 +7,7 @@ import Buyer from './pages/Buyer';
 import Seller from "./Seller/SellerCompo/SellerDashBoard";
 import SellerDb from "./Seller/SellerCompo/SellerDashBoard";
 import Buyers from "./pages/Buyers";
+import Metrics from "./Seller/SellerCompo/pages/Metrics"
 
 
 function BaseApp() {
@@ -19,7 +20,6 @@ function BaseApp() {
             <Route path = '/buyer/placeOrder/:id'  component = {Buyer} />
             <Route path = '/seller' exact component = {Seller} />
               <Route path = '/sellerDashboard' exact component = {SellerDb} />
-
 
           </Switch>
         </Router>

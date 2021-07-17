@@ -3,10 +3,20 @@
     width: 100vw;
 }
 
-.Sidebar {
+.main-page{
+    display : flex;
     height: 100%;
-    width: 19%;
+}
+
+.Sidebar {
+    flex: 0.2;
     background-color: #2f4050;
+}
+
+.metrics
+{
+    flex: 0.8;
+    padding-left: 60px;
 }
 
 .SidebarList {
@@ -45,9 +55,7 @@
 .row #title {
     flex:70%;
     color:white;
-
 }
-
 span{
     margin-left: 16px;
 }
@@ -59,14 +67,6 @@ span{
     margin-left:50px;
 }
 
-.metrics
-{
-    background-color: #1f98f4;
-    padding-left: 290px;
-    height:100%;
-
-
-}
 
 
 
