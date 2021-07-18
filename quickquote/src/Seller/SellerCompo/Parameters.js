@@ -42,7 +42,6 @@ const Parameters = () => {
             "cutspd": 0,
             "lead": 0,
             "matCost": 0,
-
             "process": []
         });
 

@@ -6,11 +6,15 @@
 .main-page{
     display : flex;
     height: 100%;
+    flex-grow: 1;
+    overflow: auto;
 }
 
 .Sidebar {
     flex: 0.2;
     background-color: #2f4050;
+    height:100%;
+    overflow: auto;
 }
 
 .component
