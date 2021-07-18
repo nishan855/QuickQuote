@@ -5,12 +5,18 @@ import TrackChangesIcon from '@material-ui/icons/TrackChanges';
 import GroupRoundedIcon from '@material-ui/icons/GroupRounded';
 import AssessmentRoundedIcon from '@material-ui/icons/AssessmentRounded';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import CategoryIcon from '@material-ui/icons/Category';
 
 export const SidebarData = [
     {
         title: "Profile",
         icon: <AccountCircleIcon />,
         link: "/profile"
+    },
+    {
+        title : "Material",
+        icon : <CategoryIcon/>,
+        link : "/material"
     },
     {
         title: "Setup Material",
