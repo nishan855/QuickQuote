@@ -7,8 +7,13 @@ import {CardHeader, CardTitle} from "reactstrap";
 import axios from "axios";
 import Server  from "../compo/Server";
 import Navbar from "../compo/Navbar";
+import {toast, ToastContainer} from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+import {useParams} from "react-router-dom";
 
 export default function Buyer () {
+
+    const param=useParams()
 
     const formData = new FormData();
 
@@ -16,7 +21,7 @@ export default function Buyer () {
 
     const fill=[];
 
-
+    const [submitBtn,setSubmit]= useState(false);
 
     const remove=event=> {
         const name= event.target.getAttribute("id")
@@ -26,20 +31,18 @@ export default function Buyer () {
         setFiles(newList);
     }
 
-    //set up additional parameter
-    const BuyerParams=()=>{
+    const notify = () => {
+        toast.error('Please add at least one file', {
+            position: "bottom-right",
+            autoClose: 2500,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+        });
 
-        return(
-            <div style={{fontSize:"50%"}}>
-                <input type={"number"} required placeholder="Quantity"/>
-                <input type={"text"} required placeholder="Material and Size"/>
-                <input type={"text"} required placeholder="Process"/>
-                <input type={"text"} required placeholder="Lead time"/>
-            </div>
-        )
     }
-
-
 
     //display component
     const display=Array.from(files).map((n,index)=>
@@ -73,23 +76,64 @@ export default function Buyer () {
     }
 
 
+    const res =[]
 
-    const submit=event=>{
 
-   console.log(files)
-        axios({
-            method: 'post',
-            url: `${Server}`,
-            data: files,
-            contentType: 'application/json'
-        })
-            .then(function (response) {
-                    //handle success
-                    console.log(response);
-                },
-                function(error) {
-                    // handle error
-                });
+    const submit=event=> {
+
+        if(files.length !=0) {
+
+
+            setSubmit(true)
+            const dxfData = [];
+
+            for (let i = 0; i < files.length; i++) {
+
+                let obj = {
+                    "quantity": "",
+                    "process": "",
+                    "Material": "",
+                    "leadtime": ""
+                }
+
+
+                obj.quantity = files[i].quantity;
+                obj.process = files[i].process;
+                obj.Material = files[i].Material;
+                obj.leadtime = files[i].leadtime;
+
+                formData.append("files", files[i].file)
+                formData.append("quantity", files[i].quantity)
+                formData.append("process", files[i].process)
+                formData.append("material", files[i].Material)
+                formData.append("lead", files[i].leadtime)
+
+            }
+
+             formData.append("id",param.id)
+             console.log(param.id)
+            // axios.post(`${Server}`, {
+            //    res
+            //})
+
+            axios({
+                method: 'post',
+                url: `${Server}`,
+                data: formData,
+            })
+                .then(function (response) {
+                        //handle success
+                        console.log(response);
+                    },
+                    function (error) {
+                        // handle error
+                    });
+
+        }
+
+        else{
+              notify()
+        }
     }
 
     const DropzoneCardStyle = {
@@ -187,12 +231,23 @@ export default function Buyer () {
                 <Card style={ButtonCardStyle} >
                     <CardHeader style={{fontWeight:'bold'}}>Total Files: {files.length}
                         <Button className={"float-right"} style={{ borderStyle: 'outset', width:'12vw',fontSize:'2vw'}} variant="danger" size="sm" onClick={reset} >Clear</Button>
-                        <Button className={"float-right"} type={"submit"} style={{marginLeft: '100px', marginRight: '1rem',width:'13vw',fontSize:'2vw',borderStyle: 'outset'}} variant="primary" size="sm"
+                        <Button className={"float-right"} type={"submit"} style={{marginLeft: '100px', marginRight: '1rem',width:'13vw',fontSize:'2vw',borderStyle: 'outset'}} disabled={submitBtn} variant="primary" size="sm"
                                 onClick={submit}>Submit</Button>
                     </CardHeader>
 
                     {display}
                 </Card>
+                <ToastContainer
+                    position="bottom-right"
+                    autoClose={2500}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                />
             </div>
 
 
