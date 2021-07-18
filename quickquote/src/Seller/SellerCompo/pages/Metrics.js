@@ -5,7 +5,7 @@ import SellerSidebar from "../SellerSidebar";
 
 function Metrics() {
     return (
-        <div className= "metrics">
+        <div className= "component">
 
             <div className= "submain">
             <h1>Page 1</h1>

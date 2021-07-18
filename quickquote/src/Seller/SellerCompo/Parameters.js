@@ -1,11 +1,9 @@
 import React, {useEffect, useState} from 'react'
-import '../../App.css'
 import '../../button.css'
 import  {Card,CardBody,CardHeader} from "reactstrap";
 import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import { Auth } from '@aws-amplify/auth';
-import DynamoConfig from "../DynamoConfig";
-import SellerNavbar from "./SellerNavbar";
+import DynamoConfig from "../../DynamoConfig";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -85,6 +83,7 @@ const Parameters = () => {
 
 
                 return (
+                    <div className= "component">
                     <Card>
                         <CardHeader style={{
                             background: '#9DC88D',
@@ -92,10 +91,10 @@ const Parameters = () => {
                         }}> Process {processList.length + 1} Available </CardHeader>
                         <Form>
 
-
+                            <div className= "material">
                             <FormGroup>
-                                <Label for="exampleEmail">Process Name</Label>
-                                <input placeholder="input Process Name" defaultValue={processObj.procname}
+                                <Label for="exampleEmail">Process Name</Label><span></span>
+                                <input placeholder=" Input Process Name" defaultValue={processObj.procname}
                                        onChange={(e) => {
                                            setProcObj(prevState => ({
                                                ...prevState,
@@ -107,8 +106,8 @@ const Parameters = () => {
 
 
                             <FormGroup>
-                                <Label for="exampleEmail">Price per Inch</Label>
-                                <input type={"number"} placeholder="input price $/inch" defaultValue={processObj.inch}
+                                <Label for="exampleEmail">Price per Inch</Label><span></span>
+                                <input type={"number"} placeholder=" Input price $/inch" defaultValue={processObj.inch}
                                        onChange={(e) => {
                                            setProcObj(prevState => ({
                                                ...prevState,
@@ -119,8 +118,8 @@ const Parameters = () => {
                             </FormGroup>
 
                             <FormGroup>
-                                <Label for="exampleEmail">Price per Pierce</Label>
-                                <input type={"number"} placeholder="input price $/ Pierce"
+                                <Label for="exampleEmail">Price per Pierce</Label><span></span>
+                                <input type={"number"} placeholder=" Input price $/ Pierce"
                                        defaultValue={processObj.pierce}
                                        onChange={(e) => {
 
@@ -134,7 +133,7 @@ const Parameters = () => {
                             </FormGroup>
 
                             <FormGroup>
-                                <Label for="exampleEmail">Set up Cost</Label>
+                                <Label for="exampleEmail">Set up Cost</Label><span></span>
                                 <input type={"number"} placeholder="input Set up Cost" defaultValue={processObj.setup}
                                        onChange={(e) => {
                                            setProcObj(prevState => ({
@@ -147,7 +146,7 @@ const Parameters = () => {
 
 
                             <FormGroup>
-                                <Label for="exampleEmail">Process Kurf</Label>
+                                <Label for="exampleEmail">Process Kurf</Label><span></span>
                                 <input placeholder="input Process Kurf" defaultValue={processObj.kurf}
                                        onChange={(e) => {
                                            setProcObj(prevState => ({
@@ -161,9 +160,11 @@ const Parameters = () => {
                             <Button disabled={saveProcessbtn} onClick={() => {
                                 saveProcess(processObj)
                             }}>Save Process</Button>
+                            </div>
 
                         </Form>
                     </Card>
+                    </div>
                 )
             }
 
@@ -181,12 +182,14 @@ const Parameters = () => {
             }
 
             return (
+                <div className= "component">
                 <Card>
                     <CardHeader
                         style={{background: "#71bbd4", marginBottom: '2%'}}>Material {val.length + 1} Setup</CardHeader>
+                    <div className= "material">
                     <FormGroup>
-                        <Label for="exampleEmail">Material Name</Label>
-                        <input placeholder="input Material Name" defaultValue={mat.matname}
+                        <Label for="exampleEmail">Material Name</Label><span></span>
+                        <input placeholder=" Input Material Name" defaultValue={mat.matname}
                                onChange={(e) => {
                                    setMat(prevState => ({
                                        ...prevState,
@@ -197,7 +200,7 @@ const Parameters = () => {
                     </FormGroup>
 
                     <FormGroup>
-                        <Label for="exampleEmail">Material Density</Label>
+                        <Label for="exampleEmail">Material Density</Label><span></span>
                         <input type={"number"} placeholder="input Material Density " defaultValue={mat.mdensity}
 
                                onChange={(e) => {
@@ -211,7 +214,7 @@ const Parameters = () => {
                     </FormGroup>
 
                     <FormGroup>
-                        <Label for="exampleEmail">Material Thickness</Label>
+                        <Label for="exampleEmail">Material Thickness</Label><span></span>
                         <input type={"number"} placeholder="input Material Thickness" defaultValue={mat.mthickness}
                                onChange={(e) => {
                                    setMat(prevState => ({
@@ -223,7 +226,7 @@ const Parameters = () => {
                     </FormGroup>
 
                     <FormGroup>
-                        <Label for="exampleEmail">Max Sizes</Label>
+                        <Label for="exampleEmail">Max Sizes</Label><span></span>
                         <input type={"number"} placeholder="input Max sizes" defaultValue={mat.msize}
                                onChange={(e) => {
                                    setMat(prevState => ({
@@ -235,7 +238,7 @@ const Parameters = () => {
                     </FormGroup>
 
                     <FormGroup>
-                        <Label for="exampleEmail">Cut speeds</Label>
+                        <Label for="exampleEmail">Cut speeds</Label><span></span>
                         <input type={"number"} placeholder="Input cut speed" defaultValue={mat.cutspd}
                                onChange={(e) => {
                                    setMat(prevState => ({
@@ -247,7 +250,7 @@ const Parameters = () => {
                     </FormGroup>
 
                     <FormGroup>
-                        <Label for="exampleEmail">Material cost </Label>
+                        <Label for="exampleEmail">Material cost </Label><span></span>
                         <input type={"number"} placeholder="Input material cost" defaultValue={mat.matCost}
                                onChange={(e) => {
 
@@ -261,8 +264,8 @@ const Parameters = () => {
                     </FormGroup>
 
                     <FormGroup>
-                        <Label for="exampleEmail">Lead In/ Lead Out distances</Label>
-                        <input type={"number"} placeholder="input Lead in/out distances" defaultValue={mat.lead}
+                        <Label for="exampleEmail">Lead In/ Lead Out distances</Label><span></span>
+                        <input type={"number"} placeholder=" Input Lead in/out distances" defaultValue={mat.lead}
                                onChange={(e) => {
                                    setMat(prevState => ({
                                        ...prevState,
@@ -271,6 +274,7 @@ const Parameters = () => {
                                    }));
                                }}/>
                     </FormGroup>
+
 
                     <Card>
                         {processList}
@@ -281,8 +285,10 @@ const Parameters = () => {
                         </Button>
 
                     </Card>
+                    </div>
 
                 </Card>
+                </div>
             )
         };
 
@@ -354,12 +360,12 @@ const Parameters = () => {
 
 
         return (
-            <div>
+            <div className= "component">
 
                 {inputList}
                 <div>
                     <ToastContainer
-                        position="bottom-right"
+                        position="bottom-left"
                         autoClose={2500}
                         hideProgressBar={false}
                         newestOnTop={false}
@@ -370,23 +376,24 @@ const Parameters = () => {
                         pauseOnHover
                     />
 
+                    <div className = "add">
                     <button className="button" title="click to add more materials"
-                            style={{background: "#71bbd4", float: "left", marginTop: "2%"}} onClick={onAddBtnClick}>Add
+                            style={{background: "#71bbd4", marginLeft: "40%"}} onClick={onAddBtnClick}>Add
                         Material (+)
                     </button>
-                    <button class="savebutton"
+                    <button className="savebutton" style={{marginLeft: "2%"}}
                             onClick={(event) => onsaveClick(event)}> Submit
                     </button>
+                    </div>
                 </div>
             </div>
         );
     }
 
         return(
-            <div>
-                <SellerNavbar/>
+            <div className= "component">
             <InnerParams/>
             </div>
         );
-}
+};
 export default Parameters;

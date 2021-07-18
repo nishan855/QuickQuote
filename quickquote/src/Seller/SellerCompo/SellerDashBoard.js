@@ -3,9 +3,10 @@ import React from "react";
 import SellerNavbar from "./SellerNavbar";
 import SellerSidebar from "./SellerSidebar";
 import { BrowserRouter as Router, Switch, Route} from 'react-router-dom'
-import Order from "./pages/Order";
+import Setup from "./pages/Setup";
 import Metrics from "./pages/Metrics"
-import Buyers from "../../pages/Buyers";
+import Parameter from "./Parameters"
+
 
 function SellerDashBoard() {
     return (
@@ -16,7 +17,8 @@ function SellerDashBoard() {
                 <SellerSidebar />
                     <Switch>
                         <Route path = '/metrics' exact component = {Metrics} />
-
+                        <Route path = '/setup' exact component = {Setup} />
+                        <Route path = "/changeParameter" exact component = {Parameter} />
                     </Switch>
                 </div>
             </Router>

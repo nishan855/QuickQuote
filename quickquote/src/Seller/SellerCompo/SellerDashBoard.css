@@ -13,10 +13,11 @@
     background-color: #2f4050;
 }
 
-.metrics
+.component
 {
     flex: 0.8;
-    padding-left: 60px;
+    padding-left: 20px;
+    padding-top: 10px;
 }
 
 .SidebarList {
@@ -65,6 +66,20 @@ span{
     place-items: center;
     flex:70%;
     margin-left:50px;
+}
+
+.set{
+    padding-top: 60px;
+}
+
+.add{
+    padding-top: 20px;
+
+}
+.material
+{
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 
