@@ -9,18 +9,7 @@ function Metrics() {
 
             <div className= "submain">
             <h1>Page 1</h1>
-            <p>I bring the sauce.</p>
-            <h1>Page 1</h1>
-            <p>I bring the sauce.</p>
-            <h1>Page 1</h1>
-            <p>I bring the sauce.</p>
-            <h1>Page 1</h1>
-            <p>I bring the sauce.</p>
-            <h1>Page 1</h1>
-            <p>I bring the sauce.</p>
-            <h1>Page 1</h1>
-            <p>I bring the sauce.</p>
-                    <h1>Page 1</h1>
+            
 
             </div>
         </div>
