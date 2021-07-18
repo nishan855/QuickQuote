@@ -5,21 +5,22 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Iterator;
 
 
 import com.Shapes.*;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.priceQuote.Job;
 import com.priceQuote.ParamDXF;	// Eric Keng
 import com.priceQuote.PriceQuote;
+import org.apache.tomcat.util.json.JSONParser;
 import org.kabeja.dxf.*;
 import org.kabeja.dxf.helpers.DXFSplineConverter;
 import org.kabeja.dxf.helpers.DXFUtils;
 import org.kabeja.dxf.helpers.Point;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.util.Base64Utils;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.kabeja.parser.*;
 @CrossOrigin
@@ -28,25 +29,37 @@ public class FileController {
 
 	//mapping for request sending dxf files
 	@PostMapping(value = "/")
-	public ArrayList<FileData> testUpload1(@RequestParam("file") MultipartFile uploadedFile[]) throws Exception {
+	public ArrayList<FileData> testUpload1(@RequestParam("files") MultipartFile[] uploadedFile,@RequestParam("quantity") String[] quantity,
+										   @RequestParam("process") String[] process,@RequestParam("material") String[] material,
+										   @RequestParam("lead") String[] lead,@RequestParam("id") String sellerId
 
-		ArrayList<FileData> parsedData = new ArrayList<>();
+	) throws Exception {
+
+		ArrayList<FileDTO> fileDTO = new ArrayList<FileDTO>();
+		ArrayList<FileData> parsedData= new ArrayList<FileData>();
 		for (int i=0;i<uploadedFile.length;i++) {
-			//parse shapes out of the file
-			ObjectParser op = new ObjectParser(uploadedFile[i]);
+            fileDTO.add(new FileDTO(uploadedFile[i],material[i],lead[i],process[i],quantity[i]));
+	   }
 
-			//get all entities on the files
+
+		for (int i=0;i<uploadedFile.length;i++) {
+			byte[] mp =uploadedFile[i].getBytes();
+
+//			//parse shapes out of the file
+			ObjectParser op = new ObjectParser(mp);
+
+//			//get all entities on the files
 			ArrayList<DXFEntity> entities = op.getEntities();
+//
 
-
-			// find all loops
+//			// find all loops
 			ArrayList<DXFEntity> loops = op.getLoops(entities);
 
-			//check for errors
+//			//check for errors
 			//getting the shape with maximum area
 			DXFEntity mx = op.maxBounds(loops);
 
-//		//checking if other shape are enclosed in the shape
+		//checking if other shape are enclosed in the shape
 			if (!op.isEnclosed(loops, mx)) {
 				throw new Exception("DXF file error: Overlapping or Unnested loop.");
 			}
@@ -80,9 +93,9 @@ public class FileController {
 			System.out.println( );
 			/*          **********	 	END changes by Eric Keng	 	**********          */
 
-			parsedData.add(new FileData(uploadedFile[i].getName(),peirce_points,length,area,totalPrice));
+			parsedData.add(new FileData("123",peirce_points,length,area,totalPrice));
 
-		}
+ }
 
 	return (parsedData);
 	}
