@@ -93,7 +93,7 @@ public class FileController {
 			System.out.println( );
 			/*          **********	 	END changes by Eric Keng	 	**********          */
 
-			parsedData.add(new FileData("123",peirce_points,length,area,totalPrice));
+			parsedData.add(new FileData(uploadedFile[i].getOriginalFilename(),peirce_points,length,area,totalPrice));
 
  }
 
