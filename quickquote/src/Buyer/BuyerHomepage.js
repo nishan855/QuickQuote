@@ -13,7 +13,6 @@ function BuyerHomepage(){
     const [sellerExists,setSexists]=useState(false)
 
     const history = useHistory();
-
     const handleRoute = () =>{
         history.push({
             pathname: '/buyer/placeOrder/'+ param.id,

@@ -6,7 +6,7 @@ import Home from './pages/Home';
 import Buyer from './pages/Buyer';
 import Seller from "./Seller/SellerCompo/SellerDashBoard";
 import Buyers from "./pages/Buyers";
-
+import BuyerHomepage from "./Buyer/BuyerHomepage"
 
 
 function BaseApp() {
@@ -19,6 +19,10 @@ function BaseApp() {
             <Route path = '/buyer/placeOrder/:id'  component = {Buyer} />
             <Route path = '/seller' exact component = {Seller} />
               <Route path = '/sellerDashboard' exact component = {Seller} />
+              <Route path = '/buyer/:id' component = {BuyerHomepage}
+              />
+
+
 
           </Switch>
         </Router>
