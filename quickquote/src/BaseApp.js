@@ -16,10 +16,10 @@ function BaseApp() {
           <Switch>
             <Route path = '/' exact component = {Home} />
               <Route path = '/buyers' exact component = {Buyers} />
-            <Route path = '/buyer/placeOrder/:id'  component = {Buyer} />
+            <Route path = '/buyer/:id'  component = {Buyer} />
             <Route path = '/seller' exact component = {Seller} />
               <Route path = '/sellerDashboard' exact component = {Seller} />
-              <Route path = '/buyer/:id' component = {BuyerHomepage}
+              //<Route path = '/buyer/:id' component = {BuyerHomepage}
               />
 
 

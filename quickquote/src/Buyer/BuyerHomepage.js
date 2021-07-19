@@ -15,7 +15,7 @@ function BuyerHomepage(){
     const history = useHistory();
     const handleRoute = () =>{
         history.push({
-            pathname: '/buyer/placeOrder/'+ param.id,
+            pathname: '/buyer/'+ param.id,
         });
     }
 
