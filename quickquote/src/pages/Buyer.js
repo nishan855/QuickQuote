@@ -13,6 +13,7 @@ import {useParams} from "react-router-dom";
 
 export default function Buyer() {
 
+    // This array needs values from Seller data
     const materialOptions = [
         {
             label: "T6 Aluminum 0.03\"", //What is diplayed
@@ -45,6 +46,22 @@ export default function Buyer() {
         {
             label: "A36 Steel 0.25\"", //What is diplayed
             value: "a36_steel_0.25", //Name of variable
+        },
+    ];
+
+    // This array needs values from Seller data
+    const processOptions = [
+        {
+            label: "Plasma", //What is diplayed
+            value: "plasma", //Name of variable
+        },
+        {
+            label: "Waterjet", //What is diplayed
+            value: "waterjet", //Name of variable
+        },
+        {
+            label: "CNC", //What is diplayed
+            value: "cnc", //Name of variable
         },
     ];
 
@@ -92,21 +109,29 @@ export default function Buyer() {
                 }}/>
 
                 {/*Dropdown menu for material selection - Populated from array above*/}
-                <select type={"text"} required placeholder="Process" onChange={(e) => {
+                <select onChange={(e) => {
                     files[index].Material = e.target.value
                 }}>
                     {materialOptions.map((materialOptions) => (
                         <option value={materialOptions.value}>{materialOptions.label}</option>
                     ))}
                 </select>
-
                 {/*<input type={"text"} required placeholder="Material and Size" onChange={(e)=>*/}
                 {/*{files[index].Material=e.target.value*/}
                 {/*}}/>*/}
 
-                <input type={"text"} required placeholder="Process" onChange={(e) => {
+                {/*Dropdown menu for Process Selection*/}
+                <select onChange={(e) => {
                     files[index].process = e.target.value
-                }}/>
+                }}>
+                    {processOptions.map((processOptions) => (
+                        <option value={processOptions.value}>{processOptions.label}</option>
+                    ))}
+                </select>
+                {/*<input type={"text"} required placeholder="Process" onChange={(e) => {*/}
+                {/*    files[index].process = e.target.value*/}
+                {/*}}/>*/}
+
                 <input type={"text"} required placeholder="Lead time" onChange={(e) => {
                     files[index].leadtime = e.target.value
                 }}
@@ -147,6 +172,12 @@ export default function Buyer() {
                 obj.process = files[i].process;
                 obj.Material = files[i].Material;
                 obj.leadtime = files[i].leadtime;
+
+                //Consol log to just make sure data is valid before it is sent to backend
+                console.log(files[i].quantity);
+                console.log(files[i].process);
+                console.log(files[i].Material);
+                console.log(files[i].leadtime);
 
                 formData.append("files", files[i].file)
                 formData.append("quantity", files[i].quantity)
@@ -220,89 +251,91 @@ export default function Buyer() {
 
 
     return (
-        <div className='seller'>
-            <div>
-                <Navbar/>
+        <div>
+            <Navbar/>
+            <div className='seller'>
+                <div>
+                    <Card style={DropzoneCardStyle}>
+                        <CardHeader style={DropzoneCardHeaderStyle}>Upload Your DXF Files</CardHeader>
+                        <Dropzone accept={'.dxf'} onDrop={acceptedFiles => {
 
-                <Card style={DropzoneCardStyle}>
-                    <CardHeader style={DropzoneCardHeaderStyle}>Upload Your DXF Files</CardHeader>
-                    <Dropzone accept={'.dxf'} onDrop={acceptedFiles => {
+                            acceptedFiles.map(
+                                af => {
 
-                        acceptedFiles.map(
-                            af => {
+                                    let obj = {
+                                        "file": "",
+                                        "quantity": "",
+                                        "process": "",
+                                        "Material": "",
+                                        "leadtime": ""
+                                    }
 
-                                let obj = {
-                                    "file": "",
-                                    "quantity": "",
-                                    "process": "",
-                                    "Material": "",
-                                    "leadtime": ""
+
+                                    obj.file = af
+
+                                    fill.push(obj)
                                 }
+                            )
+
+                            setFiles([...files, ...fill])
+
+                        }
+
+                        }>
+
+                            {({getRootProps, getInputProps}) => (
+                                <section style={{
+                                    width: '90%',
+                                    height: '500%',
+                                    alignItems: 'center',
+                                    marginTop: '5%',
+                                    marginBottom: '5%',
+                                    borderStyle: 'dashed',
+                                }}>
+                                    <div style={DropzoneStyle}{...getRootProps()}>
+                                        <input {...getInputProps()} />
+                                        <p style={DropzonePStyle}>Drag and Drop here <br/> Click to Browse</p>
+                                    </div>
+                                </section>
+                            )}
+                        </Dropzone>
+                    </Card>
 
 
-                                obj.file = af
+                    <Card style={ButtonCardStyle}>
+                        <CardHeader style={{fontWeight: 'bold'}}>Total Files: {files.length}
+                            <Button className={"float-right"}
+                                    style={{borderStyle: 'outset', width: '12vw', fontSize: '2vw'}} variant="danger"
+                                    size="sm" onClick={reset}>Clear</Button>
+                            <Button className={"float-right"} type={"submit"} style={{
+                                marginLeft: '100px',
+                                marginRight: '1rem',
+                                width: '13vw',
+                                fontSize: '2vw',
+                                borderStyle: 'outset'
+                            }} disabled={submitBtn} variant="primary" size="sm"
+                                    onClick={submit}>Submit</Button>
+                        </CardHeader>
 
-                                fill.push(obj)
-                            }
-                        )
-
-                        setFiles([...files, ...fill])
-
-                    }
-
-                    }>
-
-                        {({getRootProps, getInputProps}) => (
-                            <section style={{
-                                width: '90%',
-                                height: '500%',
-                                alignItems: 'center',
-                                marginTop: '5%',
-                                marginBottom: '5%',
-                                borderStyle: 'dashed',
-                            }}>
-                                <div style={DropzoneStyle}{...getRootProps()}>
-                                    <input {...getInputProps()} />
-                                    <p style={DropzonePStyle}>Drag and Drop here <br/> Click to Browse</p>
-                                </div>
-                            </section>
-                        )}
-                    </Dropzone>
-                </Card>
+                        {display}
+                    </Card>
+                    <ToastContainer
+                        position="bottom-right"
+                        autoClose={2500}
+                        hideProgressBar={false}
+                        newestOnTop={false}
+                        closeOnClick
+                        rtl={false}
+                        pauseOnFocusLoss
+                        draggable
+                        pauseOnHover
+                    />
+                </div>
 
 
-                <Card style={ButtonCardStyle}>
-                    <CardHeader style={{fontWeight: 'bold'}}>Total Files: {files.length}
-                        <Button className={"float-right"}
-                                style={{borderStyle: 'outset', width: '12vw', fontSize: '2vw'}} variant="danger"
-                                size="sm" onClick={reset}>Clear</Button>
-                        <Button className={"float-right"} type={"submit"} style={{
-                            marginLeft: '100px',
-                            marginRight: '1rem',
-                            width: '13vw',
-                            fontSize: '2vw',
-                            borderStyle: 'outset'
-                        }} disabled={submitBtn} variant="primary" size="sm"
-                                onClick={submit}>Submit</Button>
-                    </CardHeader>
-
-                    {display}
-                </Card>
-                <ToastContainer
-                    position="bottom-right"
-                    autoClose={2500}
-                    hideProgressBar={false}
-                    newestOnTop={false}
-                    closeOnClick
-                    rtl={false}
-                    pauseOnFocusLoss
-                    draggable
-                    pauseOnHover
-                />
             </div>
-
-
         </div>
+
     )
 
 }

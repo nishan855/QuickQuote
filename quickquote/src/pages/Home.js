@@ -8,7 +8,7 @@ import Navbar from "../compo/Navbar";
 function Home () {
     return (
         <>
-             <Navbar />
+            <Navbar />
             <HeroSection/>
             <Footer />
         </>
