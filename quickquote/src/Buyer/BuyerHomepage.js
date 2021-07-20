@@ -79,55 +79,55 @@ function BuyerHomepage(){
 
         <div>
             <Navbar/>
-        {sellerExists?
-    <div>
-<Card>
-    <Card color="danger" style={{width: "50%" ,marginLeft:"5%", marginRight: "5%"}}>
-        <CardBody>
-            Setup Fee
-            <h1 style={{float:"right"}}>{info.setupCost}</h1>
-        </CardBody>
-    </Card>
+            {sellerExists ?
+                <div>
+                    <Card>
+                        <Card color="danger" style={{width: "50%", marginLeft: "5%", marginRight: "5%"}}>
+                            <CardBody>
+                                Setup Fee
+                                <h1 style={{float: "right"}}>{info.setupCost}</h1>
+                            </CardBody>
+                        </Card>
 
-    <Card color="success" style={{width:"50%",marginLeft:"5%", marginRight: "5%"}}>
-        <CardBody>Cut Cost per inch
-            <h1 style={{float:"right"}}>{info.cutCost}</h1>
-        </CardBody>
-    </Card>
+                        <Card color="success" style={{width: "50%", marginLeft: "5%", marginRight: "5%"}}>
+                            <CardBody>Cut Cost per inch
+                                <h1 style={{float: "right"}}>{info.cutCost}</h1>
+                            </CardBody>
+                        </Card>
 
-    <Card color="warning" style={{width:"50%",marginLeft:"5%", marginRight: "5%"}}>
-        <CardBody>Area Cost per material
-            <h1 style={{float:"right"}}>{info.areaCost}</h1>
-        </CardBody>
-    </Card>
+                        <Card color="warning" style={{width: "50%", marginLeft: "5%", marginRight: "5%"}}>
+                            <CardBody>Area Cost per material
+                                <h1 style={{float: "right"}}>{info.areaCost}</h1>
+                            </CardBody>
+                        </Card>
 
 
-    <Card color="primary" style={{ width:"50%",marginLeft:"5%", marginRight: "5%"}}>
-        <CardBody>Cost per Pierce Point
-            <h1 style={{float:"right"}}>{info.pierceCost}</h1>
-        </CardBody>
-    </Card>
+                        <Card color="primary" style={{width: "50%", marginLeft: "5%", marginRight: "5%"}}>
+                            <CardBody>Cost per Pierce Point
+                                <h1 style={{float: "right"}}>{info.pierceCost}</h1>
+                            </CardBody>
+                        </Card>
 
-    <Card color="info" style={{width:"50%",marginLeft:"5%", marginRight: "5%"}}>
-        <CardBody> Process
-            {listItems}
-        </CardBody>
+                        <Card color="info" style={{width: "50%", marginLeft: "5%", marginRight: "5%"}}>
+                            <CardBody> Process
+                                {listItems}
+                            </CardBody>
 
-    </Card>
+                        </Card>
 
-</Card>
+                    </Card>
 
-<div style={{float:"right", marginRight: "30%"}}>
-    <Button  onClick={handleRoute}> Get Quotes > </Button>
-</div>
+                    <div style={{float: "right", marginRight: "30%"}}>
+                        <Button onClick={handleRoute}> Get Quotes > </Button>
+                    </div>
 
-</div>:
+                </div> :
 
-    <div>
-        <h1>OOps!!! seller doesnot exist....</h1>
+                <div>
+                    <h1>OOps!!! seller doesnot exist....</h1>
 
-        </div>}
-</div>
+                </div>}
+        </div>
 
 )
 }
