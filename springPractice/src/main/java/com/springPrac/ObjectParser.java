@@ -18,9 +18,9 @@ import java.util.Iterator;
 
 public class ObjectParser {
 
-    private MultipartFile mp;
+    private byte[] mp;
 
-    public ObjectParser(MultipartFile mp) {
+    public ObjectParser(byte[] mp) {
         this.mp = mp;
     }
 
@@ -29,7 +29,7 @@ public class ObjectParser {
         //parser
         Parser parser = ParserBuilder.createDefaultParser();
         //getting the inputStream
-        InputStream in= new ByteArrayInputStream(mp.getBytes());
+        InputStream in= new ByteArrayInputStream(mp);
 
         //parsing the file
         parser.parse(in, DXFParser.DEFAULT_ENCODING);
