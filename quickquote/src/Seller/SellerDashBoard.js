@@ -20,24 +20,16 @@ function SellerDashBoard () {
 
     const [primeKey,setPrimeKey]=useState("");
 
-    const[info,setInfo]=useState({
-                 "process" : [],
-                 "pierceCost": "",
-                 "areaCost": "",
-                 "setupCost": "",
-                 "id": "",
-                 "cutCost": "",
-                 "material": " "}
-    )
+    const[info,setInfo]=useState([])
 
 
 
-    const listItems = info.process.map((number) =>
-        <div>
-        <li style={{float: "right"}}> {number}</li>
-        <br/>
-        </div>
-    );
+    // const listItems = info.process.map((number) =>
+    //     <div>
+    //     <li style={{float: "right"}}> {number}</li>
+    //     <br/>
+    //     </div>
+    // );
 //fetching from DB
    async function fetch () {
 
@@ -56,9 +48,9 @@ function SellerDashBoard () {
        let docClient = new AWS.DynamoDB.DocumentClient();
 
         var params = {
-            TableName: "Seller",
+            TableName: "Test",
             Key: {
-                "id":id
+                "t1":id
             }
         };
 
@@ -68,16 +60,19 @@ function SellerDashBoard () {
                 console.log("users::fetchOneByKey::error - " + JSON.stringify(err, null, 2));
             }
             else if (data.Item==null){
-                setInfo(info);
+                setInfo(null);
+
            }
             else {
+                console.log(data.Item);
                 setInfo(data.Item);
+
             }
         })
     }
 
    //loads data on the start
-    useEffect(()=>fetch(),[]);
+    useEffect(()=>fetch(),[info]);
 
     return (
         <div>
@@ -113,7 +108,7 @@ function SellerDashBoard () {
 
                 <Card color="info" style={{width:"50%",marginLeft:"5%", marginRight: "5%"}}>
                     <CardBody> Process
-                        {listItems}
+
                     </CardBody>
 
                 </Card>

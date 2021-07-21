@@ -9,16 +9,26 @@ import java.util.Base64;
 import java.util.Iterator;
 
 
+import com.DataLayer.DynamoDbconfig;
+import com.DataLayer.SellerEntity;
+import com.DataLayer.SellerRepo;
+import com.PriceCalc.Price;
+import com.PriceCalc.QuotingData;
 import com.Shapes.*;
+import com.amazonaws.auth.AWSStaticCredentialsProvider;
+import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.regions.Regions;
+import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
+import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.priceQuote.Job;
-import com.priceQuote.ParamDXF;	// Eric Keng
-import com.priceQuote.PriceQuote;
 import org.apache.tomcat.util.json.JSONParser;
 import org.kabeja.dxf.*;
 import org.kabeja.dxf.helpers.DXFSplineConverter;
 import org.kabeja.dxf.helpers.DXFUtils;
 import org.kabeja.dxf.helpers.Point;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.util.Base64Utils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -26,6 +36,11 @@ import org.kabeja.parser.*;
 @CrossOrigin
 @RestController
 public class FileController {
+	@Autowired
+	private AreaCalc af;
+
+	DynamoDBMapper mapper =new DynamoDbconfig().getmapper();
+	private final Price pp = new Price();
 
 	//mapping for request sending dxf files
 	@PostMapping(value = "/")
@@ -37,6 +52,13 @@ public class FileController {
 
 		ArrayList<FileDTO> fileDTO = new ArrayList<FileDTO>();
 		ArrayList<FileData> parsedData= new ArrayList<FileData>();
+
+
+
+       //loading sellere entity from aws
+		SellerEntity quotingParams=mapper.load(SellerEntity.class,sellerId);
+
+
 		for (int i=0;i<uploadedFile.length;i++) {
             fileDTO.add(new FileDTO(uploadedFile[i],material[i],lead[i],process[i],quantity[i]));
 	   }
@@ -44,6 +66,9 @@ public class FileController {
 
 		for (int i=0;i<uploadedFile.length;i++) {
 			byte[] mp =uploadedFile[i].getBytes();
+
+			//getting price parameters
+		    QuotingData qd =pp.getQuoteData(quotingParams,fileDTO.get(i));
 
 //			//parse shapes out of the file
 			ObjectParser op = new ObjectParser(mp);
@@ -63,37 +88,18 @@ public class FileController {
 			if (!op.isEnclosed(loops, mx)) {
 				throw new Exception("DXF file error: Overlapping or Unnested loop.");
 			}
-
 			int peirce_points = loops.size();
 
 			//get pierce distance
 			double length = op.getCuttingDistance(entities);
 
+			double area=af.getArea(mx);
 
-			/*          **********	 	BEGIN changes by Eric Keng	 	**********          */
-			double area = 37.00; // Need to learn to get this value!
+			Double totalPrice =(Integer.parseInt(quantity[i]))*pp.getPriceQuote(qd,length,area,peirce_points);
 
-			// Holds the parameters for the current DXF file
-			ParamDXF currDXF = new ParamDXF(area, length, peirce_points);
-			double totalPrice = 0.00;	// total price for metalType[7] will be stored in the File
+           System.out.println(quantity[i]);
 
-			// For now, showing the price calculation for all 8 metal types
-			for( int metalIndex = 0; metalIndex < 8; metalIndex++ ){
-				// Initializing a Job object that will store all the information for the current job
-				Job currJob = new Job( currDXF, metalIndex );
-
-				// Getting a price quote based off the current job
-				totalPrice = PriceQuote.priceQuote( currJob );
-
-				// Print totalPrice and the name of the metal type
-				String currency = NumberFormat.getCurrencyInstance().format( totalPrice );
-				System.out.print("Cost to cut \"" + currJob.getMetalType().getMaterialType() + "\": ");
-				System.out.println( currency );
-			}
-			System.out.println( );
-			/*          **********	 	END changes by Eric Keng	 	**********          */
-
-			parsedData.add(new FileData(uploadedFile[i].getOriginalFilename(),peirce_points,length,area,totalPrice));
+			parsedData.add(new FileData(uploadedFile[i].getOriginalFilename(),process[i],material[i],Integer.parseInt(quantity[i]),peirce_points,length,area,totalPrice));
 
  }
 
