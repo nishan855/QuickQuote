@@ -2,18 +2,23 @@
     --primary: #fff;
 }
 
+.eric-link {
+    height: 50pt;
+    width: max-content;
+    max-width: max-content;
+    background-color: #dec300;
+    margin-left: 50pt;
+    border-radius: 8px;
+    cursor: pointer;
+    color: #d90404;
+    border: 3px solid #000000;
+}
+
 .btn--primary {
     padding: 8px 20px;
     border-radius: 2px;
     outline: none;
-    border: none;
     cursor: pointer;
-    background-color: #fff;
-    color: #242424;
-    border: 1px solid #fff;
-}
-
-.btn--primary {
     background-color: #fff;
     color: #242424;
     border: 1px solid #fff;
@@ -23,11 +28,9 @@
     padding: 8px 20px;
     border-radius: 2px;
     outline: none;
-    border: none;
     cursor: pointer;
     background-color: transparent;
     color: #fff;
-    padding: 8px 20px;
     border: 1px solid #fff;
     transition: all 0.3s ease-out;
 }
@@ -44,8 +47,7 @@
 
 .btn--large:hover,
 .btn--medium:hover {
-    transition: all 0.3s ease-out;
-    background: #fff;
+    background: #ffffff;
     color: #242424;
     transition: 250ms;
 }

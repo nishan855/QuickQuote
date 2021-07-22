@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react'
 import { Link } from 'react-router-dom'
-// import { Button } from './Button';
 import './Navbar.css';
 
 
@@ -35,7 +34,7 @@ function Navbar() {
                         className = 'navbar-logo'
                         onClick = {closeMobileMenu} // Close menu from Logo button
                     >
-                        QUICK-QUOTE <i className="fab fa-typo3"></i>
+                        QuickQuote <i className="fab fa-typo3"></i>
                     </Link>
                     <div
                         className = 'menu-icon'
