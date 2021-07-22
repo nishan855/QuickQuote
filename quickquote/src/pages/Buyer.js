@@ -10,60 +10,69 @@ import Navbar from "../compo/Navbar";
 import {toast, ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import {useParams} from "react-router-dom";
+import * as AWS from "aws-sdk";
+import DynamoConfig from "../DynamoConfig";
 
 export default function Buyer() {
 
-    // This array needs values from Seller data
-    const materialOptions = [
-        {
-            label: "T6 Aluminum 0.03\"", //What is diplayed
-            value: "t6_aluminum_0.03", //Name of variable
-        },
-        {
-            label: "T6 Aluminum 0.06\"", //What is diplayed
-            value: "t6_aluminum_0.06", //Name of variable
-        },
-        {
-            label: "T6 Aluminum 0.125\"", //What is diplayed
-            value: "t6_aluminum_0.125", //Name of variable
-        },
-        {
-            label: "T6 Aluminum 0.25\"", //What is diplayed
-            value: "t6_aluminum_0.25", //Name of variable
-        },
-        {
-            label: "A36 Steel 0.03\"", //What is diplayed
-            value: "a36_steel_0.03", //Name of variable
-        },
-        {
-            label: "A36 Steel 0.06\"", //What is diplayed
-            value: "a36_steel_0.06", //Name of variable
-        },
-        {
-            label: "A36 Steel 0.125\"", //What is diplayed
-            value: "a36_steel_0.125", //Name of variable
-        },
-        {
-            label: "A36 Steel 0.25\"", //What is diplayed
-            value: "a36_steel_0.25", //Name of variable
-        },
-    ];
+    // Get data from DB
+    const userParam=useParams()
+    const [mat, setMat] = useState( []);
+    const [matOps, setMatOps] = useState ( [] );
+    const [procOps, setProcOps] = useState ( [] );
 
-    // This array needs values from Seller data
-    const processOptions = [
-        {
-            label: "Plasma", //What is diplayed
-            value: "plasma", //Name of variable
-        },
-        {
-            label: "Waterjet", //What is diplayed
-            value: "waterjet", //Name of variable
-        },
-        {
-            label: "CNC", //What is diplayed
-            value: "cnc", //Name of variable
-        },
-    ];
+    async function fetch () {
+        console.log("Hello!");
+
+        //connecting  to db to look for record with primary key
+        AWS.config.update(DynamoConfig);
+        let docClient = new AWS.DynamoDB.DocumentClient();
+        const id= userParam.id;
+        var params = {
+            TableName: "Test",
+            Key: {
+                "t1":id
+            }
+        };
+
+        await docClient.get(params, function (err, data) {
+            if (err) {
+                console.log("users::fetchOneByKey::error - " + JSON.stringify(err, null, 2));
+            }
+            else if (data.Item==null){
+                // setInfo(null);
+            }
+            else {
+                // console.log(data.Item);
+                // setInfo(data.Item);
+                setMat(data.Item);
+            }
+        })
+    }
+
+    useEffect(()=> {
+        fetch()
+        if(mat.length != 0){
+            console.log(mat)
+            console.log(mat.material.length)
+            updateMaterialOptions();
+        }
+        else
+            console.log("Mat Empty")
+    } ,[mat.length]);   // Not sure what this does. Seems to update only when 'mat' has values.
+
+    function updateMaterialOptions () {
+        console.log("updating MaterialOptions...")
+        const matL = mat.material.length;
+        let materialOptions = [{label: "select material", value: "_default"}];
+        if( matL > 0){
+            for( let i = 0; i < matL; i++ ){
+                const matName = mat.material[i].matname;
+                materialOptions.push({ label: matName, value: matName } )
+            }
+        }
+        setMatOps(materialOptions); // Update array that shows in dropdown menu
+    }
 
     const param = useParams()
 
@@ -96,6 +105,39 @@ export default function Buyer() {
 
     }
 
+    function processOptionChange(e, index){
+        files[index].Material = e.target.value
+        console.log("Changing target!");
+        updateProcessOptions(e,index);
+        // files[this.index].material = this.e.target.value;
+    }
+    function updateProcessOptions(e){
+        console.log("Updating Process Options!");
+        let currSel = e.target.value;
+        let matIndex = -1;
+        console.log("Based on Current Selection: " + currSel);
+        for( let i = 0; i < mat.material.length; i++ ){
+            if( mat.material[i].matname == currSel ){
+                console.log("Found: " + mat.material[i].matname + " -  Index: " + i)
+                matIndex = i;
+                break;
+            }
+        }
+        if( matIndex != -1){
+            const procL = mat.material[matIndex].process.length;
+            console.log("Process Length: " + procL);
+            let processOptions = [{label: "select process", value: "_default"}];
+            for( let i = 0; i < procL; i++ ){
+                const procName = mat.material[matIndex].process[i].procname;
+                processOptions.push({label: procName, value: procName})
+            }
+            setProcOps(processOptions); // Update array that shows in dropdown menu
+        }
+        else{
+            console.log("No material found!");
+        }
+    }
+
     //display component
     const display = Array.from(files).map((n, index) =>
 
@@ -109,11 +151,10 @@ export default function Buyer() {
                 }}/>
 
                 {/*Dropdown menu for material selection - Populated from array above*/}
-                <select onChange={(e) => {
-                    files[index].Material = e.target.value
-                }}>
-                    {materialOptions.map((materialOptions) => (
-                        <option value={materialOptions.value}>{materialOptions.label}</option>
+                <select name="matOps" onChange={(e) => {processOptionChange(e,index)}}
+                >
+                    {matOps.map((matOps) => (
+                        <option value={matOps.value}>{matOps.label}</option>
                     ))}
                 </select>
                 {/*<input type={"text"} required placeholder="Material and Size" onChange={(e)=>*/}
@@ -124,8 +165,8 @@ export default function Buyer() {
                 <select onChange={(e) => {
                     files[index].process = e.target.value
                 }}>
-                    {processOptions.map((processOptions) => (
-                        <option value={processOptions.value}>{processOptions.label}</option>
+                    {procOps.map((procOps) => (
+                        <option value={procOps.value}>{procOps.label}</option>
                     ))}
                 </select>
                 {/*<input type={"text"} required placeholder="Process" onChange={(e) => {*/}
@@ -146,14 +187,9 @@ export default function Buyer() {
         setFiles(newList);
     }
 
-
-    const res = []
-
-
     const submit = event => {
 
         if (files.length != 0) {
-
 
             setSubmit(true)
             const dxfData = [];
@@ -166,7 +202,6 @@ export default function Buyer() {
                     "Material": "",
                     "leadtime": ""
                 }
-
 
                 obj.quantity = files[i].quantity;
                 obj.process = files[i].process;
@@ -189,9 +224,6 @@ export default function Buyer() {
 
             formData.append("id", param.id)
             console.log(param.id)
-            // axios.post(`${Server}`, {
-            //    res
-            //})
 
             axios({
                 method: 'post',
