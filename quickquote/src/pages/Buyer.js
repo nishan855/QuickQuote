@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {Card, Button} from 'react-bootstrap'
 import Dropzone from "react-dropzone";
 import React, {useEffect, useState} from "react";
-import {CardHeader, CardTitle} from "reactstrap";
+import {CardHeader} from "reactstrap";
 import axios from "axios";
 import Server from "../compo/Server";
 import Navbar from "../compo/Navbar";
@@ -19,11 +19,10 @@ export default function Buyer() {
     const userParam=useParams()
     const [mat, setMat] = useState( []);
     const [matOps, setMatOps] = useState ( [] );
-    const [procOps, setProcOps] = useState ( [] );
+    const [procOps, setProcOps] = useState ( [{label: "select process", value: "_default"}] );
 
     async function fetch () {
-        console.log("Hello!");
-
+        console.log("Fetching Materiel Object from DB...");
         //connecting  to db to look for record with primary key
         AWS.config.update(DynamoConfig);
         let docClient = new AWS.DynamoDB.DocumentClient();
@@ -46,6 +45,8 @@ export default function Buyer() {
                 // console.log(data.Item);
                 // setInfo(data.Item);
                 setMat(data.Item);
+                console.log(" Finished");
+
             }
         })
     }
@@ -112,6 +113,7 @@ export default function Buyer() {
         // files[this.index].material = this.e.target.value;
     }
     function updateProcessOptions(e){
+        let processOptions = [{label: "select process", value: "_default"}];
         console.log("Updating Process Options!");
         let currSel = e.target.value;
         let matIndex = -1;
@@ -126,16 +128,16 @@ export default function Buyer() {
         if( matIndex != -1){
             const procL = mat.material[matIndex].process.length;
             console.log("Process Length: " + procL);
-            let processOptions = [{label: "select process", value: "_default"}];
             for( let i = 0; i < procL; i++ ){
                 const procName = mat.material[matIndex].process[i].procname;
                 processOptions.push({label: procName, value: procName})
             }
-            setProcOps(processOptions); // Update array that shows in dropdown menu
         }
         else{
             console.log("No material found!");
         }
+        setProcOps(processOptions); // Update array that shows in dropdown menu
+
     }
 
     //display component
