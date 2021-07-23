@@ -12,18 +12,9 @@ let AWS = require("aws-sdk");
 
 function Material () {
 
-    const [primeKey,setPrimeKey]=useState("");
+    const [primeKey, setPrimeKey] = useState("");
 
-    const[info,setInfo]=useState({
-        "process" : [],
-        "matname": "",
-        "mdensity": "",
-        "mthickness": "",
-        "matCost": "",
-        "cutspd": "",
-        "msize": "",
-        "lead": ""}
-    )
+    const [info, setInfo] = useState([])
 
     const [processList, setProcessList] = useState([]);
     const [processObj, setProcObj] = useState({
@@ -34,21 +25,82 @@ function Material () {
         "kurf": 0
     })
 
-    const listItems = info.process.map((number) =>
-        <div>
-            <li style={{float: "right"}}> {number}</li>
-            <br/>
-        </div>
-    );
+    // const listItems = info.process.map((number) =>
+    //     <div>
+    //         <li style={{float: "right"}}> {number}</li>
+    //         <br/>
+    //     </div>
+    // );
+
+    const showData=info.map((inf)=>
+        <Card>
+            <Card color="danger" style={{width: 340,height:65}}>
+                <div className= "text-center">
+                    <CardBody>
+                        <h3>Material Name : {inf.matname}</h3>
+
+                    </CardBody>
+                </div>
+            </Card>
+
+            <Card color="success" style={{width: 340,height:65}}>
+                <div className= "text-center">
+                    <CardBody> <h3>Material Density: {inf.mdensity}</h3>
+                    </CardBody>
+                </div>
+            </Card>
+
+            <Card color="warning" style={{width: 340,height:65}}>
+                <div className= "text-center">
+                    <CardBody><h3>Material Thickness: {inf.mthickness}</h3>
+                    </CardBody>
+                </div>
+            </Card>
+
+
+            <Card color="primary" style={{width: 340,height:65}}>
+                <div className= "text-center">
+                    <CardBody><h3>Material Cost: {inf.matCost}</h3>
+                    </CardBody>
+                </div>
+            </Card>
+
+            <Card color="info" style={{width: 340,height:65}}>
+                <div className= "text-center">
+                    <CardBody><h3> Cut Speed: {inf.cutspd}</h3>
+                    </CardBody>
+                </div>
+            </Card>
+
+            <Card color="secondary" style={{width: 340,height:65}}>
+                <div className= "text-center">
+                    <CardBody><h3> Lead Distance: {inf.lead}</h3>
+                    </CardBody>
+                </div>
+            </Card>
+
+                {inf.process.map(p=>
+
+                    <div>
+
+                         <h1>{ p.procname}</h1>
+                        <h1> {p.inch}</h1>
+                    </div>
+
+                    )}
+
+
+        </Card>
+
+    )
+
 //fetching from DB
-    async function fetch () {
+    async function fetch() {
 
         //getting userid sub for primary key
-        const user=  await Auth.currentAuthenticatedUser();
-        console.log(user);
-        console.log("hello");
-        const id= user.attributes.sub;
-        console.log(id);
+        const user = await Auth.currentAuthenticatedUser();
+        const id = user.attributes.sub;
+
 
         //connecting  to db to look for record with primary key
         AWS.config.update(DynamoConfig);
@@ -57,7 +109,7 @@ function Material () {
         var params = {
             TableName: "Test",
             Key: {
-                "t1":id,
+                "t1": id,
             }
         };
 
@@ -65,102 +117,29 @@ function Material () {
         await docClient.get(params, function (err, data) {
             if (err) {
                 console.log("users::fetchOneByKey::error - " + JSON.stringify(err, null, 2));
-            }
-            else if (data.Item==null){
+            } else if (data.Item == null) {
                 setInfo(info);
-            }
-            else {
-                //for(let i =0 ; i < ; i ++) {
-                    setInfo(data.Item.material[0]);
-                    setProcObj(data.Item.material[0].process[0])
-                //}
+            } else {
+                setInfo(data.Item.material);
 
-
-                console.log(data.Item.material[0].process[0].inch);
-                // info.pierceCost = data.Item.material[0].cutspd;
-                // info.matname = data.Item.material[0].matname;
-                //     console.log(data.Item.material[0].matname);
 
             }
         })
     }
 
     //loads data on the startss
-    useEffect(()=>fetch(),[]);
+    useEffect(() => {
+        fetch()
+        console.log(info)
+
+    }, []);
+
 
     return (
-        <div className="component">
-            <div className= "material">
-            <div className= "set">
-                <Card>
-                    <Card color="danger" style={{width: 340,height:65}}>
-                       <div className= "text-center">
-                           <CardBody>
-                               <h3>Material Name : {info.matname}</h3>
-
-                             </CardBody>
-                         </div>
-                     </Card>
-
-                     <Card color="success" style={{width: 340,height:65}}>
-                         <div className= "text-center">
-                             <CardBody> <h3>Material Density: {info.mdensity}</h3>
-                             </CardBody>
-                         </div>
-                    </Card>
-
-                     <Card color="warning" style={{width: 340,height:65}}>
-                         <div className= "text-center">
-                             <CardBody><h3>Material Thickness: {info.mthickness}</h3>
-                             </CardBody>
-                         </div>
-                     </Card>
-
-
-                     <Card color="primary" style={{width: 340,height:65}}>
-                         <div className= "text-center">
-                             <CardBody><h3>Material Cost: {info.matCost}</h3>
-                             </CardBody>
-                         </div>
-                     </Card>
-
-                     <Card color="info" style={{width: 340,height:65}}>
-                         <div className= "text-center">
-                             <CardBody><h3> Cut Speed: {info.cutspd}</h3>
-                            </CardBody>
-                         </div>
-                     </Card>
-
-                    <Card color="secondary" style={{width: 340,height:65}}>
-                        <div className= "text-center">
-                            <CardBody><h3> Lead Distance: {info.lead}</h3>
-                            </CardBody>
-                        </div>
-                    </Card>
-
-                 </Card>
-
-
-
-             </div>
-
-            <div className= "process">
-                <Card>
-                    <CardHeader className = "text-center" style={{
-                        background: '#9DC88D'
-                    }}> Process {processList.length + 1}  {} </CardHeader>
-                </Card>
-                <div className= "processInfo">
-                    <h6>Process Name: {processObj.procname}</h6>
-                    <h6>Set Up Cost: {processObj.procname}</h6>
-                    <h6>Price per inch: {processObj.setup}</h6>
-                    <h6>Price Per Pierce: {processObj.pierce}</h6>
-                    <h6>Process Kurf: {processObj.kurf}</h6>
-                </div>
-
-            </div>
-            </div>
+        <div className="process">
+            {info.length !=0? <div> {showData}</div>:null
+            }
         </div>
-    );
+    )
 }
 export default withAuthenticator(Material);
