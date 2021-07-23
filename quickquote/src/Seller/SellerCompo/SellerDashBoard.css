@@ -6,7 +6,6 @@
 .main-page{
     display : flex;
     height: 100%;
-    flex-grow: 1;
     overflow: auto;
 }
 
@@ -74,6 +73,8 @@ span{
 
 .set{
     padding-top: 60px;
+    padding-left: 90px;
+    padding-bottom: 60px;
 }
 
 .add{
@@ -84,8 +85,17 @@ span{
 {
     padding-left: 10px;
     padding-right: 10px;
+    display : flex;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    border-top:  1px solid black;
+    border-bottom:  1px solid black;
 }
 
+.process{
+    padding-top: 60px;
+    padding-left: 60px;
+}
 
 
 
