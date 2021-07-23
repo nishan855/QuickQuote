@@ -137,7 +137,7 @@ const Parameters = () => {
                                        onChange={(e) => {
                                            setProcObj(prevState => ({
                                                ...prevState,
-                                               pierce: e.target.value
+                                               setup: e.target.value
 
                                            }));
                                        }}/>

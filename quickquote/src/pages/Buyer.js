@@ -9,6 +9,8 @@ import Server from "../compo/Server";
 import Navbar from "../compo/Navbar";
 import {toast, ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import {useParams,useHistory} from "react-router-dom";
+import Loader from "react-loader-spinner"
 import {useParams} from "react-router-dom";
 import * as AWS from "aws-sdk";
 import DynamoConfig from "../DynamoConfig";
@@ -76,14 +78,17 @@ export default function Buyer() {
     }
 
     const param = useParams()
+    const history =useHistory()
 
     const formData = new FormData();
+    const[resp,setResp]=useState([])
 
     const [files, setFiles] = useState([]);
 
     const fill = [];
 
     const [submitBtn, setSubmit] = useState(false);
+
 
     const remove = event => {
         const name = event.target.getAttribute("id")
@@ -193,6 +198,7 @@ export default function Buyer() {
 
         if (files.length != 0) {
 
+
             setSubmit(true)
             const dxfData = [];
 
@@ -234,7 +240,13 @@ export default function Buyer() {
             })
                 .then(function (response) {
                         //handle success
-                        console.log(response);
+                        console.log(response)
+                        setResp(response.data);
+                        history.push(
+                            {pathname: '/quote',
+                            state: resp}
+                            )
+
                     },
                     function (error) {
                         // handle error
@@ -349,6 +361,21 @@ export default function Buyer() {
                                 borderStyle: 'outset'
                             }} disabled={submitBtn} variant="primary" size="sm"
                                     onClick={submit}>Submit</Button>
+                        <Button className={"float-right"} style={{ borderStyle: 'outset', width:'12vw',fontSize:'2vw'}} variant="danger" size="sm" onClick={reset} >Clear</Button>
+                        <Button className={"float-right"} type={"submit"} style={{marginLeft: '100px', marginRight: '1rem',width:'13vw',fontSize:'2vw',borderStyle: 'outset'}} disabled={submitBtn} variant="primary" size="sm" onClick={submit}>Submit</Button>
+
+                        {submitBtn ?
+                            <div>
+                            <Loader
+                            type="Circles"
+                            color="#00BFFF"
+                            height={100}
+                            width={100}
+                        />
+                        <h1>Getting quotes...</h1>
+
+                        </div>: null}
+
                         </CardHeader>
 
                         {display}
@@ -364,6 +391,7 @@ export default function Buyer() {
                         draggable
                         pauseOnHover
                     />
+
                 </div>
 
 

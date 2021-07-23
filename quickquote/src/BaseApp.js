@@ -4,10 +4,10 @@ import { BrowserRouter as Router, Switch, Route} from 'react-router-dom'    // '
 import './BaseApp.css'
 import Home from './pages/Home';
 import Buyer from './pages/Buyer';
-import Seller from "./Seller/SellerCompo/SellerDashBoard";
-import Buyers from "./pages/Buyers";
+import SellerDB from "./Seller/SellerDashBoard";
+import Parameters from "./Seller/Parameters";
 import BuyerHomepage from "./Buyer/BuyerHomepage"
-
+import Buyers from "./pages/Buyers";
 
 function BaseApp() {
   return (
@@ -16,6 +16,9 @@ function BaseApp() {
           <Switch>
             <Route path = '/' exact component = {Home} />
               <Route path = '/buyers' exact component = {Buyers} />
+
+             <Route path = '/quote'  component = {Orders} />
+
             <Route path = '/buyer/:id'  component = {Buyer} />
             <Route path = '/seller' exact component = {Seller} />
               <Route path = '/sellerDashboard' exact component = {Seller} />
