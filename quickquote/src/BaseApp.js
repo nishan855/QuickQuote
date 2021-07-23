@@ -1,5 +1,6 @@
 import React from 'react'
 // import Navbar from './compo/Navbar'
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import { BrowserRouter as Router, Switch, Route} from 'react-router-dom'    // 'npm install react-router-dom'
 import './BaseApp.css'
 import Home from './pages/Home';
@@ -8,6 +9,7 @@ import SellerDB from "./Seller/SellerDashBoard";
 import Parameters from "./Seller/Parameters";
 import BuyerHomepage from "./Buyer/BuyerHomepage"
 import Buyers from "./pages/Buyers";
+import Orders from "./pages/Order";
 
 function BaseApp() {
   return (
@@ -23,6 +25,8 @@ function BaseApp() {
               <Route path = '/sellerOrders' component = {SellerDB} />
               <Route  path = '/changeParameter' component = {Parameters} />
               <Route path = '/buyer/:id'  component = {BuyerHomepage} />
+             <Route path = '/quote'  component = {Orders} />
+
 
           </Switch>
         </Router>
