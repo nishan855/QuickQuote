@@ -7,7 +7,6 @@ import DynamoConfig from "../../DynamoConfig";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-
 let AWS= require("aws-sdk");
 
 
@@ -21,27 +20,28 @@ const Parameters = () => {
         const [proceError,setProcErr] = useState(false);
 
 
-            const notify = () => {
-                toast.error('Please save or add  the process first!!', {
-                    position: "bottom-right",
-                    autoClose: 2500,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                });
+        const notify = () => {
+            toast.error('Please save or add  the process first!!', {
+                position: "bottom-right",
+                autoClose: 2500,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
 
-            }
+        }
 
         const [mat, setMat] = useState({
             "matname": "",
-            "mdensity": 0,
-            "mthickness": 0,
-            "msize": 0,
-            "cutspd": 0,
-            "lead": 0,
-            "matCost": 0,
+            "mdensity": "0",
+            "mthickness": "0",
+            "msize": "0",
+            "cutspd": "0",
+            "lead": "0",
+            "matCost": "0",
+
             "process": []
         });
 
@@ -60,10 +60,10 @@ const Parameters = () => {
             const Process = () => {
                 const [processObj, setProcObj] = useState({
                     "procname": "",
-                    "inch": 0,
-                    "pierce": 0,
-                    "setup": 0,
-                    "kurf": 0
+                    "inch": "0",
+                    "pierce": "0",
+                    "setup": "0",
+                    "kurf": "0"
                 })
 
                 const [saveProcessbtn, setSpBtn] = useState(false)
@@ -82,7 +82,6 @@ const Parameters = () => {
 
 
                 return (
-                    <div className= "component">
                     <Card>
                         <CardHeader style={{
                             background: '#9DC88D',
@@ -90,10 +89,10 @@ const Parameters = () => {
                         }}> Process {processList.length + 1} Available </CardHeader>
                         <Form>
 
-                            <div className= "material">
+
                             <FormGroup>
-                                <Label for="exampleEmail">Process Name</Label><span></span>
-                                <input placeholder=" Input Process Name" defaultValue={processObj.procname}
+                                <Label for="exampleEmail">Process Name</Label>
+                                <input placeholder="input Process Name" defaultValue={""}
                                        onChange={(e) => {
                                            setProcObj(prevState => ({
                                                ...prevState,
@@ -105,8 +104,8 @@ const Parameters = () => {
 
 
                             <FormGroup>
-                                <Label for="exampleEmail">Price per Inch</Label><span></span>
-                                <input type={"number"} placeholder=" Input price $/inch" defaultValue={processObj.inch}
+                                <Label for="exampleEmail">Price per Inch</Label>
+                                <input type={"number"} placeholder="input price $/inch" defaultValue={""}
                                        onChange={(e) => {
                                            setProcObj(prevState => ({
                                                ...prevState,
@@ -117,9 +116,9 @@ const Parameters = () => {
                             </FormGroup>
 
                             <FormGroup>
-                                <Label for="exampleEmail">Price per Pierce</Label><span></span>
-                                <input type={"number"} placeholder=" Input price $/ Pierce"
-                                       defaultValue={processObj.pierce}
+                                <Label for="exampleEmail">Price per Pierce</Label>
+                                <input type={"number"} placeholder="input price $/ Pierce"
+                                       defaultValue={""}
                                        onChange={(e) => {
 
                                            setProcObj(prevState => ({
@@ -132,8 +131,8 @@ const Parameters = () => {
                             </FormGroup>
 
                             <FormGroup>
-                                <Label for="exampleEmail">Set up Cost</Label><span></span>
-                                <input type={"number"} placeholder="input Set up Cost" defaultValue={processObj.setup}
+                                <Label for="exampleEmail">Set up Cost</Label>
+                                <input type={"number"} placeholder="input Set up Cost" defaultValue={""}
                                        onChange={(e) => {
                                            setProcObj(prevState => ({
                                                ...prevState,
@@ -145,8 +144,8 @@ const Parameters = () => {
 
 
                             <FormGroup>
-                                <Label for="exampleEmail">Process Kurf</Label><span></span>
-                                <input placeholder="input Process Kurf" defaultValue={processObj.kurf}
+                                <Label for="exampleEmail">Process Kurf</Label>
+                                <input placeholder="input Process Kurf" defaultValue={""}
                                        onChange={(e) => {
                                            setProcObj(prevState => ({
                                                ...prevState,
@@ -159,11 +158,9 @@ const Parameters = () => {
                             <Button disabled={saveProcessbtn} onClick={() => {
                                 saveProcess(processObj)
                             }}>Save Process</Button>
-                            </div>
 
                         </Form>
                     </Card>
-                    </div>
                 )
             }
 
@@ -175,20 +172,18 @@ const Parameters = () => {
                     savedpr=false
                 } else {
                     notify()
-                    console.log("n1 called")
+
                 }
 
             }
 
             return (
-                <div className= "component">
                 <Card>
                     <CardHeader
                         style={{background: "#71bbd4", marginBottom: '2%'}}>Material {val.length + 1} Setup</CardHeader>
-                    <div className= "material">
                     <FormGroup>
-                        <Label for="exampleEmail">Material Name</Label><span></span>
-                        <input placeholder=" Input Material Name" defaultValue={mat.matname}
+                        <Label for="exampleEmail">Material Name</Label>
+                        <input placeholder="input Material Name" defaultValue={""}
                                onChange={(e) => {
                                    setMat(prevState => ({
                                        ...prevState,
@@ -199,8 +194,8 @@ const Parameters = () => {
                     </FormGroup>
 
                     <FormGroup>
-                        <Label for="exampleEmail">Material Density</Label><span></span>
-                        <input type={"number"} placeholder="input Material Density " defaultValue={mat.mdensity}
+                        <Label for="exampleEmail">Material Density</Label>
+                        <input type={"number"} placeholder="input Material Density " defaultValue={""}
 
                                onChange={(e) => {
                                    setMat(prevState => ({
@@ -213,8 +208,8 @@ const Parameters = () => {
                     </FormGroup>
 
                     <FormGroup>
-                        <Label for="exampleEmail">Material Thickness</Label><span></span>
-                        <input type={"number"} placeholder="input Material Thickness" defaultValue={mat.mthickness}
+                        <Label for="exampleEmail">Material Thickness</Label>
+                        <input type={"number"} placeholder="input Material Thickness" defaultValue={""}
                                onChange={(e) => {
                                    setMat(prevState => ({
                                        ...prevState,
@@ -225,8 +220,8 @@ const Parameters = () => {
                     </FormGroup>
 
                     <FormGroup>
-                        <Label for="exampleEmail">Max Sizes</Label><span></span>
-                        <input type={"number"} placeholder="input Max sizes" defaultValue={mat.msize}
+                        <Label for="exampleEmail">Max Sizes</Label>
+                        <input type={"number"} placeholder="input Max sizes" defaultValue={""}
                                onChange={(e) => {
                                    setMat(prevState => ({
                                        ...prevState,
@@ -237,8 +232,8 @@ const Parameters = () => {
                     </FormGroup>
 
                     <FormGroup>
-                        <Label for="exampleEmail">Cut speeds</Label><span></span>
-                        <input type={"number"} placeholder="Input cut speed" defaultValue={mat.cutspd}
+                        <Label for="exampleEmail">Cut speeds</Label>
+                        <input type={"number"} placeholder="Input cut speed" defaultValue={""}
                                onChange={(e) => {
                                    setMat(prevState => ({
                                        ...prevState,
@@ -249,8 +244,8 @@ const Parameters = () => {
                     </FormGroup>
 
                     <FormGroup>
-                        <Label for="exampleEmail">Material cost </Label><span></span>
-                        <input type={"number"} placeholder="Input material cost" defaultValue={mat.matCost}
+                        <Label for="exampleEmail">Material cost </Label>
+                        <input type={"number"} placeholder="Input material cost" defaultValue={""}
                                onChange={(e) => {
 
                                    setMat(prevState => ({
@@ -263,8 +258,8 @@ const Parameters = () => {
                     </FormGroup>
 
                     <FormGroup>
-                        <Label for="exampleEmail">Lead In/ Lead Out distances</Label><span></span>
-                        <input type={"number"} placeholder=" Input Lead in/out distances" defaultValue={mat.lead}
+                        <Label for="exampleEmail">Lead In/ Lead Out distances</Label>
+                        <input type={"number"} placeholder="input Lead in/out distances" defaultValue={""}
                                onChange={(e) => {
                                    setMat(prevState => ({
                                        ...prevState,
@@ -273,7 +268,6 @@ const Parameters = () => {
                                    }));
                                }}/>
                     </FormGroup>
-
 
                     <Card>
                         {processList}
@@ -284,10 +278,8 @@ const Parameters = () => {
                         </Button>
 
                     </Card>
-                    </div>
 
                 </Card>
-                </div>
             )
         };
 
@@ -306,9 +298,9 @@ const Parameters = () => {
                 setInputList(<Input key={inputList.length}/>);
             }
 
-           if(count==0){
-               setInputList(<Input key={inputList.length}/>);
-           }
+            if(count==0){
+                setInputList(<Input key={inputList.length}/>);
+            }
 
             count++;
 
@@ -359,12 +351,12 @@ const Parameters = () => {
 
 
         return (
-            <div className= "component">
+            <div>
 
                 {inputList}
                 <div>
                     <ToastContainer
-                        position="bottom-left"
+                        position="bottom-right"
                         autoClose={2500}
                         hideProgressBar={false}
                         newestOnTop={false}
@@ -375,24 +367,22 @@ const Parameters = () => {
                         pauseOnHover
                     />
 
-                    <div className = "add">
                     <button className="button" title="click to add more materials"
-                            style={{background: "#71bbd4", marginLeft: "40%"}} onClick={onAddBtnClick}>Add
+                            style={{background: "#71bbd4", float: "left", marginTop: "2%"}} onClick={onAddBtnClick}>Add
                         Material (+)
                     </button>
-                    <button className="savebutton" style={{marginLeft: "2%"}}
+                    <button class="savebutton"
                             onClick={(event) => onsaveClick(event)}> Submit
                     </button>
-                    </div>
                 </div>
             </div>
         );
     }
 
-        return(
-            <div className= "component">
+    return(
+        <div>
             <InnerParams/>
-            </div>
-        );
-};
+        </div>
+    );
+}
 export default Parameters;
