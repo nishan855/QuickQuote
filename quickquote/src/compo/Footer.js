@@ -36,11 +36,12 @@ function Footer() {
                         <Link to='/'>Terms of Service</Link>
                     </div>
                     <div className='footer-link-items'>
-                        <h2>Contact Us</h2>
-                        <Link to='/'>Contact</Link>
-                        <Link to='/'>Support</Link>
-                        <Link to='/'>Destinations</Link>
-                        <Link to='/'>Sponsorships</Link>
+                        <h2>Seller Pages</h2>
+                        <Link to='/buyer/7b8f0eca-1eb9-43e4-9ab2-80a27da75e84'>Nishan</Link>
+                        <Link to='/'>Eric</Link>
+                        <Link to='/'>Sindhu</Link>
+                        <Link to='/'>Alisha</Link>
+                        <Link to='/'>Laith</Link>>
                     </div>
                 </div>
                 <div className='footer-link-wrapper'>
