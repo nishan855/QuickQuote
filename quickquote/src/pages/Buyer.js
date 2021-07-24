@@ -239,16 +239,23 @@ export default function Buyer() {
             })
                 .then(function (response) {
                         //handle success
-                        console.log(response)
-                        setResp(response.data);
                         history.push(
                             {pathname: '/quote',
-                            state: resp}
+                            state:{
+                                quote:response.data,
+                                filedata:files
+                            }}
                             )
 
                     },
                     function (error) {
                         // handle error
+                        history.push(
+                            {pathname: '/quoteError',
+                                state:{
+                                    message: error.message,
+                                }}
+                        )
                     });
 
         } else {
