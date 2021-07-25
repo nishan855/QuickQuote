@@ -3,6 +3,8 @@ package com.springPrac;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Base64;
@@ -97,9 +99,9 @@ public class FileController {
 
 			Double totalPrice =(Integer.parseInt(quantity[i]))*pp.getPriceQuote(qd,length,area,peirce_points);
 
-           System.out.println(quantity[i]);
+            Double tot= new BigDecimal(totalPrice).setScale(2, RoundingMode.UP).doubleValue();
 
-			parsedData.add(new FileData(uploadedFile[i].getOriginalFilename(),process[i],material[i],Integer.parseInt(quantity[i]),peirce_points,length,area,totalPrice));
+			parsedData.add(new FileData(uploadedFile[i].getOriginalFilename(),sellerId,process[i],material[i],Integer.parseInt(quantity[i]),peirce_points,length,area,tot));
 
  }
 
