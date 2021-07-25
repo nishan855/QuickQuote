@@ -10,11 +10,16 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import {Button} from "react-bootstrap";
 import Navbar from "../compo/Navbar";
+import DynamoConfig from "../DynamoConfig";
+import {Auth} from "@aws-amplify/auth";
+import uuid from 'react-uuid'
+let AWS= require("aws-sdk");
 
 function Orders(props){
     const location=useLocation()
     const quote=location.state.quote;
-    const fdata= location.state.filedata;
+     const fdata= location.state.filedata;
+
 
     const StyledTableCell = withStyles((theme) => ({
         head: {
@@ -49,7 +54,34 @@ function Orders(props){
 
         const classes = useStyles();
 
-        return (
+   async function placeOrder() {
+
+        AWS.config.update(DynamoConfig);
+        let DynamoDB = new AWS.DynamoDB.DocumentClient();
+
+        const orderId= uuid();
+        const date=new Date().toLocaleString();
+        var params = {
+            TableName: "Orders",
+            Item: {
+                "orderId": orderId,
+                //array of process
+                "orderDate": date,
+                "data":  quote,
+                "totalCost":sum,
+                "sellerId": location.state.id
+            }
+        };
+
+        DynamoDB.put(params, function (err) {
+            if (err) {
+                console.log(err);
+            }
+        });
+
+    }
+
+    return (
             <div>
                 <Navbar/>
             <TableContainer component={Paper} style={{marginTop:"2%",marginLeft:"0%"}}>
@@ -89,7 +121,7 @@ function Orders(props){
                 </Table>
             </TableContainer>
 
-                <Button className={"float-right"}  variant="primary" size="sm" >Place Order</Button>
+                <Button className={"float-right"}  variant="primary" size="sm"  onClick={placeOrder}>Place Order</Button>
             </div>
         );
 
