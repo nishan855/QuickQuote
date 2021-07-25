@@ -19,7 +19,7 @@ function SellerDashBoard() {
                     <Switch>
                         <Route path = '/metrics' exact component = {Metrics} />
                         <Route path = '/setup' exact component = {Parameters} />
-                        <Route path = "/material" exact component = {Material} />
+                        <Route path = '/material' exact component = {Material} />
                         <Route path = "/changeParameter" exact component = {Parameters} />
                     </Switch>
                 </div>

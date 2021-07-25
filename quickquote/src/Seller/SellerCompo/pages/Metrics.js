@@ -7,11 +7,11 @@ function Metrics() {
     return (
         <div className= "component">
 
-            <div className= "submain">
+
             <h1>Page 1</h1>
             
 
-            </div>
+
         </div>
     );
 }

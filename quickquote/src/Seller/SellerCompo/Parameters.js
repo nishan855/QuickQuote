@@ -1,15 +1,15 @@
 import React, {useEffect, useState} from 'react'
 import '../../button.css'
+import './SellerDashBoard.css'
 import  {Card,CardBody,CardHeader} from "reactstrap";
 import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import { Auth } from '@aws-amplify/auth';
 import DynamoConfig from "../../DynamoConfig";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import { useHistory } from "react-router-dom";
 
 let AWS= require("aws-sdk");
-
 
 const Parameters = () => {
 
@@ -21,18 +21,18 @@ const Parameters = () => {
         const [proceError,setProcErr] = useState(false);
 
 
-            const notify = () => {
-                toast.error('Please save or add  the process first!!', {
-                    position: "bottom-right",
-                    autoClose: 2500,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                });
+        const notify = () => {
+            toast.error('Please save or add  the process first!!', {
+                position: "bottom-right",
+                autoClose: 2500,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
 
-            }
+        }
 
         const [mat, setMat] = useState({
             "matname": "",
@@ -73,99 +73,95 @@ const Parameters = () => {
                     setMat(prevState => ({
                         ...prevState,
                         process: proclst
-
                     }));
                     setSpBtn(true)
                     savedpr=true;
                     console.log(savedpr)
                 }
 
-
                 return (
                     <div className= "component">
-                    <Card>
-                        <CardHeader style={{
-                            background: '#9DC88D',
-                            marginBottom: '2%'
-                        }}> Process {processList.length + 1} Available </CardHeader>
-                        <Form>
-
+                        <Card>
+                            <CardHeader
+                                style={{background: '#9DC88D', marginBottom: '2%'}}>Process {val.length + 1} Available</CardHeader>
                             <div className= "material">
-                            <FormGroup>
-                                <Label for="exampleEmail">Process Name</Label><span></span>
-                                <input placeholder=" Input Process Name" defaultValue={processObj.procname}
-                                       onChange={(e) => {
-                                           setProcObj(prevState => ({
-                                               ...prevState,
-                                               procname: e.target.value
+                                <FormGroup>
+                                    <Label for="exampleEmail" style={{ marginRight: "30%", marginLeft:"6%"}}>Process Name</Label><span></span>
+                                    <input placeholder=" Input Process Name" style={{width: "85%", marginRight: "80%",marginLeft:"6%"}} defaultValue={processObj.procname}
+                                           onChange={(e) => {
+                                               setProcObj(prevState => ({
+                                                   ...prevState,
+                                                   procname: e.target.value
 
-                                           }));
-                                       }}/>
-                            </FormGroup>
+                                               }));
+                                           }}/>
+                                </FormGroup>
+                                <span></span>
+
+                                <FormGroup>
+                                    <Label for="exampleEmail" style={{marginLeft:"6%"}}>Price per Inch </Label><span></span>
+                                    <input type={"number"} placeholder = " Input price $/inch" style={{width: "85%", marginRight: "80%",marginLeft:"6%"}} defaultValue={processObj.inch}
+
+                                           onChange={(e) => {
+                                               setProcObj(prevState => ({
+                                                   ...prevState,
+                                                   inch: e.target.value
+
+                                               }));
+                                           }}/>
+
+                                </FormGroup>
+
+                                <FormGroup>
+                                    <Label for="exampleEmail" style={{marginLeft:"6%"}}>Price per Pierce </Label><span></span>
+                                    <input type={"number"} placeholder=" Input price $/ Pierce" style={{width: "85%", marginRight: "80%",marginLeft:"6%"}} defaultValue={processObj.pierce}
+                                           onChange={(e) => {
+                                               setProcObj(prevState => ({
+                                                   ...prevState,
+                                                   pierce: e.target.value
+
+                                               }));
+                                           }}/>
+                                </FormGroup>
+
+                                <FormGroup>
+                                    <Label for="exampleEmail" style={{marginLeft:"6%"}}>Set up Cost</Label><span></span>
+                                    <input type={"number"} placeholder=" Input Set up Cost" style={{width: "85%", marginRight: "80%",marginLeft:"6%"}} defaultValue={processObj.setup}
+                                           onChange={(e) => {
+                                               setProcObj(prevState => ({
+                                                   ...prevState,
+                                                   setup: e.target.value
+
+                                               }));
+                                           }}/>
+                                </FormGroup>
+
+                                <FormGroup>
+                                    <Label for="exampleEmail" style={{marginLeft:"6%"}}>Process Kurf</Label><span></span>
+                                    <input type={"number"} placeholder=" Input Process Kurf"  style={{width: "85%", marginRight: "80%",marginLeft:"6%"}} defaultValue={processObj.kurf}
+                                           onChange={(e) => {
+
+                                               setProcObj(prevState => ({
+                                                   ...prevState,
+                                                   kurf: e.target.value
+
+                                               }));
+                                           }}/>
+                                </FormGroup>
 
 
-                            <FormGroup>
-                                <Label for="exampleEmail">Price per Inch</Label><span></span>
-                                <input type={"number"} placeholder=" Input price $/inch" defaultValue={processObj.inch}
-                                       onChange={(e) => {
-                                           setProcObj(prevState => ({
-                                               ...prevState,
-                                               inch: e.target.value
-
-                                           }));
-                                       }}/>
-                            </FormGroup>
-
-                            <FormGroup>
-                                <Label for="exampleEmail">Price per Pierce</Label><span></span>
-                                <input type={"number"} placeholder=" Input price $/ Pierce"
-                                       defaultValue={processObj.pierce}
-                                       onChange={(e) => {
-
-                                           setProcObj(prevState => ({
-                                               ...prevState,
-                                               pierce: e.target.value
-
-                                           }));
-                                       }}/>
-
-                            </FormGroup>
-
-                            <FormGroup>
-                                <Label for="exampleEmail">Set up Cost</Label><span></span>
-                                <input type={"number"} placeholder="input Set up Cost" defaultValue={processObj.setup}
-                                       onChange={(e) => {
-                                           setProcObj(prevState => ({
-                                               ...prevState,
-                                               pierce: e.target.value
-
-                                           }));
-                                       }}/>
-                            </FormGroup>
+                                <Button disabled={saveProcessbtn} onClick={() => {
+                                    saveProcess(processObj)
+                                }}>Save Process</Button>
 
 
-                            <FormGroup>
-                                <Label for="exampleEmail">Process Kurf</Label><span></span>
-                                <input placeholder="input Process Kurf" defaultValue={processObj.kurf}
-                                       onChange={(e) => {
-                                           setProcObj(prevState => ({
-                                               ...prevState,
-                                               kurf: e.target.value
 
-                                           }));
-                                       }}/>
-                            </FormGroup>
-
-                            <Button disabled={saveProcessbtn} onClick={() => {
-                                saveProcess(processObj)
-                            }}>Save Process</Button>
                             </div>
+                        </Card>
 
-                        </Form>
-                    </Card>
                     </div>
                 )
-            }
+            };
 
 
             function onProcessClick() {
@@ -181,112 +177,115 @@ const Parameters = () => {
             }
 
             return (
+
                 <div className= "component">
-                <Card>
-                    <CardHeader
-                        style={{background: "#71bbd4", marginBottom: '2%'}}>Material {val.length + 1} Setup</CardHeader>
-                    <div className= "material">
-                    <FormGroup>
-                        <Label for="exampleEmail">Material Name</Label><span></span>
-                        <input placeholder=" Input Material Name" defaultValue={mat.matname}
-                               onChange={(e) => {
-                                   setMat(prevState => ({
-                                       ...prevState,
-                                       matname: e.target.value
-
-                                   }));
-                               }}/>
-                    </FormGroup>
-
-                    <FormGroup>
-                        <Label for="exampleEmail">Material Density</Label><span></span>
-                        <input type={"number"} placeholder="input Material Density " defaultValue={mat.mdensity}
-
-                               onChange={(e) => {
-                                   setMat(prevState => ({
-                                       ...prevState,
-                                       mdensity: e.target.value
-
-                                   }));
-                               }}/>
-
-                    </FormGroup>
-
-                    <FormGroup>
-                        <Label for="exampleEmail">Material Thickness</Label><span></span>
-                        <input type={"number"} placeholder="input Material Thickness" defaultValue={mat.mthickness}
-                               onChange={(e) => {
-                                   setMat(prevState => ({
-                                       ...prevState,
-                                       mthickness: e.target.value
-
-                                   }));
-                               }}/>
-                    </FormGroup>
-
-                    <FormGroup>
-                        <Label for="exampleEmail">Max Sizes</Label><span></span>
-                        <input type={"number"} placeholder="input Max sizes" defaultValue={mat.msize}
-                               onChange={(e) => {
-                                   setMat(prevState => ({
-                                       ...prevState,
-                                       msize: e.target.value
-
-                                   }));
-                               }}/>
-                    </FormGroup>
-
-                    <FormGroup>
-                        <Label for="exampleEmail">Cut speeds</Label><span></span>
-                        <input type={"number"} placeholder="Input cut speed" defaultValue={mat.cutspd}
-                               onChange={(e) => {
-                                   setMat(prevState => ({
-                                       ...prevState,
-                                       cutspd: e.target.value
-
-                                   }));
-                               }}/>
-                    </FormGroup>
-
-                    <FormGroup>
-                        <Label for="exampleEmail">Material cost </Label><span></span>
-                        <input type={"number"} placeholder="Input material cost" defaultValue={mat.matCost}
-                               onChange={(e) => {
-
-                                   setMat(prevState => ({
-                                       ...prevState,
-                                       matCost: e.target.value
-
-                                   }));
-                               }}/>
-
-                    </FormGroup>
-
-                    <FormGroup>
-                        <Label for="exampleEmail">Lead In/ Lead Out distances</Label><span></span>
-                        <input type={"number"} placeholder=" Input Lead in/out distances" defaultValue={mat.lead}
-                               onChange={(e) => {
-                                   setMat(prevState => ({
-                                       ...prevState,
-                                       lead: e.target.value
-
-                                   }));
-                               }}/>
-                    </FormGroup>
-
-
                     <Card>
-                        {processList}
+                        <CardHeader
+                            style={{background: "#71bbd4", marginBottom: '2%'}}>Material {val.length + 1} Setup</CardHeader>
+                        <div className= "material">
+                            <FormGroup>
+                                <Label for="exampleEmail">Material Name</Label><span></span>
+                                <input placeholder=" Input Material Name" defaultValue={mat.matname}
+                                       onChange={(e) => {
+                                           setMat(prevState => ({
+                                               ...prevState,
+                                               matname: e.target.value
 
+                                           }));
+                                       }}/>
+                            </FormGroup>
+                            <FormGroup>
+                                <Label for="exampleEmail">Material Density</Label><span></span>
+                                <input type={"number"} placeholder="input Material Density " defaultValue={mat.mdensity}
 
-                        <Button title="click to add process" size="sm"
-                                style={{background: '#9DC88D', marginBottom: '2%'}} onClick={onProcessClick}>Add Process
-                        </Button>
+                                       onChange={(e) => {
+                                           setMat(prevState => ({
+                                               ...prevState,
+                                               mdensity: e.target.value
+
+                                           }));
+                                       }}/>
+
+                            </FormGroup>
+
+                            <FormGroup>
+                                <Label for="exampleEmail">Material Thickness</Label><span></span>
+                                <input type={"number"} placeholder="input Material Thickness" defaultValue={mat.mthickness}
+                                       onChange={(e) => {
+                                           setMat(prevState => ({
+                                               ...prevState,
+                                               mthickness: e.target.value
+
+                                           }));
+                                       }}/>
+                            </FormGroup>
+
+                            <FormGroup>
+                                <Label for="exampleEmail">Max Sizes</Label><span></span>
+                                <input type={"number"} placeholder="input Max sizes" defaultValue={mat.msize}
+                                       onChange={(e) => {
+                                           setMat(prevState => ({
+                                               ...prevState,
+                                               msize: e.target.value
+
+                                           }));
+                                       }}/>
+                            </FormGroup>
+
+                            <FormGroup>
+                                <Label for="exampleEmail">Cut speeds</Label><span></span>
+                                <input type={"number"} placeholder="Input cut speed" defaultValue={mat.cutspd}
+                                       onChange={(e) => {
+
+                                           setMat(prevState => ({
+                                               ...prevState,
+                                               cutspd: e.target.value
+
+                                           }));
+                                       }}/>
+                            </FormGroup>
+
+                            <FormGroup>
+                                <Label for="exampleEmail">Material cost </Label><span></span>
+                                <input type={"number"} placeholder="Input material cost" defaultValue={mat.matCost}
+                                       onChange={(e) => {
+
+                                           setMat(prevState => ({
+                                               ...prevState,
+                                               matCost: e.target.value
+
+                                           }));
+                                       }}/>
+
+                            </FormGroup>
+
+                            <FormGroup>
+                                <Label for="exampleEmail">Lead In/ Lead Out distances</Label><span></span>
+                                <input type={"number"} placeholder=" Input Lead in/out distances" defaultValue={mat.lead}
+                                       onChange={(e) => {
+                                           setMat(prevState => ({
+                                               ...prevState,
+                                               lead: e.target.value
+
+                                           }));
+                                       }}/>
+                            </FormGroup>
+
+                        </div>
+                        <Card>
+                            {processList}
+
+                            <div className= "btn">
+                                <Button title="click to add process" size="sm"
+                                        style={{background: '#9DC88D', marginBottom: '2%'}} onClick={onProcessClick}>Add Process
+                                </Button>
+
+                            </div>
+
+                        </Card>
+
 
                     </Card>
-                    </div>
-
-                </Card>
                 </div>
             )
         };
@@ -306,9 +305,9 @@ const Parameters = () => {
                 setInputList(<Input key={inputList.length}/>);
             }
 
-           if(count==0){
-               setInputList(<Input key={inputList.length}/>);
-           }
+            if(count==0){
+                setInputList(<Input key={inputList.length}/>);
+            }
 
             count++;
 
@@ -345,6 +344,12 @@ const Parameters = () => {
 
         }
 
+        const history = useHistory();
+
+        const handleRoute = () =>{
+            history.push("/material");
+        }
+
 
         const onsaveClick = () => {
             if (count !=0 && !savedpr){
@@ -353,7 +358,8 @@ const Parameters = () => {
             else {
                 val.push(mat);
                 console.log(val);
-                submitChange()
+                submitChange();
+                {handleRoute()}
             }
         };
 
@@ -376,23 +382,24 @@ const Parameters = () => {
                     />
 
                     <div className = "add">
-                    <button className="button" title="click to add more materials"
-                            style={{background: "#71bbd4", marginLeft: "40%"}} onClick={onAddBtnClick}>Add
-                        Material (+)
-                    </button>
-                    <button className="savebutton" style={{marginLeft: "2%"}}
-                            onClick={(event) => onsaveClick(event)}> Submit
-                    </button>
+                        <button className="button" title="click to add more materials"
+                                style={{background: "#71bbd4", marginLeft: "40%"}} onClick={onAddBtnClick}>Add
+                            Material (+)
+                        </button>
+
+                        <button className="savebutton" style={{marginLeft: "2%"}}
+                                onClick={(event) => onsaveClick(event)}> Submit
+                        </button>
                     </div>
                 </div>
             </div>
         );
     }
 
-        return(
-            <div className= "component">
+    return(
+        <div className= "component">
             <InnerParams/>
-            </div>
-        );
+        </div>
+    );
 };
 export default Parameters;

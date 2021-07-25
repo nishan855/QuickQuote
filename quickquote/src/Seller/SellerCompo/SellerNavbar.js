@@ -40,13 +40,14 @@ function SellerNavbar() {
         <>
             <nav className = "navbar">
                 <div className = "navbar-container">
-                    <Link
+                  <div className= "logo"> <Link
                         to ="/"
                         className = 'navbar-logo'
                         onClick = {closeMobileMenu} // Close menu from Logo button
                     >
                         QUICK-QUOTE <i className="fab fa-typo3"></i>
                     </Link>
+                  </div>
                     <div
                         className = 'menu-icon'
                         onClick={handleClick} >
