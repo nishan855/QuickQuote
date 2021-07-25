@@ -243,7 +243,8 @@ export default function Buyer() {
                             {pathname: '/quote',
                             state:{
                                 quote:response.data,
-                                filedata:files
+                                filedata:files,
+                                id:param.id
                             }}
                             )
 
