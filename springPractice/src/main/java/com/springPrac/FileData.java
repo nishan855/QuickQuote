@@ -5,6 +5,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class FileData {
     String file;
+    String id;
     private int piercePoints;
     private int quantity;
     private String material;
@@ -14,8 +15,9 @@ public class FileData {
     private double totalCost;
 
     // Constructor
-    public FileData( String file,String process, String material,int quantity,int piercePoints, double distance, double area, double totalCost) {
+    public FileData( String file,String id,String process, String material,int quantity,int piercePoints, double distance, double area, double totalCost) {
         this.file = file;
+        this.id=id;
         this.process=process;
         this.material=material;
         this.quantity=quantity;
@@ -23,6 +25,7 @@ public class FileData {
         this.distance = distance;
         this.area = area;
         this.totalCost = totalCost;
+
     }
 
     // Getter Functions
