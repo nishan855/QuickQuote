@@ -38,7 +38,7 @@ function Footer() {
                     <div className='footer-link-items'>
                         <h2>Seller Pages</h2>
                         <Link to='/buyer/7b8f0eca-1eb9-43e4-9ab2-80a27da75e84'>Nishan</Link>
-                        <Link to='/'>Eric</Link>
+                        <Link to='/buyer/b1959046-0196-4a7a-877d-e87473b4776b'>Eric</Link>
                         <Link to='/'>Sindhu</Link>
                         <Link to='/'>Alisha</Link>
                         <Link to='/'>Laith</Link>>
