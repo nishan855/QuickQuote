@@ -7,8 +7,7 @@ import Home from './pages/Home';
 import Buyer from './pages/Buyer';
 import Seller from "./Seller/SellerCompo/SellerDashBoard";
 import Buyers from "./pages/Buyers";
-import BuyerHomepage from "./Buyer/BuyerHomepage"
-import Orders from "./pages/Order";
+import Orders from "./pages/quote";
 
 function BaseApp() {
   return (

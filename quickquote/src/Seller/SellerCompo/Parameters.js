@@ -330,7 +330,6 @@ const Parameters = () => {
                     console.log(err);
                 }
 
-                //this is put
             });
 
 
