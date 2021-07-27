@@ -7,7 +7,7 @@ import Setup from "./pages/Setup";
 import Metrics from "./pages/Metrics"
 import Parameters from "./Parameters"
 import Order from "./pages/Order"
-
+import OrderItem from "./pages/OrderItem"
 
 function SellerDashBoard() {
     return (
@@ -21,6 +21,8 @@ function SellerDashBoard() {
                         <Route path = '/metrics' exact component = {Metrics} />
                         <Route path = '/setup' exact component = {Parameters} />
                         <Route path = "/changeParameter" exact component = {Parameters} />
+                        <Route path = "/orderitem" exact component = {OrderItem} />
+
                     </Switch>
                 </div>
             </Router>
