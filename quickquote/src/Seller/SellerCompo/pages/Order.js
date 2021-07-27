@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import DynamoConfig from "../../../DynamoConfig";
 import * as AWS from "aws-sdk";
 import {Auth} from "@aws-amplify/auth";
@@ -13,10 +13,13 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import {Button} from "react-bootstrap";
 import Navbar from "../../../compo/Navbar";
+import {NavLink} from "reactstrap";
 
 function Order() {
 const [dat,setDat]= useState([])
 const [files,setFiles]=useState([])
+const history=useHistory()
+
 //region and bucket name
     const S3_BUCKET = 'dxfstorage-quickquote';
     const REGION = 'us-east-2';
@@ -84,14 +87,21 @@ const [files,setFiles]=useState([])
         });
     }
 
-    const ords= dat.map((dt)=>
+    const ords= dat.map((dt,indx)=>
         <TableBody>
                 <StyledTableRow key={dt.orderId}>
                     <StyledTableCell component="th" scope="row">
-                        {dt.orderId}
+                       <NavLink onClick={()=>{
+                           history.push(
+                               {pathname: '/orderitem',
+                                   state:{
+                                       ordrData: dt,
+                                   }}
+                           )
+                           }} > {dt.orderId}</NavLink>
                     </StyledTableCell>
                     <StyledTableCell align="right">{dt.orderDate}</StyledTableCell>
-                    <StyledTableCell align="right">{dt.totalCost}</StyledTableCell>
+                    <StyledTableCell align="right">$ {dt.totalCost}</StyledTableCell>
                 </StyledTableRow>
         </TableBody>
     )
