@@ -1,0 +1,61 @@
+
+.display-paragraph{
+    background: #71bbd4;
+    margin-top: 0.5% ;
+    border-style: ridge;
+}
+
+.dropzone-card {
+    border: groove #000000;
+    background: #6d6e6e;
+    align-items: center;
+    width: 100%;
+    margin-top: 100px;
+}
+
+.dropzone-card-header {
+    width: 100%;
+    font-weight: bold;
+    background: #232323;
+    color: #fff;
+}
+
+.dropzone-box {
+    width: 90%;
+    height: 500%;
+    align-items: center;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    border-style: dashed;
+    line-height: 500%;
+    cursor: pointer;
+}
+
+.dropzone-box-paragraph {
+        color: #fff;
+        font-weight: bold;
+        text-align: center;
+}
+
+.button-card{
+        margin-top: 2%;
+        margin-bottom: 100px;
+        font-weight: bold;
+        background: #6d6e6e;
+        border-color: #000000;
+        color: #ffffff ;
+}
+
+.clear-button{
+    border-style: outset;
+    width: 12vw;
+    font-size: 2vw;
+}
+
+.submit-button{
+    margin-left: 100px;
+    margin-right: 1rem;
+    width: 13vw;
+    font-size: 2vw;
+    border-style: outset;
+}
