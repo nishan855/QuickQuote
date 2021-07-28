@@ -20,7 +20,10 @@ export default function Buyer() {
     const userParam=useParams()
     const [mat, setMat] = useState( []);
     const [matOps, setMatOps] = useState ( [] );
-    const [procOps, setProcOps] = useState ( [{label: "select process", value: "_default"}] );
+    const [procOps, setProcOps] = useState ( [] );
+
+
+
 
     async function fetch () {
         console.log("Fetching Materiel Object from DB...");
@@ -53,28 +56,19 @@ export default function Buyer() {
     }
 
     useEffect(()=> {
+        console.log("here")
+        console.log(procOps)
         fetch()
         if(mat.length != 0){
             console.log(mat)
             console.log(mat.material.length)
-            updateMaterialOptions();
+
         }
         else
             console.log("Mat Empty")
     } ,[mat.length]);   // Not sure what this does. Seems to update only when 'mat' has values.
 
-    function updateMaterialOptions () {
-        console.log("updating MaterialOptions...")
-        const matL = mat.material.length;
-        let materialOptions = [{label: "select material", value: "_default"}];
-        if( matL > 0){
-            for( let i = 0; i < matL; i++ ){
-                const matName = mat.material[i].matname;
-                materialOptions.push({ label: matName, value: matName } )
-            }
-        }
-        setMatOps(materialOptions); // Update array that shows in dropdown menu
-    }
+
 
     const param = useParams()
     const history =useHistory()
@@ -110,42 +104,24 @@ export default function Buyer() {
 
     }
 
-    function processOptionChange(e, index){
-        files[index].Material = e.target.value
-        console.log("Changing target!");
-        updateProcessOptions(e,index);
-        // files[this.index].material = this.e.target.value;
-    }
-    function updateProcessOptions(e){
-        let processOptions = [{label: "select process", value: "_default"}];
-        console.log("Updating Process Options!");
-        let currSel = e.target.value;
-        let matIndex = -1;
-        console.log("Based on Current Selection: " + currSel);
-        for( let i = 0; i < mat.material.length; i++ ){
-            if( mat.material[i].matname == currSel ){
-                console.log("Found: " + mat.material[i].matname + " -  Index: " + i)
-                matIndex = i;
-                break;
-            }
-        }
-        if( matIndex != -1){
-            const procL = mat.material[matIndex].process.length;
-            console.log("Process Length: " + procL);
-            for( let i = 0; i < procL; i++ ){
-                const procName = mat.material[matIndex].process[i].procname;
-                processOptions.push({label: procName, value: procName})
-            }
-        }
-        else{
-            console.log("No material found!");
-        }
-        setProcOps(processOptions); // Update array that shows in dropdown menu
-
-    }
-
     //display component
-    const display = Array.from(files).map((n, index) =>
+    const Display = ()=>{
+
+        //stoores proceses for material //array of array of object
+        const [matOption, setMoption]=useState([])
+
+
+        //for every file assign a dummy process
+useEffect(()=>{files.map((mp)=>
+
+               setMoption(prev=>[...prev,mat.material[0].process]))
+    }
+        ,[])
+
+
+
+        return(
+            files.map((n, index) =>
 
         <p style={{background: '#71bbd4', marginTop: '0.5%', borderStyle: 'ridge'}} key={index}>{n.file.name}
             <Button className={"float-right"} id={index} variant="danger" size="sm" style={{height: 24}}
@@ -157,27 +133,36 @@ export default function Buyer() {
                 }}/>
 
                 {/*Dropdown menu for material selection - Populated from array above*/}
-                <select name="matOps" onChange={(e) => {processOptionChange(e,index)}}
-                >
-                    {matOps.map((matOps) => (
-                        <option value={matOps.value}>{matOps.label}</option>
-                    ))}
-                </select>
-                {/*<input type={"text"} required placeholder="Material and Size" onChange={(e)=>*/}
-                {/*{files[index].Material=e.target.value*/}
-                {/*}}/>*/}
+                <select name="matOps"  onChange={(e)=>{
+                    if(e.target.value >=0) {
+                        files[index].Material=e.target.value
+                        let arr= Object.assign([],matOption)
+                        arr.splice(index,1,mat.material[e.target.value].process)
+                        setMoption(arr)
 
-                {/*Dropdown menu for Process Selection*/}
-                <select onChange={(e) => {
-                    files[index].process = e.target.value
-                }}>
-                    {procOps.map((procOps) => (
-                        <option value={procOps.value}>{procOps.label}</option>
-                    ))}
+                    }
+                }} >
+                    <option value={-1}>Select Material</option>
+                    {mat.material.map((matOps,ind) =>
+                        <option key={ind} value={ind}>{matOps.matname} ({matOps.mthickness}" )</option>
+                    )}
                 </select>
-                {/*<input type={"text"} required placeholder="Process" onChange={(e) => {*/}
-                {/*    files[index].process = e.target.value*/}
-                {/*}}/>*/}
+
+
+                {/*dropdown for process*/}
+                <select onChange={(e)=>{
+
+                    if(e.target.value !=-1){
+                        files[index].process=matOption[index][e.target.value].procname
+                    }
+                }}>
+                    <option value={-1}>Select Process</option>
+                    { matOption.length>0 && matOption[index].map((pr,ind) =>
+                        <option key={ind} value={ind}>{pr.procname}</option>
+                    )}
+
+                </select>
+
 
                 <input type={"text"} required placeholder="Lead time" onChange={(e) => {
                     files[index].leadtime = e.target.value
@@ -186,7 +171,9 @@ export default function Buyer() {
 
             </div>
         </p>
-    )
+    ))
+
+    }
 
     const reset = event => {
         const newList = []
@@ -216,10 +203,8 @@ export default function Buyer() {
                 obj.leadtime = files[i].leadtime;
 
                 //Consol log to just make sure data is valid before it is sent to backend
-                console.log(files[i].quantity);
-                console.log(files[i].process);
-                console.log(files[i].Material);
-                console.log(files[i].leadtime);
+                console.log(files);
+
 
                 formData.append("files", files[i].file)
                 formData.append("quantity", files[i].quantity)
@@ -385,7 +370,7 @@ export default function Buyer() {
 
                         </CardHeader>
 
-                        {display}
+                        <Display/>
                     </Card>
                     <ToastContainer
                         position="bottom-right"
