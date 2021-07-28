@@ -103,7 +103,7 @@ const Parameters = () => {
 
 
                             <FormGroup>
-                                <Label for="exampleEmail">Price per Inch</Label>
+                                <Label for="exampleEmail">Cut Cost</Label>
                                 <input type={"number"} placeholder="input price $/inch" defaultValue={""}
                                        onChange={(e) => {
                                            setProcObj(prevState => ({
@@ -115,7 +115,7 @@ const Parameters = () => {
                             </FormGroup>
 
                             <FormGroup>
-                                <Label for="exampleEmail">Price per Pierce</Label>
+                                <Label for="exampleEmail">Pierce Cost</Label>
                                 <input type={"number"} placeholder="input price $/ Pierce"
                                        defaultValue={""}
                                        onChange={(e) => {
@@ -208,7 +208,7 @@ const Parameters = () => {
 
                     <FormGroup>
                         <Label for="exampleEmail">Material Thickness</Label>
-                        <input type={"number"} placeholder="input Material Thickness" defaultValue={""}
+                        <input type={"number"} placeholder="input thickness (inches)" defaultValue={""}
                                onChange={(e) => {
                                    setMat(prevState => ({
                                        ...prevState,
@@ -220,7 +220,7 @@ const Parameters = () => {
 
                     <FormGroup>
                         <Label for="exampleEmail">Max Sizes</Label>
-                        <input type={"number"} placeholder="input Max sizes" defaultValue={""}
+                        <input type={"number"} placeholder="input Max sizes (inches)" defaultValue={""}
                                onChange={(e) => {
                                    setMat(prevState => ({
                                        ...prevState,
@@ -232,7 +232,7 @@ const Parameters = () => {
 
                     <FormGroup>
                         <Label for="exampleEmail">Cut speeds</Label>
-                        <input type={"number"} placeholder="Input cut speed" defaultValue={""}
+                        <input type={"number"} placeholder="input cut speed" defaultValue={""}
                                onChange={(e) => {
                                    setMat(prevState => ({
                                        ...prevState,
@@ -244,7 +244,7 @@ const Parameters = () => {
 
                     <FormGroup>
                         <Label for="exampleEmail">Material cost </Label>
-                        <input type={"number"} placeholder="Input material cost" defaultValue={""}
+                        <input type={"number"} placeholder="input material cost ($/in^2)" defaultValue={""}
                                onChange={(e) => {
 
                                    setMat(prevState => ({
