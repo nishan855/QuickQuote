@@ -135,7 +135,7 @@ useEffect(()=>{files.map((mp)=>
                 {/*Dropdown menu for material selection - Populated from array above*/}
                 <select name="matOps"  onChange={(e)=>{
                     if(e.target.value >=0) {
-                        files[index].Material=e.target.value
+                        files[index].Material=mat.material[e.target.value].matname
                         let arr= Object.assign([],matOption)
                         arr.splice(index,1,mat.material[e.target.value].process)
                         setMoption(arr)
