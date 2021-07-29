@@ -45,7 +45,7 @@ function SellerNavbar() {
                         className = 'navbar-logo'
                         onClick = {closeMobileMenu} // Close menu from Logo button
                     >
-                        QUICK-QUOTE <i className="fab fa-typo3"></i>
+                        QUICKQUOTE <i className="fab fa-typo3"></i>
                     </Link>
                     <div
                         className = 'menu-icon'
