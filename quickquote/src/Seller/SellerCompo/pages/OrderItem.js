@@ -12,7 +12,7 @@ export default function OrderItem(){
 
     return(
         <div>
-            <CardHeader style={{marginTop: "2%", marginBottom:"2%", background:'#14A76c'}}>
+            <CardHeader style={{width:1000,marginTop: "2%", marginBottom:"2%", background:'#14A76c'}}>
                 <CardTitle tag="h5">Order ID: <label style={{color:"blue"}}>{orderDat.orderId}</label></CardTitle>
                 <CardSubtitle tag="h6" className="mb-2 text-muted">{orderDat.orderDate}</CardSubtitle>
             </CardHeader>
