@@ -1,6 +1,6 @@
 import '../App.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Card, Button} from 'react-bootstrap'
+import {Card, Button,Spinner} from 'react-bootstrap'
 import Dropzone from "react-dropzone";
 import React, {useEffect, useState} from "react";
 import {CardHeader} from "reactstrap";
@@ -13,7 +13,6 @@ import {useParams, useHistory} from "react-router-dom";
 import Loader from "react-loader-spinner"
 import * as AWS from "aws-sdk";
 import DynamoConfig from "../DynamoConfig";
-
 export default function Buyer() {
 
     // Get data from DB
@@ -110,8 +109,7 @@ export default function Buyer() {
                 files.map((mp) =>
 
                     setMoption(prev => [...prev, mat.material[0].process]))
-            }
-            , [])
+            },[])
 
         return (
             files.map((n, index) =>
@@ -288,86 +286,82 @@ export default function Buyer() {
     return (
         <div>
             <Navbar/>
+        {!submitBtn ?
+        <div>
+
             <div className='seller'>
+
+
                 <div>
-                    <Card style={DropzoneCardStyle}>
-                        <CardHeader style={DropzoneCardHeaderStyle}>Upload Your DXF Files</CardHeader>
-                        <Dropzone accept={'.dxf'} onDrop={acceptedFiles => {
+                        <Card style={DropzoneCardStyle}>
+                            <CardHeader style={DropzoneCardHeaderStyle}>Upload Your DXF Files</CardHeader>
+                            <Dropzone accept={'.dxf'} onDrop={acceptedFiles => {
 
-                            acceptedFiles.map(
-                                af => {
+                                acceptedFiles.map(
+                                    af => {
 
-                                    let obj = {
-                                        "file": "",
-                                        "quantity": "",
-                                        "process": "",
-                                        "Material": "",
-                                        "leadtime": ""
+                                        let obj = {
+                                            "file": "",
+                                            "quantity": "",
+                                            "process": "",
+                                            "Material": "",
+                                            "leadtime": ""
+                                        }
+
+
+                                        obj.file = af
+
+                                        fill.push(obj)
                                     }
+                                )
+
+                                setFiles([...files, ...fill])
+
+                            }
+
+                            }>
+
+                                {({getRootProps, getInputProps}) => (
+                                    <section style={{
+                                        width: '90%',
+                                        height: '500%',
+                                        alignItems: 'center',
+                                        marginTop: '5%',
+                                        marginBottom: '5%',
+                                        borderStyle: 'dashed',
+                                    }}>
+                                        <div style={DropzoneStyle}{...getRootProps()}>
+                                            <input {...getInputProps()} />
+                                            <p style={DropzonePStyle}>Drag and Drop here <br/> Click to Browse</p>
+                                        </div>
+                                    </section>
+                                )}
+                            </Dropzone>
+                        </Card>
 
 
-                                    obj.file = af
-
-                                    fill.push(obj)
-                                }
-                            )
-
-                            setFiles([...files, ...fill])
-
-                        }
-
-                        }>
-
-                            {({getRootProps, getInputProps}) => (
-                                <section style={{
-                                    width: '90%',
-                                    height: '500%',
-                                    alignItems: 'center',
-                                    marginTop: '5%',
-                                    marginBottom: '5%',
-                                    borderStyle: 'dashed',
-                                }}>
-                                    <div style={DropzoneStyle}{...getRootProps()}>
-                                        <input {...getInputProps()} />
-                                        <p style={DropzonePStyle}>Drag and Drop here <br/> Click to Browse</p>
-                                    </div>
-                                </section>
-                            )}
-                        </Dropzone>
-                    </Card>
+                        <Card style={ButtonCardStyle}>
+                            <CardHeader style={{fontWeight: 'bold'}}>Total Files: {files.length}
+                                <Button className={"float-right"}
+                                        style={{borderStyle: 'outset', width: '12vw', fontSize: '2vw'}} variant="danger"
+                                        size="sm" onClick={reset}>Clear</Button>
+                                <Button className={"float-right"} type={"submit"} style={{
+                                    marginLeft: '100px',
+                                    marginRight: '1rem',
+                                    width: '13vw',
+                                    fontSize: '2vw',
+                                    borderStyle: 'outset'
+                                }} disabled={submitBtn} variant="primary" size="sm"
+                                        onClick={submit}>Submit</Button>
 
 
-                    <Card style={ButtonCardStyle}>
-                        <CardHeader style={{fontWeight: 'bold'}}>Total Files: {files.length}
-                            <Button className={"float-right"}
-                                    style={{borderStyle: 'outset', width: '12vw', fontSize: '2vw'}} variant="danger"
-                                    size="sm" onClick={reset}>Clear</Button>
-                            <Button className={"float-right"} type={"submit"} style={{
-                                marginLeft: '100px',
-                                marginRight: '1rem',
-                                width: '13vw',
-                                fontSize: '2vw',
-                                borderStyle: 'outset'
-                            }} disabled={submitBtn} variant="primary" size="sm"
-                                    onClick={submit}>Submit</Button>
+                            </CardHeader>
+
+                            <Display/>
+                        </Card>
 
 
-                            {submitBtn ?
-                                <div>
-                                    <Loader
-                                        type="Circles"
-                                        color="#00BFFF"
-                                        height={100}
-                                        width={100}
-                                    />
-                                    <h1>Getting quotes...</h1>
 
-                                </div> : null}
-
-                        </CardHeader>
-
-                        <Display/>
-                    </Card>
                     <ToastContainer
                         position="bottom-right"
                         autoClose={2500}
@@ -380,12 +374,17 @@ export default function Buyer() {
                         pauseOnHover
                     />
 
-                </div>
 
+                </div>
+                }
 
             </div>
-        </div>
-
+        </div> :
+            <div align={"center"}>
+            <Loader type="Puff" color="#00BFFF" height={"30%"} width={"30%"} />
+            <h1> Getting quotes...</h1>
+            </div>}
+</div>
     )
 
 }
