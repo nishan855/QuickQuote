@@ -114,10 +114,10 @@ export default function Buyer() {
         return (
             files.map((n, index) =>
 
-                <p style={{background: '#71bbd4', marginTop: '0.5%', borderStyle: 'ridge'}} key={index}>{n.file.name}
+                <div style={{background: '#71bbd4', marginTop: '0.5%', borderStyle: 'ridge'}} key={index}>{n.file.name}
                     <Button className={"float-right"} id={index} variant="danger" size="sm" style={{height: 24}}
                             onClick={remove}>X</Button>
-                    <div style={{fontSize: "50%"}}>
+                    <div style={{display:"flex",fontSize: "50%"}}>
 
                         <input type={"number"} required placeholder="Quantity" onChange={(e) => {
                             files[index].quantity = e.target.value
@@ -161,7 +161,7 @@ export default function Buyer() {
                         />
 
                     </div>
-                </p>
+                </div>
             ))
 
     }
