@@ -9,6 +9,7 @@ import Seller from "./Seller/SellerCompo/SellerDashBoard";
 import Buyers from "./pages/Buyers";
 import Orders from "./pages/quote";
 import CustomerInfo from "./pages/CustomerInfo"
+import Payment from "./pages/Payment"
 
 function BaseApp() {
   return (
