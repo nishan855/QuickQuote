@@ -9,12 +9,12 @@
       "UnauthRoleName": "amplify-quickquote-dev-230541-unauthRole",
       "StackName": "amplify-quickquote-dev-230541",
       "StackId": "arn:aws:cloudformation:us-east-2:122857835167:stack/amplify-quickquote-dev-230541/4a8311e0-ca6a-11eb-9edf-0a895b109086",
-      "AmplifyAppId": "d2s7h7gm1ef19"
+      "AmplifyAppId": "d2s7h7gm1ef19",
+      "AuthTriggerTemplateURL": ""
     },
     "categories": {
       "auth": {
-        "quickquotee7c5579c": {},
-        "userPoolGroups": {}
+        "quickquotee7c5579c": {}
       }
     }
   }

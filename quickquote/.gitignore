@@ -33,6 +33,7 @@ dist/
 node_modules/
 aws-exports.js
 aws-exports.js
+src\S3config.js
 src/DynamoConfig.js
 DynamoConfig.js
 awsconfiguration.json
