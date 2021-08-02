@@ -82,9 +82,12 @@ const history=useHistory()
                 if (data.Items.length > 0) { // here is the info
 
                     let dt=data.Items
-                    dt.sort(function(a,b){
-                        return  new Date(b.orderDate) - new Date(a.orderDate);
-                    });
+
+                    if(dt.length>1) {
+                        dt.sort(function (a, b) {
+                            return new Date(b.orderDate) - new Date(a.orderDate);
+                        })
+                    }
                     setDat(dt);
                 }
 
