@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+/*import { useState, useEffect } from 'react'
 import { Storage } from 'aws-amplify'
 import S3config from "../../../S3config";
 import { Auth } from '@aws-amplify/auth';
@@ -74,3 +74,15 @@ function Profile() {
 }
 
 export default Profile;
+
+ */
+import { useState, useEffect } from 'react'
+function Profile() {
+    return (
+        <div className="App">
+            <h1>Test</h1>
+        </div>
+            );
+}
+
+export default  Profile;
