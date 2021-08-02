@@ -77,10 +77,96 @@ export default Profile;
 
  */
 import { useState, useEffect } from 'react'
+import { Auth } from '@aws-amplify/auth';
+import DynamoConfig from "../../../DynamoConfig";
+
+import  {Card,CardBody,CardHeader} from "reactstrap";
+import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+
+let AWS= require("aws-sdk");
+
 function Profile() {
+    const information =[];
+    const[info,setinfo] = useState({
+        "cname":"",
+        "cmotto" :"",
+
+
+    });
+    async function save() {
+
+        AWS.config.update(DynamoConfig);
+        let DynamoDB = new AWS.DynamoDB.DocumentClient();
+
+        //getting sub as user id
+        const user = await Auth.currentAuthenticatedUser();
+        console.log(user);
+        const id = user.attributes.sub;
+        console.log(id);
+        var params = {
+            TableName: "SellerProfile",
+            Item: {
+                "sellerid": id,
+                //array of process
+                "info": information
+            }
+        };
+
+        DynamoDB.put(params, function (err) {
+            if (err) {
+                console.log(err);
+            }
+
+            //this is put
+        });
+
+
+    }
+
+    const onsaveClick = () => {
+        information.push(info);
+        console.log(information);
+        save();
+
+    }
+
     return (
         <div className="App">
-            <h1>Test</h1>
+            <Card>
+                <CardHeader
+                    style={{background: "#71bbd4", marginBottom: '2%'}}>Profile Setup </CardHeader>
+
+                    <FormGroup>
+                        <Label for="exampleEmail">Company Name</Label><span></span>
+                        <input placeholder=" Input Company Name" defaultValue={info.cname}
+
+                               onChange={(e) => {
+                                   setinfo(prevState => ({
+                                       ...prevState,
+                                       cname: e.target.value
+
+                                   }));
+                               }}/>
+
+                    </FormGroup>
+
+                    <FormGroup>
+                        <Label for="exampleEmail">Company motto </Label><span></span>
+                        <input  placeholder="input Company motto" defaultValue={info.cmotto}
+
+                                onChange={(e) => {
+                                    setinfo(prevState => ({
+                                        ...prevState,
+                                        cmotto: e.target.value
+                                    }));
+                                }}/>
+
+                    </FormGroup>
+
+                    <Button title="click to add process" size="sm"
+                            style={{background: '#9DC88D', marginBottom: '2%'}} onClick={onsaveClick}>Add Information
+                    </Button>
+            </Card>
         </div>
             );
 }
