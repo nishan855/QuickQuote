@@ -8,6 +8,7 @@ import Buyer from './pages/Buyer';
 import Seller from "./Seller/SellerCompo/SellerDashBoard";
 import Buyers from "./pages/Buyers";
 import Orders from "./pages/quote";
+import CustomerInfo from "./pages/CustomerInfo"
 
 function BaseApp() {
   return (
@@ -21,7 +22,7 @@ function BaseApp() {
             <Route path = '/buyer/:id'  component = {Buyer} />
             <Route path = '/seller' exact component = {Seller} />
               <Route path = '/sellerDashboard' exact component = {Seller} />
-
+              <Route path = '/custinfo' exact component = {CustomerInfo} />
 
           </Switch>
         </Router>
