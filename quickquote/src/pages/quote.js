@@ -26,42 +26,8 @@ function Orders(props){
 
      const ref=[];
 
-    const notifyErr= () => {
-        toast.error('Order Placement failed, Try again!!', {
-            position: "bottom-right",
-            autoClose: 2500,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-        });
-
-    }
-
-    const notifySucc= () => {
-        toast.success('Order Successfully placed!!', {
-            position: "bottom-right",
-            autoClose: 2500,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-        });
-
-    }
-
-   //region and bucket name
-    const S3_BUCKET ='dxfstorage-quickquote';
-    const REGION ='us-east-2';
-
-
 
     AWS.config.update(DynamoConfig);
-
-    //instance of s3
-    const s3 = new AWS.S3();
 
 
     const StyledTableCell = withStyles((theme) => ({
@@ -74,6 +40,8 @@ function Orders(props){
         },
     }))(TableCell);
 
+
+    //getting totalCost
     let sum=0;
     const getCost=()=>{
         quote.map((q)=> sum+=parseFloat(q.totalCost))
@@ -98,37 +66,11 @@ function Orders(props){
         const classes = useStyles();
 
 
-    function timeout(delay: number) {
-        return new Promise( res => setTimeout(res, delay) );
-    }
 
 
-   async function placeOrder() {
+        async function placeOrder() {
 
-
-       const orderId= uuid();
-
-       const data=[]
-
-
-// fdata.map((fl)=>{
-//
-//     const key=orderId+"_"+fl.file.name
-//
-//        const params = {
-//            Bucket: S3_BUCKET,
-//            Key:key,
-//            Body: fl.file,
-//        };
-//
-//     ref.push(key)
-//
-//        const res = s3.putObject(params).promise().catch(err=>
-//        notifyErr()
-//        )
-//
-// });
-
+const data=[]
 quote.map((q,ind)=>{
     let obj={
         file:"",
@@ -141,7 +83,7 @@ quote.map((q,ind)=>{
     }
 
     obj.file=q.file
-    obj.fileKey=ref[ind]
+    obj.fileKey=""
     obj.material=q.material
     obj.process=q.process
     obj.quantity=q.quantity
@@ -150,39 +92,16 @@ quote.map((q,ind)=>{
     data.push(obj)
 })
 
-
-
-
-        AWS.config.update(DynamoConfig);
-        let DynamoDB = new AWS.DynamoDB.DocumentClient();
-
-
-         const date=new Date().toLocaleString();
-         var par = {
-             TableName: "Orders",
-             Item: {
-                 "orderId": orderId,
-                 //array of process
-                 "orderDate": date,
-                  "data":  data,
-                 "totalCost":sum,
-                 "sellerId": location.state.id
-             }
-         };
-
-         DynamoDB.put(par, function (err) {
-             if (err) {
-                 notifyErr()
-             }
-             else{
-                 notifySucc()
-
-                 setTimeout(function() {
-                     history.push('/')
-                 }, 2000);
-
-             }
-         });
+       history.push(
+           {
+               pathname: '/custinfo',
+               state: {
+                   file: fdata,
+                   otherData:data,
+                   id: location.state.id
+               }
+           }
+       )
 
     }
 
