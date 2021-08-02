@@ -36,7 +36,7 @@ function DXFParametersCard () {
         return(
             <>
                 <Card style={DXFParametersCardStyle}>
-                    <CardHeader style={DXFParametersCardHeaderStyle}>DXF PARAMETERS CARD!!!!</CardHeader>
+                    <CardHeader style={DXFParametersCardHeaderStyle}>Customer and Shipping Details</CardHeader>
                     <DXFParametersForm />
                 </Card>
 
