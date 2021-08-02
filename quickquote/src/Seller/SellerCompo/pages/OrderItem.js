@@ -3,6 +3,7 @@ import {Card, CardText, CardBody,CardHeader, CardLink, CardTitle, CardSubtitle
 } from 'reactstrap';
 import React from "react";
 import GetAppIcon from '@material-ui/icons/GetApp';
+import './Order.css'
 
 export default function OrderItem(){
 
@@ -11,17 +12,19 @@ export default function OrderItem(){
     console.log(orderDat)
 
     return(
-        <div>
-            <CardHeader style={{width:1000,marginTop: "2%", marginBottom:"2%", background:'#14A76c'}}>
-                <CardTitle tag="h5">Order ID: <label style={{color:"blue"}}>{orderDat.orderId}</label></CardTitle>
-                <CardSubtitle tag="h6" className="mb-2 text-muted">{orderDat.orderDate}</CardSubtitle>
+        <div className='order-container'>
+            <CardHeader className = 'order-card-header'>
+                <CardTitle className = 'order-card-title'>Order ID:
+                    <label className = 'order-card-header-title'> {orderDat.orderId}</label>
+                </CardTitle>
+                <CardSubtitle tag="h6" className = 'order-card-header-subtitle'>{orderDat.orderDate}</CardSubtitle>
             </CardHeader>
 
             {orderDat.data.map((ord,ind)=>
                 <Card key={ind}>
-                    <CardHeader style={{background:"#3FEEE6"}}>{ord.fileKey}<GetAppIcon style={{float:"right"}}/></CardHeader>
+                    <CardHeader className='order-item-card-header'>Buyer ID: {ord.fileKey}<GetAppIcon style={{float:"right"}}/></CardHeader>
                     <CardBody>
-                        <CardText> Quantity: {ord.quantity}</CardText>
+                        <CardText>Quantity: {ord.quantity}</CardText>
                         <CardText>Material: {ord.material}</CardText>
                         <CardText>Process: {ord.process}</CardText>
                         <CardText>Cost: ${ord.cost}</CardText>
