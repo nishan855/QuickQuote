@@ -1,0 +1,29 @@
+
+.order-container{
+    min-width: 500pt;
+    margin-bottom: 600pt;
+}
+
+.order-card-header{
+    /*width: 1000pt;*/
+    margin-top:  2%;
+    margin-bottom: 2%;
+    background: #242424;
+}
+.order-card-title{
+    color: white;
+    display: flex;
+    flex-direction: row;
+
+}
+.order-card-header-title{
+    color: #b19b0c;
+    padding-left: 4pt;
+}
+.order-card-header-subtitle{
+    color: rgba(255, 255, 255, 0.54);
+}
+
+.order-item-card-header{
+    background: #b19b0c;
+}

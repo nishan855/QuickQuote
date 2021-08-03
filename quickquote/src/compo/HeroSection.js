@@ -7,7 +7,7 @@ function HeroSection() {
     return (
         <div className='hero-container'>
             <video src='../videos/video-1.mp4' autoPlay loop muted/>
-            <h1>Quick-Quote</h1>
+            <h1>Quick<i class="fab fa-connectdevelop"></i>Quote</h1>
             <p>Providing the most advanced and efficient services</p>
             <div className="hero-btns">
                 <Button
