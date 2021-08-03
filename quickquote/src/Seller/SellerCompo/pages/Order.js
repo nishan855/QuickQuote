@@ -120,32 +120,7 @@ const history=useHistory()
         fetch()
 
 
-        // //setting filekey to array
-        // dat.map((d)=> {
-        //     const innerKey = [];
-        //     d.data.map((dd) => {
-        //
-        //
-        //         var params = {
-        //             Bucket: S3_BUCKET,
-        //             Key: dd.fileKey
-        //         };
-        //         s3.getObject(params, function (err, data) {
-        //             if (err) console.log(err, err.stack); // an error occurred
-        //             else {
-        //                 console.log(data)
-        //                 innerKey.push(data)
-        //             };
-        //         })
-        //
-        //
-        //
-        //     })
-        //     keyDat.push(innerKey);
-        //     setFiles(keyDat)
-        //     console.log(keyDat)
-        //     console.log(files)
-        // })
+
 
 
     },[])
