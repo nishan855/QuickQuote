@@ -34,7 +34,7 @@ function Navbar() {
                         className = 'navbar-logo'
                         onClick = {closeMobileMenu} // Close menu from Logo button
                     >
-                        Quick-Quote<i className="fab fa-typo3"></i>
+                            Quick<i class="fab fa-connectdevelop"></i>Quote
                     </Link>
                     <div
                         className = 'menu-icon'
