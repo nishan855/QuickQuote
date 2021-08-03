@@ -21,12 +21,14 @@
 
 .navbar-logo {
     color: #fff;
-    justify-self: start;
+    white-space: nowrap;
     cursor: pointer;
-    text-decoration: none;
-    font-size: 2rem;
-    display: flex;
-    align-items: center;
+    font-size: 24pt;
+    margin-left: -24pt;
+    /*justify-self: start;*/
+    /*text-decoration: none;*/
+    /*display: flex;*/
+    /*align-items: center;*/
 }
 .navbar-logo:hover {
     color: #d50505;
