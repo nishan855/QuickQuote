@@ -33,4 +33,5 @@ public class Material {
     public String mthickness;
     @DynamoDBAttribute
     public List<Proc> process;
+
 }
