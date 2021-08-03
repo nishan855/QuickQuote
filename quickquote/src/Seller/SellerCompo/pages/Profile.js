@@ -79,20 +79,25 @@ export default Profile;
 import { useState, useEffect } from 'react'
 import { Auth } from '@aws-amplify/auth';
 import DynamoConfig from "../../../DynamoConfig";
-
+import {Link, useHistory} from "react-router-dom";
 import  {Card,CardBody,CardHeader} from "reactstrap";
 import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import Display from "./Display.js"
 
 let AWS= require("aws-sdk");
 
 function Profile() {
     const information =[];
-    const[info,setinfo] = useState({
+    const history=useHistory()
+    const [info,setinfo] = useState({
         "cname":"",
         "cmotto" :"",
-
-
     });
+
+    //const handledisplay {
+      //  history.push('/Display')
+
+    //}
     async function save() {
 
         AWS.config.update(DynamoConfig);
@@ -126,7 +131,10 @@ function Profile() {
     const onsaveClick = () => {
         information.push(info);
         console.log(information);
+
+
         save();
+
 
     }
 
@@ -164,8 +172,11 @@ function Profile() {
                     </FormGroup>
 
                     <Button title="click to add process" size="sm"
-                            style={{background: '#9DC88D', marginBottom: '2%'}} onClick={onsaveClick}>Add Information
+                            style={{background: '#9DC88D', marginBottom: '2%'}} onClick={onsaveClick}>Save Profile
                     </Button>
+                <Button title="click to add process" size="sm"
+                        style={{background: '#9DC88D', marginBottom: '2%'}} onClick = {() => history.push('/Display')}> View Profile
+                </Button>
             </Card>
         </div>
             );
