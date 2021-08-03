@@ -60,9 +60,9 @@ function UploadPicture() {
     return (
         <div className="App" >
 
+            <AmplifyS3ImagePicker level="private"  identityId={identityId} onLoad={url => console.log(url)}/>
 
-
-            <div style={{  marginLeft : '400px' , marginTop: '10px', marginBottom : '50 px' ,float : 'center' }}>
+            <div style={{  marginLeft : '400px' , marginTop: '10px', marginBottom : '50 px' ,float : 'right' }}>
                 {
 
                         <img
@@ -74,7 +74,7 @@ function UploadPicture() {
                         />
 
                 }
-                <AmplifyS3ImagePicker level="private"  identityId={identityId} onLoad={url => console.log(url)}/>
+
             </div>
         </div>
     )
