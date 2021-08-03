@@ -171,11 +171,15 @@ function Profile() {
 
                     </FormGroup>
 
-                    <Button title="click to add process" size="sm"
+                    <Button title="click to save profile info" size="sm"
                             style={{background: '#9DC88D', marginBottom: '2%'}} onClick={onsaveClick}>Save Profile
                     </Button>
-                <Button title="click to add process" size="sm"
+                <Button title="view what you saved" size="sm"
                         style={{background: '#9DC88D', marginBottom: '2%'}} onClick = {() => history.push('/Display')}> View Profile
+                </Button>
+
+                <Button title="upload a picture" size="sm"
+                        style={{background: '#9DC88D', marginBottom: '2%'}} onClick = {() => history.push('/UploadPicture')}>Upload photo
                 </Button>
             </Card>
         </div>

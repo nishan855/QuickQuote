@@ -10,6 +10,7 @@ import Parameters from "./Parameters"
 import Order from "./pages/Order"
 import OrderItem from "./pages/OrderItem"
 import Display from "./pages/Display"
+import UploadPicture from "./pages/UploadPicture"
 
 function SellerDashBoard() {
     return (
@@ -26,6 +27,7 @@ function SellerDashBoard() {
                         <Route path = "/changeParameter" exact component = {Parameters} />
                         <Route path = "/orderitem" exact component = {OrderItem} />
                         <Route path = "/Display" exact component = {Display} />
+                        <Route path = "/UploadPicture" exact component = {UploadPicture} />
 
                     </Switch>
                 </div>
