@@ -75,20 +75,20 @@ function Display()
                 <div className= "set">
 
                     <Card>
-            <Card color="danger" style={{width: 340,height:65}}>
+            <Card color="success" style={{width: 800,height:70}}>
                 <div className= "text-center">
                     <CardBody>
-                        <h2>Name : {name}</h2>
+                        <h2>Company Name : {name}</h2>
 
                     </CardBody>
                 </div>
             </Card>
 
 
-                <Card color="danger" style={{width: 340,height:65}}>
+                <Card color="success" style={{width: 800,height:70}}>
                     <div className= "text-center">
                         <CardBody>
-                            <h2>motto : {motto}</h2>
+                            <h2> Motto : {motto}</h2>
 
                         </CardBody>
                     </div>

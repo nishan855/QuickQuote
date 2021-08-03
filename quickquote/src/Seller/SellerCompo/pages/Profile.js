@@ -140,11 +140,12 @@ function Profile() {
 
     return (
         <div className="App">
+
             <Card>
                 <CardHeader
-                    style={{background: "#71bbd4", marginBottom: '2%'}}>Profile Setup </CardHeader>
+                    style={{background: "#71bbd4",  marginLeft: '15%', marginBottom: '2%', width:680 , height:50}}><h2>Profile Setup</h2> </CardHeader>
 
-                    <FormGroup>
+                    <FormGroup style = {{marginLeft:'15%', width:800}}>
                         <Label for="exampleEmail">Company Name</Label><span></span>
                         <input placeholder=" Input Company Name" defaultValue={info.cname}
 
@@ -158,7 +159,7 @@ function Profile() {
 
                     </FormGroup>
 
-                    <FormGroup>
+                    <FormGroup style = {{marginLeft:'15%', width:800}}>
                         <Label for="exampleEmail">Company motto </Label><span></span>
                         <input  placeholder="input Company motto" defaultValue={info.cmotto}
 
@@ -172,14 +173,14 @@ function Profile() {
                     </FormGroup>
 
                     <Button title="click to save profile info" size="sm"
-                            style={{background: '#9DC88D', marginBottom: '2%'}} onClick={onsaveClick}>Save Profile
+                            style={{background: '#9DC88D', marginBottom: '2%', marginLeft:'15%' }} onClick={onsaveClick}>Save Profile
                     </Button>
                 <Button title="view what you saved" size="sm"
-                        style={{background: '#9DC88D', marginBottom: '2%'}} onClick = {() => history.push('/Display')}> View Profile
+                        style={{background: '#9DC88D', marginBottom: '2%',marginLeft:'15%'}} onClick = {() => history.push('/Display')}> View Profile
                 </Button>
 
                 <Button title="upload a picture" size="sm"
-                        style={{background: '#9DC88D', marginBottom: '2%'}} onClick = {() => history.push('/UploadPicture')}>Upload photo
+                        style={{background: '#9DC88D', marginBottom: '2%',marginLeft:'15%'}} onClick = {() => history.push('/UploadPicture')}>Upload photo
                 </Button>
             </Card>
         </div>
