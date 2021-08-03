@@ -72,6 +72,8 @@ public class FileController {
 			//getting price parameters
 		    QuotingData qd =pp.getQuoteData(quotingParams,fileDTO.get(i));
 
+		    String mat= material[i]+" ("+pp.getThickness(quotingParams,fileDTO.get(i))+"\")";
+
 //			//parse shapes out of the file
 			ObjectParser op = new ObjectParser(mp);
 
@@ -101,7 +103,7 @@ public class FileController {
 
             Double tot= new BigDecimal(totalPrice).setScale(2, RoundingMode.UP).doubleValue();
 
-			parsedData.add(new FileData(uploadedFile[i].getOriginalFilename(),sellerId,process[i],material[i],Integer.parseInt(quantity[i]),peirce_points,length,area,tot));
+			parsedData.add(new FileData(uploadedFile[i].getOriginalFilename(),sellerId,process[i],mat,Integer.parseInt(quantity[i]),peirce_points,length,area,tot));
 
  }
 
