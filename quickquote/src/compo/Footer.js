@@ -65,11 +65,11 @@ function Footer() {
                 <div className='social-media-wrap'>
                     <div className='footer-logo'>
                         <Link to='/' className='social-logo'>
-                            QUICK-QUOTE
-                            <i className='fab fa-typo3'/>
+                            Quick<i class="fab fa-connectdevelop"></i>Quote
                         </Link>
                     </div>
-                    <small className='website-rights'>QUICK-QUOTE © 2020</small>
+                    <small className='website-rights'>Quick<i class="fab fa-connectdevelop"></i>Quote © 2021
+                    </small>
                     <div className='social-icons'>
                         <Link
                             class='social-icon-link facebook'
