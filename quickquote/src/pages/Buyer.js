@@ -12,6 +12,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import {useParams, useHistory} from "react-router-dom";
 import Loader from "react-loader-spinner"
 import * as AWS from "aws-sdk";
+import DisplayBuyer from "./DisplayBuyer"
 import DynamoConfig from "../DynamoConfig";
 export default function Buyer() {
 
@@ -286,6 +287,7 @@ export default function Buyer() {
     return (
         <div>
             <Navbar/>
+            <DisplayBuyer/>
         {!submitBtn ?
         <div>
 
