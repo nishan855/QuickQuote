@@ -2,7 +2,6 @@
 
 .process-list-card{
     background: rgba(255, 140, 0, 0.2);
-    margin-bottom: 2%;
     margin-right: 25pt;
 }
 
@@ -13,6 +12,7 @@
 
 .process-list-form{
     padding-left: 12pt;
+    padding-right: 12pt;
     padding-bottom: 12pt;
 }
 
@@ -24,6 +24,7 @@
 }
 
 .material-card{
+    margin-top: 24pt;
     min-width: 400pt;
     max-width: 500pt;
     background: rgba(0, 128, 0, 0.2);
@@ -64,15 +65,18 @@
 .add-process-button{
     background: darkorange;
     color: black;
-    margin-top: 2%;
-    margin-bottom: 2%;
+    margin-top: 12pt;
+    margin-bottom: 12pt;
     float: left;
     max-width: 100pt;
-    height: 25pt;
+    height: 40pt;
 }
 .save-process-button{
     color: darkorange;
     background: black;
+
+    max-width: 100pt;
+    height: 40pt;
 }
 
 .submit-material-button:hover,
