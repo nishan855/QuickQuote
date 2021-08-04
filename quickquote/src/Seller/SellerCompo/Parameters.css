@@ -1,0 +1,83 @@
+
+
+.process-list-card{
+    background: rgba(255, 140, 0, 0.2);
+    margin-bottom: 2%;
+    margin-right: 25pt;
+}
+
+.process-list-card-header{
+    background: darkorange;
+    margin-bottom: 2%;
+}
+
+.process-list-form{
+    padding-left: 12pt;
+    padding-bottom: 12pt;
+}
+
+
+.process-button:hover{
+    background: #ffffff;
+    color: #242424;
+    transition: 250ms;
+}
+
+.material-card{
+    min-width: 400pt;
+    max-width: 500pt;
+    background: rgba(0, 128, 0, 0.2);
+}
+
+.material-card-header{
+    background: green;
+    margin-bottom: 2%;
+}
+
+.material-form-container{
+    padding-left: 25pt;
+}
+
+.material-input-box{
+    min-width: 200pt;
+}
+
+/************ BUTTONS ************/
+
+
+.add-material-button{
+    background: green;
+    float: left;
+    margin-top: 20pt;
+    margin-bottom: 100pt;
+    margin-right: 50pt;
+    min-width: 150pt;
+    height: 50pt;
+}
+.submit-material-button{
+    background: red;
+    float: right;
+    margin-top: 20pt;
+    min-width: 150pt;
+    height: 50pt;
+}
+.add-process-button{
+    background: darkorange;
+    color: black;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    float: left;
+    max-width: 100pt;
+    height: 25pt;
+}
+.save-process-button{
+    color: darkorange;
+    background: black;
+}
+
+.submit-material-button:hover,
+.add-material-button:hover
+{
+    color: white;
+    transition: 250ms;
+}
