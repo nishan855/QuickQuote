@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {AmplifySignOut, withAuthenticator} from '@aws-amplify/ui-react'
-import {Card,Button, CardBody, CardHeader} from "reactstrap";
+import {Card, Button, CardBody, CardHeader} from "reactstrap";
 import {Link, useHistory} from 'react-router-dom'
 import {Auth} from "@aws-amplify/auth";
 import DynamoConfig from "../../../DynamoConfig";
@@ -9,25 +9,25 @@ import "../SellerDashBoard.css";
 let AWS = require("aws-sdk");
 
 
-function Setup () {
+function Setup() {
     const history = useHistory();
 
-    const handleRoute = () =>{
+    const handleRoute = () => {
         history.push("/changeParameter");
     }
 
-    const [primeKey,setPrimeKey]=useState("");
+    const [primeKey, setPrimeKey] = useState("");
 
-    const[info,setInfo]=useState({
-        "process" : [],
-        "pierceCost": "",
-        "areaCost": "",
-        "setupCost": "",
-        "id": "",
-        "cutCost": "",
-        "material": " "}
+    const [info, setInfo] = useState({
+            "process": [],
+            "pierceCost": "",
+            "areaCost": "",
+            "setupCost": "",
+            "id": "",
+            "cutCost": "",
+            "material": " "
+        }
     )
-
 
 
     const listItems = info.process.map((number) =>
@@ -36,8 +36,9 @@ function Setup () {
             <br/>
         </div>
     );
+
 //fetching from DB
-    async function fetch () {
+    async function fetch() {
 
         // await Auth.currentAuthenticatedUser().then((data)=> {
         //     setPrimeKey(data.attributes.sub)
@@ -45,9 +46,9 @@ function Setup () {
         // });
 
         //getting userid sub for primary key
-        const user=  await Auth.currentAuthenticatedUser();
+        const user = await Auth.currentAuthenticatedUser();
         console.log(user);
-        const id= user.attributes.sub;
+        const id = user.attributes.sub;
 
         //connecting  to db to look for record with primary key
         AWS.config.update(DynamoConfig);
@@ -56,7 +57,7 @@ function Setup () {
         var params = {
             TableName: "Seller",
             Key: {
-                "id":id
+                "id": id
             }
         };
 
@@ -64,75 +65,74 @@ function Setup () {
         await docClient.get(params, function (err, data) {
             if (err) {
                 console.log("users::fetchOneByKey::error - " + JSON.stringify(err, null, 2));
-            }
-            else if (data.Item==null){
+            } else if (data.Item == null) {
                 setInfo(info);
-            }
-            else {
+            } else {
                 setInfo(data.Item);
             }
         })
     }
 
     //loads data on the start
-    useEffect(()=>fetch(),[]);
+    useEffect(() => fetch(), []);
 
     return (
         <div className="component">
-        <div className= "set">
+            <div className="set">
 
                 <Card>
-                    <Card color="danger" style={{width: 330,height:65,marginLeft:"35%", marginRight: "5%"}}>
-                        <div className= "text-center">
-                        <CardBody>
-                            Setup Fee
-                           <h1 style={{}}>{info.setupCost}</h1>
-                        </CardBody>
+                    <Card color="danger" style={{width: 330, height: 65, marginLeft: "35%", marginRight: "5%"}}>
+                        <div className="text-center">
+                            <CardBody>
+                                Setup Fee
+                                <h1 style={{}}>{info.setupCost}</h1>
+                            </CardBody>
                         </div>
                     </Card>
 
-                    <Card color="success" style={{width: 330,height:65,marginLeft:"35%", marginRight: "5%"}}>
-                        <div className= "text-center">
-                        <CardBody>Cut Cost per inch
-                            <h1 style={{float:"right"}}>{info.cutCost}</h1>
-                        </CardBody>
+                    <Card color="success" style={{width: 330, height: 65, marginLeft: "35%", marginRight: "5%"}}>
+                        <div className="text-center">
+                            <CardBody>Cut Cost per inch
+                                <h1 style={{float: "right"}}>{info.cutCost}</h1>
+                            </CardBody>
                         </div>
                     </Card>
 
-                    <Card color="warning" style={{width: 330,height:65,marginLeft:"35%", marginRight: "5%"}}>
-                        <div className= "text-center">
-                        <CardBody>Area Cost per material
-                            <h1 style={{float:"right"}}>{info.areaCost}</h1>
-                        </CardBody>
+                    <Card color="warning" style={{width: 330, height: 65, marginLeft: "35%", marginRight: "5%"}}>
+                        <div className="text-center">
+                            <CardBody>Area Cost per material
+                                <h1 style={{float: "right"}}>{info.areaCost}</h1>
+                            </CardBody>
                         </div>
                     </Card>
 
 
-                    <Card color="primary" style={{ width: 330,height:65,marginLeft:"35%", marginRight: "5%"}}>
-                        <div className= "text-center">
-                        <CardBody>Cost per Pierce Point
-                            <h1 style={{float:"right"}}>{info.pierceCost}</h1>
-                        </CardBody>
+                    <Card color="primary" style={{width: 330, height: 65, marginLeft: "35%", marginRight: "5%"}}>
+                        <div className="text-center">
+                            <CardBody>Cost per Pierce Point
+                                <h1 style={{float: "right"}}>{info.pierceCost}</h1>
+                            </CardBody>
                         </div>
                     </Card>
 
-                    <Card color="info" style={{width: 330,height:65,marginLeft:"35%", marginRight: "5%"}}>
-                        <div className= "text-center">
-                        <CardBody> Process
-                            {listItems}
-                        </CardBody>
+                    <Card color="info" style={{width: 330, height: 65, marginLeft: "35%", marginRight: "5%"}}>
+                        <div className="text-center">
+                            <CardBody> Process
+                                {listItems}
+                            </CardBody>
                         </div>
                     </Card>
 
                 </Card>
 
                 <div style={{marginLeft: "43%"}}>
-                    <Button  onClick={handleRoute}> Set Parameters > </Button>
+                    <Button onClick={handleRoute}> Set Parameters > </Button>
                 </div>
 
-        </div>
+            </div>
         </div>
     );
 }
+
 export default withAuthenticator(Setup);
 //export default SellerDashBoard;
