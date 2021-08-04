@@ -40,23 +40,7 @@ function UploadPicture() {
         console.log('imageKeys: ', imageKeys)
         setImages(imageKeys)
     }
-    async function onChange(e) {
-        const file = e.target.files[0];
-        try {
-            const result = await Storage.put(file.name, file,
-                {
-                    level : 'private'
-                })
 
-            console.log({result})
-            fetchImages()
-        }
-
-        catch (error)
-        {
-            console.log(error);
-        }
-    }
     return (
         <div className="App" >
 
