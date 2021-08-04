@@ -30,6 +30,16 @@ public class Price {
          return qd;
     }
 
+    public String getThickness(SellerEntity se, FileDTO fileData){
+
+        String tk="";
+        for (int i=0; i<se.material.size();i++){
+            if(fileData.getMaterial().equalsIgnoreCase(se.material.get(i).matname)){
+               tk=se.material.get(i).mthickness;
+            }
+        }
+        return tk;
+    }
     public double getPriceQuote (QuotingData qd,Double dist, Double area,int pierce){
         double price=0D;
         price = qd.getMaterialCost()*area+qd.getPierceCost()*pierce+qd.getCutCust()*dist+qd.getSetupCost();

@@ -5,7 +5,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class SpringPracticeApplication {
-	//@Autowired
 
 
 
@@ -15,9 +14,6 @@ public class SpringPracticeApplication {
 
 	   SpringApplication.run(SpringPracticeApplication.class, args);
 
-
-	   //SellerRepo repo=new SellerRepo();
-		//repo.getEmployeeById("11111");
 	}
 
 }
