@@ -8,7 +8,7 @@ const QuoteError=()=>{
     return(
         <div>
             <Navbar style={{marginBottom:"2%"}}/>
-            <label>Your {loc.state.message}.</label>
+            <label>{loc.state.message}.</label>
             <label>     Please, try again.....</label>
         </div>
 

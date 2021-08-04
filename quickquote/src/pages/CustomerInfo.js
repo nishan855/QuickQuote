@@ -24,6 +24,8 @@ export default function CustomerInfo(){
     const [state,setState]=useState("")
     const [zip,setZip]=useState("")
     const [err,setErr]=useState(false)
+    let ordID=""
+
 
     const loc=useLocation();
     const fdt= loc.state.file
@@ -117,6 +119,7 @@ export default function CustomerInfo(){
            cust.addrs= addr+", "+city+", "+state+", "+zip
 
            const orderId= uuid();
+            ordID=orderId
 
            const dt=[]
 
@@ -171,11 +174,16 @@ export default function CustomerInfo(){
                    console.log(err)
                }
                else{
-                   notifySucc()
 
-                   setTimeout(function() {
-                       history.push('/')
-                   }, 2000);
+                   history.push(
+                       {
+                           pathname: '/OrderSuccess',
+                           state: {
+                               cust: name.split(" ")[0],
+                               ordrId: ordID ,
+                           }
+                       }
+                   )
 
                }
            });
