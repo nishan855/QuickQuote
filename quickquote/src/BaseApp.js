@@ -9,6 +9,7 @@ import Seller from "./Seller/SellerCompo/SellerDashBoard";
 import Buyers from "./pages/Buyers";
 import Orders from "./pages/quote";
 import CustomerInfo from "./pages/CustomerInfo"
+import OrderSuccess from "./pages/OrderSuccess";
 
 function BaseApp() {
   return (
@@ -23,6 +24,7 @@ function BaseApp() {
             <Route path = '/seller' exact component = {Seller} />
               <Route path = '/sellerDashboard' exact component = {Seller} />
               <Route path = '/custinfo' exact component = {CustomerInfo} />
+              <Route path = '/OrderSuccess' exact component = {OrderSuccess} />
 
           </Switch>
         </Router>
