@@ -17,7 +17,7 @@ function Display()
     const[display,setdisplay] = useState("");
     const[name,setname] = useState("");
     const[motto,setmotto]= useState("");
-
+    const[ids,setid] = useState("");
 
     async function fetch () {
 
@@ -44,6 +44,7 @@ function Display()
             }
             setname(data.Items[0].info[0].cname);
             setmotto(data.Items[0].info[0].cmotto);
+            setid(id);
             //console.log(data.Items[0].info[0].cname)
             //console.log(data.Items[0].info[0].cmotto)
 
@@ -63,7 +64,7 @@ function Display()
     //const show = display.map((dt,i) =>
 
         //<h3>{dt.cname}</h3>
-
+    console.log(ids);
     //)
     //console.log(display.cname)
     useEffect(()=>fetch(),[]);
@@ -75,17 +76,26 @@ function Display()
                 <div className= "set">
 
                     <Card>
-            <Card color="success" style={{width: 800,height:70}}>
+
+                        <Card color="success" style={{width: 900,height:70}}>
+                            <div className= "text-center">
+                                <CardBody>
+                                    <h2>Company Id : {ids}  </h2>
+
+                                </CardBody>
+                            </div>
+                        </Card>
+            <Card color="success" style={{width: 900,height:70}}>
                 <div className= "text-center">
                     <CardBody>
-                        <h2>Company Name : {name}</h2>
+                        <h2>Company Name : {name}  </h2>
 
                     </CardBody>
                 </div>
             </Card>
 
 
-                <Card color="success" style={{width: 800,height:70}}>
+                <Card color="success" style={{width: 900,height:70}}>
                     <div className= "text-center">
                         <CardBody>
                             <h2> Motto : {motto}</h2>
@@ -95,6 +105,7 @@ function Display()
                 </Card>
 
             </Card>
+
                 </div>
                 </div>
 
