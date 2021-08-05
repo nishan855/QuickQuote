@@ -25,38 +25,25 @@ function Display()
         console.log(user);
         const id= user.attributes.sub;
 
-        //connecting  to db to look for record with primary key
-        AWS.config.update(DynamoConfig);
         let docClient = new AWS.DynamoDB.DocumentClient();
+
 
         var params = {
             TableName: "SellerProfile",
             Key: {
-                "sellerid":id
+                "sellerid": id
             }
         };
-        console.log("Before scan");
 
-        docClient.scan(params, function (err, data) {
+        await docClient.get(params, function (err, data) {
             if (err) {
-                console.log(err);
-                console.log("Here");
-            }
-            setname(data.Items[0].info[0].cname);
-            setmotto(data.Items[0].info[0].cmotto);
-            setid(id);
-            //console.log(data.Items[0].info[0].cname)
-            //console.log(data.Items[0].info[0].cmotto)
+                console.log("users::fetchOneByKey::error - " + JSON.stringify(err, null, 2));
+            }  else {
 
+                    setname(data.Item.info[0].cname)
+                    setmotto(data.Item.info[0].cmotto)
+                    setid(id)
 
-
-            if(data.Items.length > 0)
-            {
-                let dt = data.Items.info
-                setdisplay(dt);
-                console.log("No error")
-               console.log(dt);
-                //console.log(data.item.cmotto);
             }
         })
     }
