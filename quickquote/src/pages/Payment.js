@@ -1,7 +1,7 @@
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 
 export default function Payment(props) {
-    const amt= props.val+1;
+    const amt= props.val;
     console.log("hello")
     console.log(amt)
     return (
