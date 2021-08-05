@@ -1,6 +1,7 @@
 .main {
     height: 100vh;
     width: 100vw;
+    overflow: auto;
 }
 
 .main-page{
@@ -16,13 +17,27 @@
     min-width: 200pt;
     overflow: auto;
     margin-right: 25pt;
+    min-height: 600pt;
+}
+
+@media (max-width: 1100px) {
+    .Sidebar {
+        display: none;
+    }
 }
 
 .component
 {
     flex: 0.8;
-    padding-left: 20px;
+    padding-left: 10px;
     padding-top: 10px;
+}
+
+.getmaterial{
+    flex: 0.8;
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-bottom: 20px;
 }
 
 .SidebarList {
@@ -31,7 +46,7 @@
 }
 
 .SidebarList .row {
-    height: 80px;
+    height:80px;
     list-style-type: none;
     margin: 0;
     display: flex;
@@ -73,7 +88,17 @@ span{
 }
 
 .set{
-    padding-top: 60px;
+    padding-top: 40px;
+    padding-bottom: 60px;
+    padding-left:400px;
+    display: flex;
+    flex-direction: row;
+
+}
+
+.material_data{
+    display: flex;
+    flex-direction: row;
 }
 
 .add{
@@ -82,10 +107,25 @@ span{
 }
 .material
 {
-    padding-left: 10px;
-    padding-right: 10px;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    padding-top: 20px;
+    padding-left: 20px;
+
+}
+.process{
+    padding-top: 60px;
+    padding-left: 60px;
+}
+.exampleEmail{
+    display: block;
+    width: 130px;
 }
 
+.btn{
+
+}
 
 
 

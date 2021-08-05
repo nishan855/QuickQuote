@@ -11,19 +11,27 @@ import Order from "./pages/Order"
 import OrderItem from "./pages/OrderItem"
 import Display from "./pages/Display"
 import UploadPicture from "./pages/UploadPicture"
+import Material from "./pages/Material";
+import Home from "../../pages/Home"
+
 
 function SellerDashBoard() {
     return (
         <div className = "main">
             <Router>
+                <Switch>
+                    <Route path = '/' exact component = {Home}/>
+                </Switch>
                 <SellerNavbar/>
                 <div className= "main-page">
                 <SellerSidebar />
                     <Switch>
                         <Route path = '/manage_order' exact component = {Order} />
+                        <Route path = '/' exact component = {Home}/>
                         <Route path = '/metrics' exact component = {Metrics} />
                         <Route path = '/setup' exact component = {Parameters} />
                         <Route path = '/profile' exact component = {Profile} />
+                        <Route path = '/material' exact component = {Material} />
                         <Route path = "/changeParameter" exact component = {Parameters} />
                         <Route path = "/orderitem" exact component = {OrderItem} />
                         <Route path = "/Display" exact component = {Display} />
