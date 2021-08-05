@@ -3,7 +3,7 @@ import Navbar from "../compo/Navbar";
 import {Button, Card} from "react-bootstrap";
 import {CardHeader} from "reactstrap";
 import DXFParametersForm from "../compo/Buyer/DXFParametersFrom";
-import React from "react";
+import React, {useEffect} from "react";
 import custInfo from "./custInfo.css"
 import {useState} from 'react'
 import {useLocation,useHistory} from "react-router-dom"
@@ -100,11 +100,25 @@ export default function CustomerInfo(){
     const rf=[]
 
 
+    useEffect(()=>{
+        let s=0
+
+        qdata.map((qd,ind)=>{
+            s+=parseFloat(qd.cost)
+        })
+        setPrc(s)
+},[])
+
+
     function submit() {
+
+
        if (name.trim()=="" && phone.trim()=="" && email.trim()=="" && addr.trim()=="" && city.trim()=="" && state.trim()=="" && zip.trim()=="")
        {
            setErr(true)
        }
+
+
 
        else{
            //set customer details
@@ -150,8 +164,9 @@ export default function CustomerInfo(){
                sum+=parseFloat(qd.cost)
                qd.fileKey=rf[ind]
                dt.push(qd)
+              // setPrc(sum)
+
            })
-           setPrc(sum)
 
            let DynamoDB = new AWS.DynamoDB.DocumentClient();
 
@@ -231,9 +246,15 @@ export default function CustomerInfo(){
                         </div>
 
                     </form>
-                    <Payment val={prc}/>
+
+
+                  <div style={{marginTop: "5%"}}>
+                    <Payment val={prc} />
                     <Button className={"float-right"}  style={{marginTop:"2%"}} onClick={submit} variant="primary" size="sm">Submit</Button>
+               </div>
                 </Card>
+
+
 
             </>
 
