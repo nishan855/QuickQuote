@@ -26,73 +26,84 @@ function Material () {
     })
 
     const showData=info.map((inf)=>
-        <Card>
-            <Card color="danger" style={{width: 340,height:65}}>
-                <div className= "text-center">
-                    <CardBody>
-                        <h3>Material Name : {inf.matname}</h3>
+        <div className= "getmaterial">
+            <div classNme = "materialinfo">
+                <Card>
+                    <div className= "material">
+                        <FormGroup>
+                            <Card color="danger" style={{width: 190,height:45}}>
+                                <div className= "text-center">
+                                    <p>Material Name : {inf.matname}</p>
+                                </div>
+                            </Card>
+                        </FormGroup><span></span>
+                        <FormGroup>
+                            <Card color="success" style={{width: 190,height:35}}>
+                                <div className= "text-center">
+                                    <p>Material Density: {inf.mdensity}</p>
 
-                    </CardBody>
-                </div>
-            </Card>
+                                </div>
+                            </Card>
 
-            <Card color="success" style={{width: 340,height:65}}>
-                <div className= "text-center">
-                    <CardBody> <h3>Material Density: {inf.mdensity}</h3>
-                    </CardBody>
-                </div>
-            </Card>
+                        </FormGroup><span></span>
 
-            <Card color="warning" style={{width: 340,height:65}}>
-                <div className= "text-center">
-                    <CardBody><h3>Material Thickness: {inf.mthickness}</h3>
-                    </CardBody>
-                </div>
-            </Card>
+                        <FormGroup>
+                            <Card color="warning" style={{width: 190,height:35}}>
+                                <div className= "text-center">
+                                    <p>Material Thickness: {inf.mthickness}</p>
+                                </div>
+                            </Card>
+                        </FormGroup><span></span>
 
+                        <FormGroup>
+                            <Card color="primary" style={{width: 190,height:35}}>
+                                <div className= "text-center">
+                                    <p>Material Cost: {inf.matCost}</p>
+                                </div>
+                            </Card>
+                        </FormGroup><span></span>
 
-            <Card color="primary" style={{width: 340,height:65}}>
-                <div className= "text-center">
-                    <CardBody><h3>Material Cost: {inf.matCost}</h3>
-                    </CardBody>
-                </div>
-            </Card>
+                        <FormGroup>
+                            <Card color="info" style={{width: 190,height:35}}>
+                                <div className= "text-center">
+                                    <p> Cut Speed: {inf.cutspd}</p>
 
-            <Card color="info" style={{width: 340,height:65}}>
-                <div className= "text-center">
-                    <CardBody><h3> Cut Speed: {inf.cutspd}</h3>
-                    </CardBody>
-                </div>
-            </Card>
+                                </div>
+                            </Card>
+                        </FormGroup><span></span>
 
-            <Card color="secondary" style={{width: 340,height:65}}>
-                <div className= "text-center">
-                    <CardBody><h3> Lead Distance: {inf.lead}</h3>
-                    </CardBody>
-                </div>
-            </Card>
+                        <FormGroup>
+                            <Card color="secondary" style={{width: 190,height:35}}>
+                                <div className= "text-center">
+                                    <p> Lead Distance: {inf.lead}</p>
 
-            {inf.process.map(p=>
-                <div>
-                    <Card color="tertiary" style={{width: 340,height:65}}>
-                        <div className= "text-center">
-                            <CardBody><h3> Process Name: { p.procname}</h3>
-                            </CardBody>
-                        </div>
-                    </Card>
+                                </div>
+                            </Card>
+                        </FormGroup>
+                    </div>
 
-                    <Card color="info" style={{width: 340,height:65}}>
-                        <div className= "text-center">
-                            <CardBody><h3>Set up Cost: {p.inch}</h3>
-                            </CardBody>
-                        </div>
-                    </Card>
-                </div>
-            )}
-
-
-        </Card>
-
+                    {inf.process.map(p=>
+                        <div className = "materialinfo">
+                                <div className= "material">
+                                    <FormGroup>
+                                        <Card color="light" style={{width: 190,height:35}}>
+                                            <div className= "text-center">
+                                                <p> Process Name: { p.procname}</p>
+                                            </div>
+                                        </Card>
+                                    </FormGroup><span></span>
+                                    <FormGroup>
+                                        <Card color="secondary" style={{width: 190,height:35}}>
+                                            <div className= "text-center">
+                                                <p> Price per inch : { p.inch}</p>
+                                            </div>
+                                        </Card>
+                                    </FormGroup><span></span>
+                                </div></div>
+                    )}
+                </Card>
+            </div>
+        </div>
     )
 
 //fetching from DB
@@ -137,10 +148,10 @@ function Material () {
 
 
     return (
-        <div className= "">
-
+        <div className= "component">
             {info.length !=0? <div> {showData}</div>:null}
         </div>
+
     )
 }
 export default withAuthenticator(Material);

@@ -179,6 +179,7 @@ const Parameters = () => {
             return (
 
                 <div className= "component">
+                    <div classNme = "materialinfo">
                     <Card>
                         <CardHeader
                             style={{background: "#71bbd4", marginBottom: '2%'}}>Material {val.length + 1} Setup</CardHeader>
@@ -193,7 +194,7 @@ const Parameters = () => {
 
                                            }));
                                        }}/>
-                            </FormGroup>
+                            </FormGroup><span></span>
                             <FormGroup>
                                 <Label for="exampleEmail">Material Density</Label><span></span>
                                 <input type={"number"} placeholder="input Material Density " defaultValue={mat.mdensity}
@@ -206,7 +207,7 @@ const Parameters = () => {
                                            }));
                                        }}/>
 
-                            </FormGroup>
+                            </FormGroup><span></span>
 
                             <FormGroup>
                                 <Label for="exampleEmail">Material Thickness</Label><span></span>
@@ -218,7 +219,7 @@ const Parameters = () => {
 
                                            }));
                                        }}/>
-                            </FormGroup>
+                            </FormGroup><span></span>
 
                             <FormGroup>
                                 <Label for="exampleEmail">Max Sizes</Label><span></span>
@@ -230,7 +231,7 @@ const Parameters = () => {
 
                                            }));
                                        }}/>
-                            </FormGroup>
+                            </FormGroup><span></span>
 
                             <FormGroup>
                                 <Label for="exampleEmail">Cut speeds</Label><span></span>
@@ -243,7 +244,7 @@ const Parameters = () => {
 
                                            }));
                                        }}/>
-                            </FormGroup>
+                            </FormGroup><span></span>
 
                             <FormGroup>
                                 <Label for="exampleEmail">Material cost </Label><span></span>
@@ -257,10 +258,10 @@ const Parameters = () => {
                                            }));
                                        }}/>
 
-                            </FormGroup>
+                            </FormGroup><span></span>
 
                             <FormGroup>
-                                <Label for="exampleEmail">Lead In/ Lead Out distances</Label><span></span>
+                                <Label for="exampleEmail">Lead In/Out distances</Label><span></span>
                                 <input type={"number"} placeholder=" Input Lead in/out distances" defaultValue={mat.lead}
                                        onChange={(e) => {
                                            setMat(prevState => ({
@@ -269,7 +270,7 @@ const Parameters = () => {
 
                                            }));
                                        }}/>
-                            </FormGroup>
+                            </FormGroup><span></span>
 
                         </div>
                         <Card>
@@ -286,6 +287,7 @@ const Parameters = () => {
 
 
                     </Card>
+                    </div>
                 </div>
             )
         };
