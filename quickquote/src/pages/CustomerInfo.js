@@ -10,6 +10,7 @@ import {useLocation,useHistory} from "react-router-dom"
 import DynamoConfig from "../DynamoConfig";
 import uuid from "react-uuid";
 import {toast} from "react-toastify";
+import Payment from "./Payment";
 export default function CustomerInfo(){
 
     let AWS= require("aws-sdk");
@@ -24,6 +25,7 @@ export default function CustomerInfo(){
     const [state,setState]=useState("")
     const [zip,setZip]=useState("")
     const [err,setErr]=useState(false)
+    const[prc,setPrc]=useState(0)
     let ordID=""
 
 
@@ -149,7 +151,7 @@ export default function CustomerInfo(){
                qd.fileKey=rf[ind]
                dt.push(qd)
            })
-
+           setPrc(sum)
 
            let DynamoDB = new AWS.DynamoDB.DocumentClient();
 
@@ -229,10 +231,13 @@ export default function CustomerInfo(){
                         </div>
 
                     </form>
+                    <Payment val={prc}/>
                     <Button className={"float-right"}  style={{marginTop:"2%"}} onClick={submit} variant="primary" size="sm">Submit</Button>
                 </Card>
 
             </>
+
+
         </div>
             </div>
     )
