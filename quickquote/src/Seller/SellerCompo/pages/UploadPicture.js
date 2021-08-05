@@ -1,11 +1,7 @@
-import { useState, useEffect } from 'react'
-import {Amplify,Storage } from 'aws-amplify'
+import { Storage } from 'aws-amplify'
 import S3config from "../../../S3config";
+import { useState, useEffect } from 'react'
 import { Auth } from '@aws-amplify/auth';
-import {AmplifyS3ImagePicker} from "@aws-amplify/ui-react";
-import awsmobile from "../../../aws-exports";
-
-
 var AWS = require('aws-sdk');
 var s3 = new AWS.S3({'region': 'us-east-2'});
 //var identityId = credentialsProvider.getIdentityId();
@@ -13,10 +9,7 @@ var identityId = AWS.config.credentials.identityId;
 //const user = Auth.currentAuthenticatedUser();
 //console.log(user);
 //const id = user.attributes.sub;
-
-Amplify.configure(awsmobile);
 function UploadPicture() {
-
     const [images, setImages] = useState([])
     useEffect(() => {
         fetchImages()
@@ -31,7 +24,6 @@ function UploadPicture() {
                 const key = await Storage.get(k.key)
                 return key
             }))
-
         }
         catch(error)
         {
@@ -47,39 +39,33 @@ function UploadPicture() {
                 {
                     level : 'private'
                 })
-
             console.log({result})
             fetchImages()
         }
-
         catch (error)
         {
             console.log(error);
         }
     }
     return (
-        <div className="App" >
-
-            <AmplifyS3ImagePicker level="private"  identityId={identityId} onLoad={url => console.log(url)}/>
-
-            <div style={{  marginLeft : '400px' , marginTop: '10px', marginBottom : '50 px' ,float : 'right' }}>
+        <div className="App">
+            <div style={{ display: 'flex', flexDirection: 'column', marginTop:20 , marginBottom:10}}>
                 {
-
+                    images.map(image => (
                         <img
-                            src={images}
-                            key={images}
-                            alt= {fetchImages}
-                            style={{width: 300, height: 300}}
-                            className = "left"
+                            src={image}
+                            key={image}
+                            style={{width: 300, height: 200 , marginLeft:5, marginTop:20}}
                         />
-
+                    ))
                 }
-
             </div>
+            <input
+                type="file"
+                onChange={onChange}
+            />
         </div>
-    )
+    );
 }
-
-
 
 export default UploadPicture;

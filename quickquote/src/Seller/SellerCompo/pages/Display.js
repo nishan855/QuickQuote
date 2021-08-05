@@ -6,7 +6,8 @@ import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
-
+import {Link, useHistory} from "react-router-dom";
+import  "./Display.css"
 import  {Card,CardBody,CardHeader} from "reactstrap";
 import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 
@@ -14,6 +15,7 @@ let AWS= require("aws-sdk");
 
 function Display()
 {
+    const history=useHistory()
     const[display,setdisplay] = useState("");
     const[name,setname] = useState("");
     const[motto,setmotto]= useState("");
@@ -59,42 +61,18 @@ function Display()
 
     return(
 
-            <div className = "component">
-                <div className= "set">
+        <div className="cards">
+            <h1> id - {ids} </h1>
+           <hr/>
+            <h2> Company name - {name} </h2>
+            <hr/>
+            <h3> Motto - {motto}</h3>
+            <hr/>
+            <Button title="Go back to edit" size="sm"
+                    style={{background: '#9DC88D', marginBottom: '2%'}} onClick = {() => history.push('/Profile')}> Edit Profile
+            </Button>
 
-                    <Card>
-
-                        <Card color="success" style={{width: 900,height:70}}>
-                            <div className= "text-center">
-                                <CardBody>
-                                    <h2>Company Id : {ids}  </h2>
-
-                                </CardBody>
-                            </div>
-                        </Card>
-            <Card color="success" style={{width: 900,height:70}}>
-                <div className= "text-center">
-                    <CardBody>
-                        <h2>Company Name : {name}  </h2>
-
-                    </CardBody>
-                </div>
-            </Card>
-
-
-                <Card color="success" style={{width: 900,height:70}}>
-                    <div className= "text-center">
-                        <CardBody>
-                            <h2> Motto : {motto}</h2>
-
-                        </CardBody>
-                    </div>
-                </Card>
-
-            </Card>
-
-                </div>
-                </div>
+        </div>
 
 
     );
