@@ -7,6 +7,7 @@ import DynamoConfig from "../../DynamoConfig";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './Parameters.css'
+import { useHistory } from "react-router-dom";
 
 let AWS= require("aws-sdk");
 
@@ -262,6 +263,11 @@ const Parameters = () => {
                 }
             });
         }
+        const history = useHistory();
+
+        const handleRoute = () =>{
+            history.push("/material");
+        }
 
         const onsaveClick = () => {
             if (count !=0 && !savedpr){
@@ -271,6 +277,7 @@ const Parameters = () => {
                 val.push(mat);
                 console.log(val);
                 submitChange()
+                {handleRoute()}
             }
         };
 
