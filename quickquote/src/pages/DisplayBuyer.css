@@ -1,0 +1,27 @@
+
+.logo-motto-container{
+
+}
+
+.logo-card{
+    border: groove;
+    border-color: #232323;
+    border-width: 4pt;
+    background: grey;
+    align-items: center;
+    width: 500pt;
+    height: 70pt;
+    margin-left: 40pt;
+}
+
+.motto-card{
+    border: groove;
+    border-color: #232323;
+    border-width: 4pt;
+    background: grey;
+    align-items: center;
+    width: 500pt;
+    height: 70pt;
+    margin-top: 20pt;
+    margin-left: 40pt;
+}
