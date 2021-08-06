@@ -172,7 +172,7 @@ function Profile() {
                                 }}/>
 
                     </FormGroup>
-                <UploadPicture/>
+                {/*<UploadPicture/>*/}
                     <Button title="click to save profile info" size="sm"
                             style={{background: '#9DC88D',marginTop:'2%', marginBottom: '2%'}} onClick={onsaveClick}>Save Profile
                     </Button>
