@@ -7,6 +7,7 @@ import "./SellerDashBoard.css";
 import '../../compo/Navbar.css';
 import Amplify from "aws-amplify";
 
+
 Amplify.configure(awsconfig);
 
 function SellerNavbar() {
@@ -41,7 +42,7 @@ function SellerNavbar() {
             <nav className = "navbar">
                 <div className = "navbar-container">
                   <div className= "logo"> <Link
-                        to ="/"
+                        to ="/seller"
                         className = 'navbar-logo'
                         onClick = {closeMobileMenu} // Close menu from Logo button
                     >
@@ -67,15 +68,12 @@ function SellerNavbar() {
                         </li>
 
 
-                        <li className = 'nav-item'>
-                            <Link
-                                to='/'
-                                className='nav-links'
-                                onClick={signout}
-                            >
-                                Signout
-                            </Link>
+                        <li className = 'nav-item2'>
+
+                            <AmplifySignOut/>
+
                         </li>
+
 
 
                     </ul>
