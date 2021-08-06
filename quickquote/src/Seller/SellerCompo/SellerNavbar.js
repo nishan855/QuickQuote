@@ -1,11 +1,12 @@
-import React, {useState, useEffect} from 'react'
-import { Link } from 'react-router-dom';
+import React, {useState, useEffect} from 'react';
 import { Auth } from '@aws-amplify/auth';
 import awsconfig from "../../aws-exports";
+import SignUp from "../../pages/Signup";
 import {AmplifySignOut, withAuthenticator} from '@aws-amplify/ui-react'
 import "./SellerDashBoard.css";
 import '../../compo/Navbar.css';
 import Amplify from "aws-amplify";
+import {Link, useHistory} from "react-router-dom";
 
 Amplify.configure(awsconfig);
 
@@ -16,10 +17,16 @@ function SellerNavbar() {
     const handleClick = () => setClick (!click)
     const closeMobileMenu = () => setClick(false);
 
+
+
     //sign out
     async function signout(){
         alert("Are you sure you want to sign out?")
-        await Auth.signOut();
+        try {
+            await Auth.signOut();
+        } catch (error) {
+            console.log('error signing out: ', error);
+        }
 
     }
     const showButton = () => {
@@ -41,7 +48,7 @@ function SellerNavbar() {
             <nav className = "navbar">
                 <div className = "navbar-container">
                   <div className= "logo"> <Link
-                        to ="/"
+                        to ="/seller"
                         className = 'navbar-logo'
                         onClick = {closeMobileMenu} // Close menu from Logo button
                     >
@@ -68,13 +75,7 @@ function SellerNavbar() {
 
 
                         <li className = 'nav-item'>
-                            <Link
-                                to='/'
-                                className='nav-links'
-                                onClick={signout}
-                            >
-                                Signout
-                            </Link>
+                        <AmplifySignOut/>
                         </li>
 
 

@@ -16,6 +16,8 @@ function Material () {
 
     const [info, setInfo] = useState([])
 
+    console.log(Auth.user.attributes.email);
+
     const [processList, setProcessList] = useState([]);
     const [processObj, setProcObj] = useState({
         "procname": "",
@@ -84,22 +86,22 @@ function Material () {
 
                     {inf.process.map(p=>
                         <div className = "materialinfo">
-                                <div className= "material">
-                                    <FormGroup>
-                                        <Card color="light" style={{width: 190,height:35}}>
-                                            <div className= "text-center">
-                                                <p> Process Name: { p.procname}</p>
-                                            </div>
-                                        </Card>
-                                    </FormGroup><span></span>
-                                    <FormGroup>
-                                        <Card color="secondary" style={{width: 190,height:35}}>
-                                            <div className= "text-center">
-                                                <p> Price per inch : { p.inch}</p>
-                                            </div>
-                                        </Card>
-                                    </FormGroup><span></span>
-                                </div></div>
+                            <div className= "material">
+                                <FormGroup>
+                                    <Card color="light" style={{width: 190,height:35}}>
+                                        <div className= "text-center">
+                                            <p> Process Name: { p.procname}</p>
+                                        </div>
+                                    </Card>
+                                </FormGroup><span></span>
+                                <FormGroup>
+                                    <Card color="secondary" style={{width: 190,height:35}}>
+                                        <div className= "text-center">
+                                            <p> Price per inch : { p.inch}</p>
+                                        </div>
+                                    </Card>
+                                </FormGroup><span></span>
+                            </div></div>
                     )}
                 </Card>
             </div>
@@ -154,4 +156,4 @@ function Material () {
 
     )
 }
-export default withAuthenticator(Material);
+export default Material;

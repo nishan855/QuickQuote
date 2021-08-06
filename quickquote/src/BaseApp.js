@@ -10,6 +10,7 @@ import Buyers from "./pages/Buyers";
 import Orders from "./pages/quote";
 import CustomerInfo from "./pages/CustomerInfo"
 import OrderSuccess from "./pages/OrderSuccess";
+import SignUp from "./pages/Signup";
 
 function BaseApp() {
   return (
@@ -21,8 +22,8 @@ function BaseApp() {
              <Route path = '/quote'  component = {Orders} />
               <Route path = '/quoteerror'  component ={QuoteError} />
             <Route path = '/buyer/:id'  component = {Buyer} />
-            <Route path = '/seller' exact component = {Seller} />
-              <Route path = '/sellerDashboard' exact component = {Seller} />
+            <Route path = '/signup' exact component = {SignUp} />
+              <Route path = '/seller' exact component = {Seller} />
               <Route path = '/custinfo' exact component = {CustomerInfo} />
               <Route path = '/OrderSuccess' exact component = {OrderSuccess} />
 
