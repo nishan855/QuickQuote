@@ -13,6 +13,7 @@ import Display from "./pages/Display"
 import UploadPicture from "./pages/UploadPicture"
 import Material from "./pages/Material";
 import Home from "../../pages/Home"
+import Customer from '../SellerCompo/pages/Customer'
 
 
 function SellerDashBoard() {
@@ -36,7 +37,7 @@ function SellerDashBoard() {
                         <Route path = "/orderitem" exact component = {OrderItem} />
                         <Route path = "/Display" exact component = {Display} />
                         <Route path = "/UploadPicture" exact component = {UploadPicture} />
-
+                        <Route path = "/customer" exact component = {Customer} />
                     </Switch>
                 </div>
             </Router>
