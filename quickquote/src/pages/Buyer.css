@@ -1,0 +1,90 @@
+
+.file-display-container{
+    background: #71bbd4;
+    height: 40pt;
+    margin-top: 0.5%;
+    border-style: ridge;
+}
+.file-clear-button{
+    height: 24pt;
+    width: 24pt;
+    float: right;
+}
+.file-parameters-container{
+    display: flex;
+    font-size: 80%;
+}
+
+.buyer-page-container{
+}
+
+.buyer-container{
+    background: black;
+    padding-top: 60pt;
+    padding-bottom: 60pt;
+}
+
+.dropzone-card{
+    border: groove;
+    border-color: #232323;
+    border-width: 4pt;
+    background: grey;
+    align-items: center;
+    width: 500pt;
+    margin-top: 40pt;
+    margin-left: 40pt;
+}
+
+.dropzone-card-header{
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+    background: #232323;
+    color: #fff;
+}
+
+.dropzone{
+    height: 200pt;
+    cursor: pointer;
+    width: 400pt;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    border-style: dashed;
+}
+
+.dropzone-p{
+    color: white;
+    font-weight: bold;
+    text-align: center;
+}
+
+.dropzone-button-card{
+    margin-top: 10pt;
+    margin-bottom: 100px;
+    margin-left: 40pt;
+    width: 500pt;
+    font-weight: bold;
+    background: grey;
+    border: groove;
+    border-color: #232323;
+    border-width: 4pt;
+    color: #ffffff;
+}
+
+.dropzone-clear-button{
+    border-style: outset;
+    width: 80pt;
+    font-size: 12pt;
+    float: right;
+}
+.dropzone-submit-button{
+    border-style: outset;
+    width: 80pt;
+    font-size: 12pt;
+    float: right;
+    margin-right: 10pt;
+    margin-left: auto;
+}

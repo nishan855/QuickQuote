@@ -1,6 +1,5 @@
-import '../App.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Card, Button,Spinner} from 'react-bootstrap'
+import {Card, Button, Spinner} from 'react-bootstrap'
 import Dropzone from "react-dropzone";
 import React, {useEffect, useState} from "react";
 import {CardHeader} from "reactstrap";
@@ -14,6 +13,8 @@ import Loader from "react-loader-spinner"
 import * as AWS from "aws-sdk";
 import DisplayBuyer from "./DisplayBuyer"
 import DynamoConfig from "../DynamoConfig";
+import './Buyer.css'
+
 export default function Buyer() {
 
     // Get data from DB
@@ -66,16 +67,11 @@ export default function Buyer() {
 
     const param = useParams()
     const history = useHistory()
-
     const formData = new FormData();
     const [resp, setResp] = useState([])
-
     const [files, setFiles] = useState([]);
-
     const fill = [];
-
     const [submitBtn, setSubmit] = useState(false);
-
 
     const remove = event => {
         const name = event.target.getAttribute("id")
@@ -107,19 +103,19 @@ export default function Buyer() {
 
         //for every file assign a dummy process
         useEffect(() => {
-                files.map((mp) =>
+            files.map((mp) =>
 
-                    setMoption(prev => [...prev, mat.material[0].process]))
-            },[])
+                setMoption(prev => [...prev, mat.material[0].process]))
+        }, [])
 
         return (
             files.map((n, index) =>
 
-                <div style={{background: '#71bbd4', marginTop: '0.5%', borderStyle: 'ridge'}} key={index}>{n.file.name}
-                    <Button className={"float-right"} id={index} variant="danger" size="sm" style={{height: 24}}
-                            onClick={remove}>X</Button>
-                    <div style={{display:"flex",fontSize: "50%"}}>
-
+                <div className = 'file-display-container' key={index}>{n.file.name}
+                    <Button className='file-clear-button' id={index} variant="danger"
+                            size="sm" onClick={remove}
+                    >X</Button>
+                    <div className = 'file-parameters-container'>
                         <input type={"number"} required placeholder="Quantity" onChange={(e) => {
                             files[index].quantity = e.target.value
                         }}/>
@@ -140,7 +136,6 @@ export default function Buyer() {
                             )}
                         </select>
 
-
                         {/*dropdown for process*/}
                         <select onChange={(e) => {
 
@@ -154,7 +149,6 @@ export default function Buyer() {
                             )}
 
                         </select>
-
 
                         <input type={"text"} required placeholder="Lead time" onChange={(e) => {
                             files[index].leadtime = e.target.value
@@ -245,58 +239,15 @@ export default function Buyer() {
         }
     }
 
-    const DropzoneCardStyle = {
-        border: 'groove',
-        borderColor: '#000000',
-        background: '#6d6e6e',
-        alignItems: 'center',
-        width: '100%',
-        marginTop: '100px',
-    }
-    const DropzoneCardHeaderStyle = {
-        width: '100%',
-        fontWeight: 'bold',
-        background: '#232323',
-        color: '#fff',
-    }
-    const DropzoneStyle = {
-        lineHeight: "500%",
-        // marginBottom:'0%',
-        // marginRight:'0%',
-        // marginLeft:'0%',
-        // marginTop: '0%',
-        cursor: 'pointer',
-
-    }
-    const DropzonePStyle = {
-        color: '#fff',
-        fontWeight: "bold",
-        textAlign: 'center',
-    }
-
-    const ButtonCardStyle = {
-        marginTop: '2%',
-        marginBottom: '100px',
-        fontWeight: 'bold',
-        background: '#6d6e6e',
-        borderColor: '#000000',
-        color: '#ffffff',   // Text color
-    }
-
-
     return (
-        <div>
+        <div className='buyer-page-container'>
             <Navbar/>
-            <DisplayBuyer/>
-        {!submitBtn ?
-        <div>
-
-            <div className='seller'>
-
-
-                <div>
-                        <Card style={DropzoneCardStyle}>
-                            <CardHeader style={DropzoneCardHeaderStyle}>Upload Your DXF Files</CardHeader>
+            {!submitBtn ?
+                <div className='buyer-container'>
+                    <DisplayBuyer/>
+                    <div>
+                        <Card className='dropzone-card'>
+                            <CardHeader className='dropzone-card-header'>Upload Your DXF Files</CardHeader>
                             <Dropzone accept={'.dxf'} onDrop={acceptedFiles => {
 
                                 acceptedFiles.map(
@@ -322,71 +273,49 @@ export default function Buyer() {
                             }
 
                             }>
-
                                 {({getRootProps, getInputProps}) => (
-                                    <section style={{
-                                        width: '90%',
-                                        height: '500%',
-                                        alignItems: 'center',
-                                        marginTop: '5%',
-                                        marginBottom: '5%',
-                                        borderStyle: 'dashed',
-                                    }}>
-                                        <div style={DropzoneStyle}{...getRootProps()}>
-                                            <input {...getInputProps()} />
-                                            <p style={DropzonePStyle}>Drag and Drop here <br/> Click to Browse</p>
-                                        </div>
-                                    </section>
+                                    <div className='dropzone' {...getRootProps()}>
+                                        <input {...getInputProps()} />
+                                        <p className='dropzone-p'>Drag and Drop here <br/> Click to Browse</p>
+                                    </div>
                                 )}
                             </Dropzone>
                         </Card>
 
 
-                        <Card style={ButtonCardStyle}>
+                        <Card className='dropzone-button-card'>
                             <CardHeader style={{fontWeight: 'bold'}}>Total Files: {files.length}
-                                <Button className={"float-right"}
-                                        style={{borderStyle: 'outset', width: '12vw', fontSize: '2vw'}} variant="danger"
+                                <Button className='dropzone-clear-button'
+                                        variant="danger"
                                         size="sm" onClick={reset}>Clear</Button>
-                                <Button className={"float-right"} type={"submit"} style={{
-                                    marginLeft: '100px',
-                                    marginRight: '1rem',
-                                    width: '13vw',
-                                    fontSize: '2vw',
-                                    borderStyle: 'outset'
-                                }} disabled={submitBtn} variant="primary" size="sm"
+                                <Button className='dropzone-submit-button' type={"submit"}  disabled={submitBtn} variant="primary" size="sm"
                                         onClick={submit}>Submit</Button>
-
-
                             </CardHeader>
 
                             <Display/>
+
                         </Card>
 
-
-
-                    <ToastContainer
-                        position="bottom-right"
-                        autoClose={2500}
-                        hideProgressBar={false}
-                        newestOnTop={false}
-                        closeOnClick
-                        rtl={false}
-                        pauseOnFocusLoss
-                        draggable
-                        pauseOnHover
-                    />
-
+                        <ToastContainer
+                            position="bottom-right"
+                            autoClose={2500}
+                            hideProgressBar={false}
+                            newestOnTop={false}
+                            closeOnClick
+                            rtl={false}
+                            pauseOnFocusLoss
+                            draggable
+                            pauseOnHover
+                        />
+                    </div>
 
                 </div>
-                }
-
-            </div>
-        </div> :
-            <div align={"center"}>
-            <Loader type="Puff" color="#00BFFF" height={"30%"} width={"30%"} />
-            <h1> Getting quotes...</h1>
-            </div>}
-</div>
+                :
+                <div align={"center"}>
+                    <Loader type="Puff" color="#00BFFF" height={"30%"} width={"30%"}/>
+                    <h1> Getting quotes...</h1>
+                </div>}
+        </div>
     )
 
 }
