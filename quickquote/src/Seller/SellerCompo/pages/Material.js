@@ -86,16 +86,37 @@ function Material () {
                         <div className = "materialinfo">
                                 <div className= "material">
                                     <FormGroup>
-                                        <Card color="light" style={{width: 190,height:35}}>
+                                        <Card color="secondary" style={{width: 190,height:35}}>
                                             <div className= "text-center">
                                                 <p> Process Name: { p.procname}</p>
                                             </div>
                                         </Card>
                                     </FormGroup><span></span>
                                     <FormGroup>
-                                        <Card color="secondary" style={{width: 190,height:35}}>
+                                        <Card color="info" style={{width: 190,height:35}}>
                                             <div className= "text-center">
-                                                <p> Price per inch : { p.inch}</p>
+                                                <p> Cut cost: { p.inch}</p>
+                                            </div>
+                                        </Card>
+                                    </FormGroup><span></span>
+                                    <FormGroup>
+                                        <Card color="success" style={{width: 190,height:35}}>
+                                            <div className= "text-center">
+                                                <p> Pierce Cost : { p.inch}</p>
+                                            </div>
+                                        </Card>
+                                    </FormGroup><span></span>
+                                    <FormGroup>
+                                        <Card color="warning" style={{width: 190,height:35}}>
+                                            <div className= "text-center">
+                                                <p> Set up cost : { p.setup}</p>
+                                            </div>
+                                        </Card>
+                                    </FormGroup><span></span>
+                                    <FormGroup>
+                                        <Card color="light" style={{width: 190,height:35}}>
+                                            <div className= "text-center">
+                                                <p> Process Kurf : { p.kurf}</p>
                                             </div>
                                         </Card>
                                     </FormGroup><span></span>
