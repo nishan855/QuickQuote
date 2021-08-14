@@ -59,7 +59,7 @@ Dependencies are shown below:
 	  * npm install react-scripts
 
 ## Authors
-* Keng, Eric : 
+* Keng, Eric 
 * Kunwar, Alisha 
 * Laith, Marzouq
 * Parajuli, Sindhu
