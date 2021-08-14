@@ -35,9 +35,9 @@ The quick quote application is a web-based full-stack application that provides 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 ## Prerequisites
 Things that needs to be installed.
-Intellij Ultimate(2019 or latest)
-Java SE JDK 16
-Node.js 14.17.5(or latest)
+* Intellij Ultimate(2019 or latest)
+* Java SE JDK 16
+* Node.js 14.17.5(or latest)
 Dependencies are shown below:
 ![dependencies](https://user-images.githubusercontent.com/58004262/129462293-e27493fa-d01f-4602-88a5-edf0d3f21af6.PNG)
 ## Installation
