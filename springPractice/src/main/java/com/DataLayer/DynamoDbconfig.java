@@ -15,7 +15,7 @@ public class DynamoDbconfig {
     @Bean
     public DynamoDBMapper getmapper() {
         AWSStaticCredentialsProvider acp = new AWSStaticCredentialsProvider(
-                new BasicAWSCredentials("", ""));
+                new BasicAWSCredentials("YOUR ACCESS KEY", "YOUR SECRET KEY"));
 
         AmazonDynamoDB db= AmazonDynamoDBClientBuilder.standard()
                 .withCredentials(acp)
