@@ -56,7 +56,7 @@ function Display()
     console.log(ids);
     //)
     //console.log(display.cname)
-    useEffect(()=>fetch(),[]);
+    useEffect(()=>fetch(),[name]);
     //console.log(data.item.cname);
 
     return(

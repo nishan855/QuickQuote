@@ -165,7 +165,7 @@ function Material () {
         fetch()
         console.log(info)
 
-    }, []);
+    }, [info]);
 
 
     return (
