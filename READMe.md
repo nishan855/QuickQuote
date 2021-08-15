@@ -42,9 +42,9 @@ Things that needs to be installed.
 ![dependencies](https://user-images.githubusercontent.com/58004262/129462293-e27493fa-d01f-4602-88a5-edf0d3f21af6.PNG)
 ## Installation
 1.	Clone the repo
-	  git clone  https://github.com/nishan855/QuickQuote
+	 ##### git clone  https://github.com/nishan855/QuickQuote
 2.	Install npm package
-	  npm install
+	 ##### npm install
 3.	Other necessary installation are:* npm install react-uuid
       * npm install @aws-amplify/auth
 	  * npm install @material-ui/core
