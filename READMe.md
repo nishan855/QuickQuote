@@ -76,11 +76,11 @@ Things that needs to be installed.
 7.	In DynamoConfig.js file, replace the access key and secret key with your own AWS keys.  
 	 Detailed step of these is in AWS server Settings file. 
 8.	 Start the React application. This will open the app on your localhost: 3000 
-	#####npm start 
+	##### npm start 
 	
 ###	Back-end (Spring Boot Part) 
 1. 	Clone the repo 
-	#####git clone  https://github.com/nishan855/QuickQuote
+	##### git clone  https://github.com/nishan855/QuickQuote
 2.	Navigate to the directory “springPractice”. 
 	Directory tree:   Quickquote ->   springPractice 
 3. 	Open springPractice on the IDE 
@@ -94,8 +94,8 @@ Things that needs to be installed.
 	You will get “Spring boot application started” message on terminal. Although this server use local host:8080 normally, there is no UI for this 	(Just an API).  
 	 Test it while placing order on buyer side with DXF files. 
 8. 	All the dependencies are in Pom.xml file. Dependencies includes: 
-	##### aws-java-sdk-bom 1.11.1000 
-       	##### aws-java-sdk-dynamodb 
+	 aws-java-sdk-bom 1.11.1000 
+       	 aws-java-sdk-dynamodb 
 
        ##### spring-boot-starter-web lombok 1.18.20 
        ##### spring-boot-starter-test 
@@ -104,7 +104,7 @@ Things that needs to be installed.
 ###	Aws Server Settings (AWS Part) 
 	For this, refer to the document, AWS_Server_Settings, which is submitted with the documentation.
 	
-### 	Future Work 
+##	Future Work 
  #### All the future work will be done with close consultation with the sponsor Robert Gullette. As per Sponsor, most of the functional work is already completed. 
 #### Some of the things to work on in future include: 
 
