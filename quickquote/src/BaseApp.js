@@ -10,6 +10,7 @@ import Buyers from "./pages/Buyers";
 import Orders from "./pages/quote";
 import CustomerInfo from "./pages/CustomerInfo"
 import OrderSuccess from "./pages/OrderSuccess";
+import DummySite from "./pages/DummySite";
 
 function BaseApp() {
   return (
@@ -17,7 +18,7 @@ function BaseApp() {
         <Router>
           <Switch>
             <Route path = '/' exact component = {Home} />
-              <Route path = '/buyers' exact component = {Buyers} />
+              <Route path = '/buyers' exact component = {DummySite} />
              <Route path = '/quote'  component = {Orders} />
               <Route path = '/quoteerror'  component ={QuoteError} />
             <Route path = '/buyer/:id'  component = {Buyer} />
