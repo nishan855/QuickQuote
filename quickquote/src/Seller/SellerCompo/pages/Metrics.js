@@ -5,13 +5,8 @@ import SellerSidebar from "../SellerSidebar";
 
 function Metrics() {
     return (
-        <div className= "component">
-            <div className= "set">
-
-
-            <h1>Page 1</h1>
-
-            </div>
+        <div style = {{margin: '100pt 0pt 0pt 100pt'}}>
+                <h1>Metrics feature coming soon!</h1>
         </div>
     );
 }

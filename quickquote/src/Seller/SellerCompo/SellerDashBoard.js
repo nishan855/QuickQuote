@@ -13,7 +13,8 @@ import Display from "./pages/Display"
 import UploadPicture from "./pages/UploadPicture"
 import Material from "./pages/Material";
 import Home from "../../pages/Home"
-
+import Track from "./pages/Track"
+import Customer from "./pages/Customer"
 
 function SellerDashBoard() {
     return (
@@ -35,7 +36,11 @@ function SellerDashBoard() {
                         <Route path = "/changeParameter" exact component = {Parameters} />
                         <Route path = "/orderitem" exact component = {OrderItem} />
                         <Route path = "/Display" exact component = {Display} />
-                        <Route path = "/UploadPicture" exact component = {UploadPicture} />
+
+                        <Route path = "/track_order" exact component = {Track} />
+                        <Route path = "/customer" exact component = {Customer} />
+
+
 
                     </Switch>
                 </div>
